@@ -2,9 +2,10 @@
   "name": "wildlife-tracker",
   "version": "0.0.0",
   "description": "Ahmic Lake Wildlife Tracker",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "pack": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -17,11 +18,28 @@
   },
   "homepage": "https://github.com/DukeBaird/wildlife-tracker#readme",
   "dependencies": {
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^4.4.1",
+    "css-loader": "^5.2.4",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "html-webpack-plugin": "^5.3.1",
     "jest": "^26.6.3",
+    "mini-css-extract-plugin": "^1.5.0",
     "mongoose": "^5.12.5",
+    "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.2",
+    "pug-loader": "^2.4.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0"
   }
 }
