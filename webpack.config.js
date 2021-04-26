@@ -11,9 +11,11 @@ module.exports = {
 		path: path.resolve(__dirname, './dist')
 	},
 	module: {
+		//Editing to find only CSS files
 		rules: [
 			{ test: /\.(js|jsx)$/, exclude: /node_modules/,  use: ['babel-loader'] },
-			{ test: /\.s[ac]ss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
+			//{ test: /\.s[ac]ss$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
+			{ test: /\.css$/, use: ['style-loader', 'css-loader'] },
 			{ test: /\.pug$/, loader: 'pug-loader'}
 		]
 	},
