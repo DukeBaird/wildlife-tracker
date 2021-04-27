@@ -33,7 +33,6 @@ class App extends React.Component {
 			<div>
 				<h1>Ahmic Animals</h1>
 				<Header addSighting={this.addSighting} />
-				{/* <button onClick={this.addSighting}>Add Sighting</button> */}
 				<h1>MAP GOES HERE</h1>
 				{this.renderSightings()}
 			</div>
