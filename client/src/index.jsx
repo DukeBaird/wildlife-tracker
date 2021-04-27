@@ -2,6 +2,49 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles.css';
 
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {number: 1};
+		this.addSighting = this.addSighting.bind(this);
+	}
+
+	renderSightings(){
+		const {number} = this.state;
+		if (!number | number < 0) return null;
+		console.log("adding to number}")
+		console.log(number)
+		let total = []
+		for (let i = 0; i < number; i+=1) {
+			total.push(
+				<SightingList user={person} sighting={sight} />
+			);
+		};
+		return total;
+	};
+
+	addSighting() {
+		console.log("Clicked Sighting");
+		this.setState(state => ({
+			number: state.number + 1
+		}));
+	}
+
+	render() {
+		return (
+			<div>
+				<h1>Ahmic Animals</h1>
+				<Header />
+				<button onClick={this.addSighting}>Add Sighting</button>
+				<h1>MAP GOES HERE</h1>
+				{this.renderSightings()}
+			</div>
+		);
+	};
+}		
+
+
+
 //Nav bar at top of page
 function Header() {
 	return (
@@ -9,7 +52,7 @@ function Header() {
 			<button onClick={viewHome}>Home</button>
 			<button onClick={viewUser}>User</button>
 			<button onClick={viewAnimals}>Animals</button>
-			<button onClick={addSighting}>Add Sighting</button>
+			{/* <button onClick={this.addSighting}>Add Sighting</button> */}
 		</span>
 	);
 }
@@ -76,21 +119,6 @@ const sight = {
 
 //const testsight = SightingList(sighting=sight, user=person);
 
-
-
-function App() {
-	return (
-		<div>
-			<h1>Ahmic Animals</h1>
-			<Header />
-			<h1>MAP GOES HERE</h1>
-			<SightingList user={person} sighting={sight} />
-			<SightingList user={person} sighting={sight} />
-			<SightingList user={person} sighting={sight} />
-		</div>
-	);
-}		
-
 const element = <h1>Hello, world</h1>;
 
 console.log("Running!");
@@ -109,9 +137,12 @@ function viewAnimals() {
 	console.log("Clicked Animals");
 }
 
-function addSighting() {
+/* function addSighting() {
 	console.log("Clicked Sighting");
-}
+	this.setState(state => ({
+		number: state.number + 1
+	}));
+} */
 
 
 
