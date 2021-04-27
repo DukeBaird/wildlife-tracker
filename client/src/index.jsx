@@ -12,8 +12,6 @@ class App extends React.Component {
 	renderSightings(){
 		const {number} = this.state;
 		if (!number | number < 0) return null;
-		console.log("adding to number}")
-		console.log(number)
 		let total = []
 		for (let i = 0; i < number; i+=1) {
 			total.push(
@@ -34,8 +32,8 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header />
-				<button onClick={this.addSighting}>Add Sighting</button>
+				<Header addSighting={this.addSighting} />
+				{/* <button onClick={this.addSighting}>Add Sighting</button> */}
 				<h1>MAP GOES HERE</h1>
 				{this.renderSightings()}
 			</div>
@@ -46,15 +44,26 @@ class App extends React.Component {
 
 
 //Nav bar at top of page
-function Header() {
-	return (
-		<span>
-			<button onClick={viewHome}>Home</button>
-			<button onClick={viewUser}>User</button>
-			<button onClick={viewAnimals}>Animals</button>
-			{/* <button onClick={this.addSighting}>Add Sighting</button> */}
-		</span>
-	);
+class Header extends React.Component {
+	constructor(props) {
+		super(props)
+		this.newSighting = this.newSighting.bind(this);
+	};
+
+	newSighting() {
+		this.props.addSighting();
+	};
+
+	render() {
+		return (
+			<span>
+				<button onClick={viewHome}>Home</button>
+				<button onClick={viewUser}>User</button>
+				<button onClick={viewAnimals}>Animals</button>
+				<button onClick={this.newSighting}>Add Sighting</button>
+			</span>
+		);
+	};
 }
 
 //Display user profile picture (if loaded)
