@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles.css';
+import {Header} from './header.jsx';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {number: 1};
+		this.state = {number: 0};
 		this.addSighting = this.addSighting.bind(this);
 	}
 
 	renderSightings(){
 		const {number} = this.state;
 		if (!number | number < 0) return null;
-		let total = []
+		const total = []
 		for (let i = 0; i < number; i+=1) {
 			total.push(
 				<SightingList user={person} sighting={sight} />
@@ -39,32 +40,6 @@ class App extends React.Component {
 		);
 	};
 }		
-
-
-
-
-//Nav bar at top of page
-class Header extends React.Component {
-	constructor(props) {
-		super(props)
-		this.newSighting = this.newSighting.bind(this);
-	};
-
-	newSighting() {
-		this.props.addSighting();
-	};
-
-	render() {
-		return (
-			<span>
-				<button onClick={viewHome}>Home</button>
-				<button onClick={viewUser}>User</button>
-				<button onClick={viewAnimals}>Animals</button>
-				<button onClick={this.newSighting}>Add Sighting</button>
-			</span>
-		);
-	};
-}
 
 //Display user profile picture (if loaded)
 function Avatar(props) {
@@ -123,39 +98,10 @@ const sight = {
 	animal: "Cat",
 	location: "Desk",
 	time: "Now",
-	img: "fdsdfsd"
+	img: "./cat.jpg"
 };
 
-//const testsight = SightingList(sighting=sight, user=person);
-
-const element = <h1>Hello, world</h1>;
-
 console.log("Running!");
-
-
-//Event handlers for Header
-function viewHome() {
-	console.log("Clicked Home");
-}
-
-function viewUser() {
-	console.log("Clicked User");
-}
-
-function viewAnimals() {
-	console.log("Clicked Animals");
-}
-
-/* function addSighting() {
-	console.log("Clicked Sighting");
-	this.setState(state => ({
-		number: state.number + 1
-	}));
-} */
-
-
-
-
 
 ReactDOM.render(
 	<App />, 
