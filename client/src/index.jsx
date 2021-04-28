@@ -6,17 +6,17 @@ import {Header} from './header.jsx';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {number: 0};
+		this.state = {sightingCount: 0};
 		this.addSighting = this.addSighting.bind(this);
 	}
 
 	renderSightings(){
-		const {number} = this.state;
-		if (!number | number < 0) return null;
+		const {sightingCount} = this.state;
+		if (!sightingCount | sightingCount < 0) return null;
 		const total = []
-		for (let i = 0; i < number; i+=1) {
+		for (let i = 0; i < sightingCount; i+=1) {
 			total.push(
-				<SightingList user={person} sighting={sight} />
+				<SightingAsText user={person} sighting={sight} />
 			);
 		};
 		return total;
@@ -25,7 +25,7 @@ class App extends React.Component {
 	addSighting() {
 		console.log("Clicked Sighting");
 		this.setState(state => ({
-			number: state.number + 1
+			sightingCount: state.sightingCount + 1
 		}));
 	}
 
@@ -75,7 +75,7 @@ function SightingInfo(props) {
 }
 
 //List version of a sighting
-function SightingList(props) {
+function SightingAsText(props) {
 	return (
 		<div className="SightingList">
 			<img className="Sighting-Image"
