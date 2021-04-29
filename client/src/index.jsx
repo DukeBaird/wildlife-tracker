@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '../style.sass';
 
-const element = <h1>Hello, world</h1>;
+const element = <h1 className='test'>Hello, world</h1>;
 
 console.log("Running!");
 
