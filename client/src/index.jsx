@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles.css';
 import {Header} from './header.jsx';
+import '../style.sass';
 
 class App extends React.Component {
 	constructor(props) {
@@ -9,6 +9,7 @@ class App extends React.Component {
 		this.state = {sightingCount: 0};
 		this.addSighting = this.addSighting.bind(this);
 	}
+
 
 	renderSightings(){
 		const {sightingCount} = this.state;

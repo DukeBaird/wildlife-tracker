@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "pack": "webpack --config webpack.config.js"
+    "pack": "webpack --config webpack.config.js",
+    "pack:watch": "webpack --config webpack.config.js --watch"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,6 @@
     "express-session": "^1.17.1",
     "html-webpack-plugin": "^5.3.1",
     "jest": "^26.6.3",
-    "mini-css-extract-plugin": "^1.5.0",
     "mongoose": "^5.12.5",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
@@ -37,6 +37,7 @@
     "pug-loader": "^2.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "sass": "^1.32.12",
     "sass-loader": "^11.0.1",
     "webpack": "^5.35.1",
     "webpack-cli": "^4.6.0"
