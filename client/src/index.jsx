@@ -6,27 +6,28 @@ import '../style.sass';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {sightingCount: 0};
+		this.state = {sightings: [sight, sight1, sight2]};
 		this.addSighting = this.addSighting.bind(this);
 	}
 
 
 	renderSightings(){
-		const {sightingCount} = this.state;
-		if (!sightingCount | sightingCount < 0) return null;
-		const total = []
-		for (let i = 0; i < sightingCount; i+=1) {
-			total.push(
-				<SightingAsText user={person} sighting={sight} />
+		const {sightings} = this.state;
+		if (!sightings | sightings.length < 0) return null;
+		//const total = [sight, sight1, sight2];
+		const SATList = []; //Create list of SightingAsText elements
+		for (let i = 0; i < sightings.length; i+=1) {
+			SATList.push(
+				<SightingAsText user={person} sighting={sightings[i]} />
 			);
-		};
-		return total;
+		}
+		return SATList;
 	};
 
 	addSighting() {
 		console.log("Clicked Sighting");
 		this.setState(state => ({
-			sightingCount: state.sightingCount + 1
+			sightings: [...state.sightings, sight]
 		}));
 	}
 
@@ -78,7 +79,7 @@ function SightingInfo(props) {
 //List version of a sighting
 function SightingAsText(props) {
 	return (
-		<div className="SightingList">
+		<div className="SightingAsText">
 			<img className="Sighting-Image"
 				src={props.sighting.img}
 				alt={props.sighting.animal}
@@ -101,6 +102,22 @@ const sight = {
 	time: "Now",
 	img: "./cat.jpg"
 };
+
+const sight1 = {
+	animal: "Dog",
+	location: "Outside",
+	time: "Now",
+	img: "./cat.jpg"
+};	
+
+const sight2 = {
+	animal: "Cat",
+	location: "Desk",
+	time: "Yesterday",
+	img: "./cat.jpg"
+};	
+
+
 
 console.log("Running!");
 

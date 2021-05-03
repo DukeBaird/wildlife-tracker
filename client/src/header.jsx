@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles.css';
+import '../style.sass';
 
 //Nav bar at top of page
 export class Header extends React.Component {
