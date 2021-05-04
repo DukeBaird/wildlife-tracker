@@ -7,14 +7,21 @@ import '../style.sass';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {sightings: [sight, sight1, sight2]};
+		this.state = {
+			sightings: [sight, sight1, sight2],
+			showing: "sight"
+		
+		};
 		this.addSighting = this.addSighting.bind(this);
-		this.showAnimals = this.showAnimals.bind(this);
+		this.viewAnimals = this.viewAnimals.bind(this);
 	}
 
 
 	renderSightings(){
 		const {sightings} = this.state;
+/* 		if (this.state.showing === "sight") {
+			return null;
+		} */
 		if (!sightings | sightings.length < 0) return null;
 		//const total = [sight, sight1, sight2];
 		const SATList = []; //Create list of SightingAsText elements
@@ -29,9 +36,18 @@ class App extends React.Component {
 	addSighting() {
 		console.log("Clicked Sighting");
 		this.setState(state => ({
-			sightings: [...state.sightings, sight]
+			sightings: [...state.sightings, sight],
+			showing: "sight"
 		}));
 	}
+
+	viewAnimals() {
+		console.log("Clicked Animals");
+		this.setState({
+			showing: "animals"
+		});
+	}
+
 
 	showAnimals() {
 		console.log("Showing animals");
@@ -72,10 +88,11 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header addSighting={this.addSighting} showAnimals={this.showAnimals} />
+				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} />
 				<h1>MAP GOES HERE</h1>
-				{this.renderSightings()}
-				{/* {this.showAnimals()} */}
+				{this.state.showing === "sight" ? this.renderSightings() 
+				: this.state.showing === "animals" ? this.showAnimals()
+				: null}
 			</div>
 		);
 	};

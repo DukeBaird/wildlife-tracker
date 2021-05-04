@@ -15,7 +15,7 @@ export class Header extends React.Component {
 	};
 
     animalList() {
-        this.props.showAnimals();
+        this.props.viewAnimals();
     }
 
 	render() {
