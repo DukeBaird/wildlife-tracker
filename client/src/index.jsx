@@ -12,6 +12,7 @@ class App extends React.Component {
 			showing: "sight"
 		
 		};
+		this.viewHomepage = this.viewHomepage.bind(this);
 		this.addSighting = this.addSighting.bind(this);
 		this.viewAnimals = this.viewAnimals.bind(this);
 	}
@@ -19,11 +20,7 @@ class App extends React.Component {
 
 	renderSightings(){
 		const {sightings} = this.state;
-/* 		if (this.state.showing === "sight") {
-			return null;
-		} */
 		if (!sightings | sightings.length < 0) return null;
-		//const total = [sight, sight1, sight2];
 		const SATList = []; //Create list of SightingAsText elements
 		for (let i = 0; i < sightings.length; i+=1) {
 			SATList.push(
@@ -32,6 +29,13 @@ class App extends React.Component {
 		}
 		return SATList;
 	};
+
+	viewHomepage() {
+		console.log("Clicked Home");
+		this.setState({
+			showing: "sight"
+		});
+	}
 
 	addSighting() {
 		console.log("Clicked Sighting");
@@ -70,25 +74,19 @@ class App extends React.Component {
 
 		const animalList = [];
 		for (let i in animals) {
-			//console.log(animals[i]);
 			animalList.push(
 			<AnimalSet animal={i} locations={animals[i]}/>
 			);
 		}
 
 		return animalList;
-
-
-		//const animalSet = new Set(sightings);
-		//console.log(sightings[1].animal);
-		//console.log(animals);
 	}
 
 	render() {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} />
+				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} />
 				<h1>MAP GOES HERE</h1>
 				{this.state.showing === "sight" ? this.renderSightings() 
 				: this.state.showing === "animals" ? this.showAnimals()
