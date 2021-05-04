@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
+import {AnimalSet} from './animalSet.jsx';
 import '../style.sass';
 
 class App extends React.Component {
@@ -8,6 +9,7 @@ class App extends React.Component {
 		super(props);
 		this.state = {sightings: [sight, sight1, sight2]};
 		this.addSighting = this.addSighting.bind(this);
+		this.showAnimals = this.showAnimals.bind(this);
 	}
 
 
@@ -31,13 +33,49 @@ class App extends React.Component {
 		}));
 	}
 
+	showAnimals() {
+		console.log("Showing animals");
+		const {sightings} = this.state;
+		if (!sightings | sightings.length < 0) return null;
+		const animals = {};
+
+		//Create "set" of animals
+		for (let i = 0; i < sightings.length; i+=1) {
+			let sight = sightings[i];
+			if (sight.animal in animals) {
+				//console.log('animal exists');
+				animals[`${sight.animal}`].push(sight.location);
+			} else {
+				//console.log('new animal');
+				animals[`${sight.animal}`] = [sight.location];
+			} 
+
+		};
+
+		const animalList = [];
+		for (let i in animals) {
+			console.log(animals[i]);
+			animalList.push(
+			<AnimalSet animal={i} locations={animals[i]}/>
+			);
+		}
+
+		return animalList;
+
+
+		//const animalSet = new Set(sightings);
+		//console.log(sightings[1].animal);
+		//console.log(animals);
+	}
+
 	render() {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header addSighting={this.addSighting} />
+				<Header addSighting={this.addSighting} showAnimals={this.showAnimals} />
 				<h1>MAP GOES HERE</h1>
-				{this.renderSightings()}
+				{/* {this.renderSightings()} */}
+				{this.showAnimals()}
 			</div>
 		);
 	};
@@ -98,7 +136,7 @@ const person = {
 
 const sight = {
 	animal: "Cat",
-	location: "Desk",
+	location: "Kitchen",
 	time: "Now",
 	img: "./cat.jpg"
 };

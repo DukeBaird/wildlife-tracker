@@ -7,18 +7,23 @@ export class Header extends React.Component {
 	constructor(props) {
 		super(props)
 		this.newSighting = this.newSighting.bind(this);
+        this.animalList = this.animalList.bind(this);
 	};
 
 	newSighting() {
 		this.props.addSighting();
 	};
 
+    animalList() {
+        this.props.showAnimals();
+    }
+
 	render() {
 		return (
 			<span>
 				<button onClick={viewHome}>Home</button>
 				<button onClick={viewUser}>User</button>
-				<button onClick={viewAnimals}>Animals</button>
+				<button onClick={this.animalList}>Animals</button>
 				<button onClick={this.newSighting}>Add Sighting</button>
 			</span>
 		);
@@ -32,8 +37,4 @@ function viewHome() {
 
 function viewUser() {
 	console.log("Clicked User");
-}
-
-function viewAnimals() {
-	console.log("Clicked Animals");
 }
