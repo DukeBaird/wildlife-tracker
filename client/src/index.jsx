@@ -54,7 +54,7 @@ class App extends React.Component {
 
 		const animalList = [];
 		for (let i in animals) {
-			console.log(animals[i]);
+			//console.log(animals[i]);
 			animalList.push(
 			<AnimalSet animal={i} locations={animals[i]}/>
 			);
@@ -74,8 +74,8 @@ class App extends React.Component {
 				<h1>Ahmic Animals</h1>
 				<Header addSighting={this.addSighting} showAnimals={this.showAnimals} />
 				<h1>MAP GOES HERE</h1>
-				{/* {this.renderSightings()} */}
-				{this.showAnimals()}
+				{this.renderSightings()}
+				{/* {this.showAnimals()} */}
 			</div>
 		);
 	};
