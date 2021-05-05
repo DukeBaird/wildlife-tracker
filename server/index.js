@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const config = require('./config');
-const routes = require("./routes/routes");
+const routes = require('./routes/routes');
 
 const app = express();
 
@@ -14,7 +14,7 @@ const Cat = new require('./models/Cat.js');
 
 function start() {
 	app.set('port', (process.env.PORT || 8080));
-	app.use(express.static(__dirname + "./dist"));
+	app.use(express.static(__dirname + './dist'));
 	app.use(bodyParser.json());
 
 	app.use(logger('common'));
