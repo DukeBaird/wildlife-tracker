@@ -41,10 +41,10 @@ function start() {
 			console.log('Mongo Connection Successful');
 
 			// Test db connection
-			const poofy = new Cat({ name: 'PoofyCat' });
-			poofy.save((err, poofy) => {
-				console.log(poofy.meow());
-			});
+			// const poofy = new Cat({ name: 'PoofyCat' });
+			// poofy.save((err, poofy) => {
+			// 	console.log(poofy.meow());
+			// });
 		}
 	});
 
