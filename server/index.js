@@ -6,13 +6,15 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const config = require('./config');
-const routes = require("./routes/routes");
+const routes = require('./routes/routes');
 
 const app = express();
 
+const Cat = new require('./models/Cat.js');
+
 function start() {
 	app.set('port', (process.env.PORT || 8080));
-	app.use(express.static(__dirname + "./dist"));
+	app.use(express.static(__dirname + './dist'));
 	app.use(bodyParser.json());
 
 	app.use(logger('common'));
@@ -28,16 +30,23 @@ function start() {
 	app.use('/', routes);
 	// app.use('/api/v1', api.router);
 
-	// No database right now
-	// mongoose.connect((process.env.MONGOSTRING || config.mongoString), {
-	// 	useMongoClient: true
-	// }, function(err) {
-	// 	if (err) {
-	// 		console.log('Mongo Connection Error', err);
-	// 	} else {
-	// 		console.log('Mongo Connection Successful');
-	// 	}
-	// });
+	// This should end up having 2 connections, one for "prod", and one for development
+	mongoose.connect((process.env.MONGOSTRING || config.dbConnectionString), {
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	}, function(err) {
+		if (err) {
+			console.log('Mongo Connection Error', err);
+		} else {
+			console.log('Mongo Connection Successful');
+
+			// Test db connection
+			// const poofy = new Cat({ name: 'PoofyCat' });
+			// poofy.save((err, poofy) => {
+			// 	console.log(poofy.meow());
+			// });
+		}
+	});
 
 	// passport is for user auth
 	// require('./lib/passport.js')(passport);
