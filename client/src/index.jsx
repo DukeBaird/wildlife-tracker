@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalSet} from './animalSet.jsx';
+import {NewSighting} from './addSighting.jsx';
 import '../style.sass';
 
 class App extends React.Component {
@@ -15,6 +16,8 @@ class App extends React.Component {
 		this.viewHomepage = this.viewHomepage.bind(this);
 		this.addSighting = this.addSighting.bind(this);
 		this.viewAnimals = this.viewAnimals.bind(this);
+		this.createNewSighting = this.createNewSighting.bind(this);
+
 	}
 
 
@@ -40,8 +43,8 @@ class App extends React.Component {
 	addSighting() {
 		console.log("Clicked Sighting");
 		this.setState(state => ({
-			sightings: [...state.sightings, sight],
-			showing: "sight"
+			//sightings: [...state.sightings, sight],
+			showing: "newSight"
 		}));
 	}
 
@@ -82,6 +85,24 @@ class App extends React.Component {
 		return animalList;
 	}
 
+	newSighting() {
+		return <NewSighting onSubmit={this.createNewSighting}/>
+	}
+
+	createNewSighting(animal, location) {
+		const newSight = {
+			animal: animal,
+			location: location,
+			time: "Surprise"
+		};
+
+		//Add to sighting state and show all sightings
+		this.setState(state => ({
+			sightings: [...state.sightings, newSight],
+			showing: "sight"
+		}));
+	}
+
 	render() {
 		return (
 			<div>
@@ -90,6 +111,7 @@ class App extends React.Component {
 				<h1>MAP GOES HERE</h1>
 				{this.state.showing === "sight" ? this.renderSightings() 
 				: this.state.showing === "animals" ? this.showAnimals()
+				: this.state.showing === "newSight" ? this.newSighting()
 				: null}
 			</div>
 		);
