@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
 const sightSchema = new mongoose.Schema({
+    _id: String,
     animal: String,
     time: Date,
-    location: String
+    location: String,
+    spottedBy: String
 });
 
 sightSchema.methods.summary = function() {

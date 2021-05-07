@@ -42,17 +42,18 @@ function start() {
 		} else {
 			console.log('Mongo Connection Successful');
 
-			// Test db connection
+			/* // Test db connection
 			const poofy = new Cat({ name: 'PoofyCat' });
 			poofy.save((err, poofy) => {
 			console.log(poofy.meow());
 			});
 
+			//Test sight
 			const currentTime = new Date();
 			const matilda = new Sight({ animal: 'Cat', time: currentTime, location: 'Desk'});
 			matilda.save((err, matilda) => {
 				console.log(matilda.summary());
-			});
+			}); */
 
 		}
 	});
