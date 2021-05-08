@@ -6,8 +6,8 @@ import '../style.sass';
 export class Header extends React.Component {
 	constructor(props) {
 		super(props)
-		this.newSighting = this.newSighting.bind(this);
-    	this.animalList = this.animalList.bind(this);
+		this.showNewSighting = this.showNewSighting.bind(this);
+    	this.showAnimalList = this.showAnimalList.bind(this);
     	this.goHome = this.goHome.bind(this);
 	};
 
@@ -15,11 +15,11 @@ export class Header extends React.Component {
         this.props.viewHomepage();
     }
 
-	newSighting() {
+	showNewSighting() {
 		this.props.addSighting();
 	};
 
-    animalList() {
+    showAnimalList() {
         this.props.viewAnimals();
     }
 
@@ -28,8 +28,8 @@ export class Header extends React.Component {
 			<span>
 				<button onClick={this.goHome}>Home</button>
 				<button onClick={viewUser}>User</button>
-				<button onClick={this.animalList}>Animals</button>
-				<button onClick={this.newSighting}>Add Sighting</button>
+				<button onClick={this.showAnimalList}>Animals</button>
+				<button onClick={this.showNewSighting}>Add Sighting</button>
 			</span>
 		);
 	};

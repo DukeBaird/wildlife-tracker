@@ -2,24 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../style.sass';
 
-export class AnimalSet extends React.Component {
+export class AnimalLocations extends React.Component {
     constructor(props) {
         super(props)
-        this.addLocations = this.addLocations.bind(this);
+        this.displayLocations = this.displayLocations.bind(this);
     };
 
-    addLocations() {
+    displayLocations() {
         const loc = this.props.locations;
         console.log(loc);
         const locList = loc.map((location) =>
             <div key={location}>{location}</div>
         );
-        //console.log("Adding Locations")
-/*         for (let i = 0; i < this.props.locations.length; i+=1 ) {
-            loc.push(
-                <div>{this.props.locations[i]}</div>
-            );
-        }; */
 
         return locList;
     }
@@ -30,7 +24,7 @@ export class AnimalSet extends React.Component {
                 <h1>{this.props.animal}</h1>
                 <div>Seen at:</div>
                 <span>
-                    {this.addLocations()}
+                    {this.displayLocations()}
                 </span>
             </div>
         );

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
-import {AnimalSet} from './animalSet.jsx';
+import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './addSighting.jsx';
 import '../style.sass';
 
@@ -81,7 +81,7 @@ class App extends React.Component {
 		const animalList = [];		
 		for (let i in animals) {
 			animalList.push(
-			<AnimalSet animal={i} locations={animals[i]}/>
+			<AnimalLocations animal={i} locations={animals[i]}/>
 			);
 		}
 
