@@ -42,7 +42,7 @@ function start() {
 		} else {
 			console.log('Mongo Connection Successful');
 
-			// Test db connection
+/* 			// Test db connection
 			const poofy = new Cat({ name: 'PoofyCat' });
 			poofy.save((err, poofy) => {
 			console.log(poofy.meow());
@@ -54,7 +54,7 @@ function start() {
 			matilda.save((err, matilda) => {
 				if (err) return console.error(err);
 				console.log(matilda.summary());
-			});
+			}); */
 
 		}
 	});

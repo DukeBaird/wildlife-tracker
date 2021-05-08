@@ -7,8 +7,8 @@ export class Header extends React.Component {
 	constructor(props) {
 		super(props)
 		this.showNewSighting = this.showNewSighting.bind(this);
-    	this.showAnimalList = this.showAnimalList.bind(this);
-    	this.goHome = this.goHome.bind(this);
+		this.showAnimalList = this.showAnimalList.bind(this);
+		this.goHome = this.goHome.bind(this);
 	};
 
     goHome() {
