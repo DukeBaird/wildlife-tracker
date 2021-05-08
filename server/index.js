@@ -48,10 +48,11 @@ function start() {
 			console.log(poofy.meow());
 			});
 
-			//Test sight
+			//Test sighting
 			const currentTime = new Date();
 			const matilda = new Sighting({ animal: 'Cat', time: currentTime, location: 'Desk'});
 			matilda.save((err, matilda) => {
+				if (err) return console.error(err);
 				console.log(matilda.summary());
 			});
 
