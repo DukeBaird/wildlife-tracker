@@ -12,7 +12,7 @@ const routes = require('./routes/routes');
 const app = express();
 
 const Cat = new require('./models/Cat.js');
-const Sight = new require ('./models/Sight.js');
+const Sighting = new require ('./models/Sighting.js');
 
 function start() {
 	app.set('port', (process.env.PORT || 8080));
@@ -42,7 +42,7 @@ function start() {
 		} else {
 			console.log('Mongo Connection Successful');
 
-			/* // Test db connection
+			// Test db connection
 			const poofy = new Cat({ name: 'PoofyCat' });
 			poofy.save((err, poofy) => {
 			console.log(poofy.meow());
@@ -50,10 +50,10 @@ function start() {
 
 			//Test sight
 			const currentTime = new Date();
-			const matilda = new Sight({ animal: 'Cat', time: currentTime, location: 'Desk'});
+			const matilda = new Sighting({ animal: 'Cat', time: currentTime, location: 'Desk'});
 			matilda.save((err, matilda) => {
 				console.log(matilda.summary());
-			}); */
+			});
 
 		}
 	});

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const sightSchema = new mongoose.Schema({
+const sightingSchema = new mongoose.Schema({
     _id: String,
     animal: String,
     time: Date,
@@ -8,8 +8,8 @@ const sightSchema = new mongoose.Schema({
     spottedBy: String
 });
 
-sightSchema.methods.summary = function() {
+sightingSchema.methods.summary = function() {
     return `On ${this.time}, saw a ${this.animal} at ${this.location}`;
 };
 
-module.exports = mongoose.model('Sight', sightSchema);
+module.exports = mongoose.model('Sighting', sightingSchema);
