@@ -35,7 +35,4 @@ export class AnimalSet extends React.Component {
             </div>
         );
     };
-
-
-
 }

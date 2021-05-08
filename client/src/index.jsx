@@ -25,11 +25,17 @@ class App extends React.Component {
 		const {sightings} = this.state;
 		if (!sightings | sightings.length < 0) return null;
 		const SATList = []; //Create list of SightingAsText elements
-		for (let i = 0; i < sightings.length; i+=1) {
+		sightings.forEach(element =>
+			SATList.push(
+				<SightingAsText user={person} sighting={element} />
+			)
+		);
+
+		/* for (let i = 0; i < sightings.length; i+=1) {
 			SATList.push(
 				<SightingAsText user={person} sighting={sightings[i]} />
 			);
-		}
+		} */
 		return SATList;
 	};
 
@@ -60,22 +66,19 @@ class App extends React.Component {
 		console.log("Showing animals");
 		const {sightings} = this.state;
 		if (!sightings | sightings.length < 0) return null;
-		const animals = {};
 
 		//Create "set" of animals
-		for (let i = 0; i < sightings.length; i+=1) {
-			let sight = sightings[i];
-			if (sight.animal in animals) {
-				//console.log('animal exists');
-				animals[`${sight.animal}`].push(sight.location);
+		const animals = {};
+		sightings.forEach(element => {
+			if (animals[element.animal]) {
+				animals[element.animal].push(element.location);
 			} else {
-				//console.log('new animal');
-				animals[`${sight.animal}`] = [sight.location];
-			} 
+				animals[element.animal] = [element.location];
+			}		
+		});
 
-		};
-
-		const animalList = [];
+		//Create elements to display from set
+		const animalList = [];		
 		for (let i in animals) {
 			animalList.push(
 			<AnimalSet animal={i} locations={animals[i]}/>
@@ -109,9 +112,17 @@ class App extends React.Component {
 				<h1>Ahmic Animals</h1>
 				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} />
 				<h1>MAP GOES HERE</h1>
+
+				{/* If showing = sight, render sightings */}
 				{this.state.showing === "sight" ? this.renderSightings() 
+
+				// else if showing = animals, show animals
 				: this.state.showing === "animals" ? this.showAnimals()
+
+				// else if showing = newSight, show new sighting input
 				: this.state.showing === "newSight" ? this.newSighting()
+
+				// Otherwise show null
 				: null}
 			</div>
 		);
