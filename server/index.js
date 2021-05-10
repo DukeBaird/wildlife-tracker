@@ -7,10 +7,12 @@ const passport = require('passport');
 
 const config = require('./config');
 const routes = require('./routes/routes');
+//const Sight = require('./models/Sight');
 
 const app = express();
 
 const Cat = new require('./models/Cat.js');
+const Sighting = new require ('./models/Sighting.js');
 
 function start() {
 	app.set('port', (process.env.PORT || 8080));
@@ -40,11 +42,20 @@ function start() {
 		} else {
 			console.log('Mongo Connection Successful');
 
-			// Test db connection
-			// const poofy = new Cat({ name: 'PoofyCat' });
-			// poofy.save((err, poofy) => {
-			// 	console.log(poofy.meow());
-			// });
+/* 			// Test db connection
+			const poofy = new Cat({ name: 'PoofyCat' });
+			poofy.save((err, poofy) => {
+			console.log(poofy.meow());
+			});
+
+			//Test sighting
+			const currentTime = new Date();
+			const matilda = new Sighting({ animal: 'Cat', time: currentTime, location: 'Desk'});
+			matilda.save((err, matilda) => {
+				if (err) return console.error(err);
+				console.log(matilda.summary());
+			}); */
+
 		}
 	});
 
