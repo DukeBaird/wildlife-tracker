@@ -5,6 +5,7 @@ const router = express.Router();
 
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
+const sighting = require ('./sightingsController.js');
 
 // router.use(session({
 // 	secret: 'nothingiswrongwithpinappleonpizza',
@@ -32,6 +33,13 @@ router.get('/', (req, res) => {
 		root: './dist'
 	})
 });
+
+router.route('/sighting')
+	.get(sighting.getSightings)
+	.put(sighting.addSighting);
+
+// router.route('/sighting/:sightingID')
+// 	.delete(sighting.deleteSighting);
 
 
 module.exports = router;
