@@ -16,10 +16,11 @@ exports.getSightings = function(req, res) {
 exports.addSighting = function(req, res) {
     console.log("Saving Sighting...");
     const newSight = new Sighting(req.body);
-    newSight.save().then(sight=> {
-        res.json(sight);
+    return newSight.save().then(() => {
+        res.json({message: 'Save Success'});
         res.status(201);
     }).catch(err => {
+        console.log("Uh oh...");
         if (err) return console.log(err);
     });
 };

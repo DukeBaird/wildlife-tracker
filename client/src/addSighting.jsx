@@ -35,8 +35,7 @@ export class NewSighting extends React.Component {
         const newSightingInfo = {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'            
+                'Content-Type': 'application/json',          
             },
             body: JSON.stringify(newSighting)
         };
@@ -46,6 +45,7 @@ export class NewSighting extends React.Component {
         fetch('/sighting', newSightingInfo)
         .then(response => response.json())
         .catch(err => {
+            // Currently always returns 404, but sighting will be added to db
             console.log(err);
         });
     }
