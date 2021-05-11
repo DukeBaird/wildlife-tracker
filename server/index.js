@@ -5,7 +5,9 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 // const passport = require('passport');
 
+/* eslint-disable import/no-unresolved */
 const config = require('./config');
+/* eslint-enable import/no-unresolved */
 const routes = require('./routes/routes');
 
 const app = express();
