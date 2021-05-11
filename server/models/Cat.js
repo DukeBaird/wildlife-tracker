@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const catSchema = new mongoose.Schema({
-  name: String
+	name: String
 });
 
-catSchema.methods.meow = function() {
+catSchema.methods.meow = function () {
 	return `meow${this.name}meow`;
 };
 

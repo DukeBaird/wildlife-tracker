@@ -1,10 +1,11 @@
-const express = require("express");
-const passport = require("passport");
-const session = require("express-session");
+const express = require('express');
+// const passport = require('passport');
+// const session = require('express-session');
+
 const router = express.Router();
 
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo');
+// const mongoose = require('mongoose');
+// const MongoStore = require('connect-mongo');
 
 // router.use(session({
 // 	secret: 'nothingiswrongwithpinappleonpizza',
@@ -22,16 +23,14 @@ const MongoStore = require('connect-mongo');
 // 			token: req.token
 // 		});
 // 	} else {
-// 		res.render('login');		
+// 		res.render('login');
 // 	}
 // });
-
 
 router.get('/', (req, res) => {
 	res.sendFile('index.html', {
 		root: './dist'
-	})
+	});
 });
-
 
 module.exports = router;

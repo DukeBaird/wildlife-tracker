@@ -10,9 +10,9 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{ test: /\.(js|jsx)$/, exclude: /node_modules/,  use: ['babel-loader'] },
+			{ test: /\.(js|jsx)$/, exclude: /node_modules/, use: ['babel-loader'] },
 			{ test: /\.s[ac]ss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
-			{ test: /\.pug$/, loader: 'pug-loader'}
+			{ test: /\.pug$/, loader: 'pug-loader' }
 		]
 	},
 	plugins: [
