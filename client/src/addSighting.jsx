@@ -26,7 +26,28 @@ export class NewSighting extends React.Component {
     }
 
     handleSubmit() {
-        this.props.createNewSighting(this.state.animal, this.state.location);
+        const newSighting = {
+            animal: this.state.animal,
+            location: this.state.location,
+            time: new Date()
+        };
+
+        const newSightingInfo = {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'            
+            },
+            body: JSON.stringify(newSighting)
+        };
+
+        //console.log(newSightingInfo);
+
+        fetch('/sighting', newSightingInfo)
+        .then(response => response.json())
+        .catch(err => {
+            console.log(err);
+        });
     }
 
 

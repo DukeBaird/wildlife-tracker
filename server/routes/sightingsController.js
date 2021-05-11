@@ -3,6 +3,7 @@ const Sighting = new require('../models/Sighting.js');
 
 //Get all sightings in the database
 exports.getSightings = function(req, res) {
+    console.log("Getting Sightings...");
     Sightings.find({}).then(sight => {
         res.status(200);
         res.json(sight);
@@ -13,6 +14,7 @@ exports.getSightings = function(req, res) {
 
 //Create a new sighting
 exports.addSighting = function(req, res) {
+    console.log("Saving Sighting...");
     const newSight = new Sighting(req.body);
     newSight.save().then(sight=> {
         res.json(sight);

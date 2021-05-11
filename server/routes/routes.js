@@ -36,7 +36,15 @@ router.get('/', (req, res) => {
 
 router.route('/sighting')
 	.get(sighting.getSightings)
-	.put(sighting.addSighting);
+	.post(sighting.addSighting);
+
+/* router.get('/sighting', function(req, res) {
+	sighting.getSightings(req, res);
+});
+
+router.post('/sighting', function(req, res) {
+	sighting.addSighting(req, req);
+}); */
 
 // router.route('/sighting/:sightingID')
 // 	.delete(sighting.deleteSighting);
