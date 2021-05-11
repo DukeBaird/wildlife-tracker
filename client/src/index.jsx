@@ -89,7 +89,7 @@ class App extends React.Component {
 	}
 
 	newSighting() {
-		return <NewSighting onSubmit={this.createNewSighting}/>
+		return <NewSighting onSubmit={this.createNewSighting} return={this.viewHomepage}/>
 	}
 
 	createNewSighting(animal, location) {

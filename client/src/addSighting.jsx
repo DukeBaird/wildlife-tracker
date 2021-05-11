@@ -25,7 +25,8 @@ export class NewSighting extends React.Component {
         this.setState({location: event.target.value});
     }
 
-    handleSubmit() {
+    handleSubmit(event) {
+        event.preventDefault();
         const newSighting = {
             animal: this.state.animal,
             location: this.state.location,
@@ -43,9 +44,13 @@ export class NewSighting extends React.Component {
         //console.log(newSightingInfo);
 
         fetch('/sighting', newSightingInfo)
-        .then(response => response.json())
+        .then(response => {
+            response.json();
+            console.log(response);
+        })
+        .then(this.props.return)
         .catch(err => {
-            // Currently always returns 404, but sighting will be added to db
+            console.log("addSighting caught error")
             console.log(err);
         });
     }
