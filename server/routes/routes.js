@@ -1,3 +1,6 @@
+/* eslint no-tabs: 0 */
+// no tabs disabled because of all the commented code
+
 const express = require('express');
 // const passport = require('passport');
 // const session = require('express-session');
