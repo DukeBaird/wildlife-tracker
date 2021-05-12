@@ -1,29 +1,27 @@
 const express = require('express');
-const path = require('path');
+// const path = require('path');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const passport = require('passport');
+// const passport = require('passport');
 
+/* eslint-disable import/no-unresolved */
 const config = require('./config');
+/* eslint-enable import/no-unresolved */
 const routes = require('./routes/routes');
-//const Sight = require('./models/Sight');
 
 const app = express();
 
-const Cat = new require('./models/Cat.js');
-const Sighting = new require ('./models/Sighting.js');
-
 function start() {
 	app.set('port', (process.env.PORT || 8080));
-	app.use(express.static(__dirname + './dist'));
+	app.use(express.static(`${__dirname}./dist`));
 	app.use(bodyParser.json());
 
 	app.use(logger('common'));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 
-	app.use(function(req, res, next) {
+	app.use((req, res, next) => {
 		res.setHeader('Access-Control-Allow-Origin', '*');
 		res.setHeader('Cache-Control', 'no-cache');
 		next();
@@ -36,34 +34,19 @@ function start() {
 	mongoose.connect((process.env.MONGOSTRING || config.dbConnectionString), {
 		useNewUrlParser: true,
 		useUnifiedTopology: true
-	}, function(err) {
+	}, (err) => {
 		if (err) {
 			console.log('Mongo Connection Error', err);
 		} else {
 			console.log('Mongo Connection Successful');
-
-/* 			// Test db connection
-			const poofy = new Cat({ name: 'PoofyCat' });
-			poofy.save((err, poofy) => {
-			console.log(poofy.meow());
-			});
-
-			//Test sighting
-			const currentTime = new Date();
-			const matilda = new Sighting({ animal: 'Cat', time: currentTime, location: 'Desk'});
-			matilda.save((err, matilda) => {
-				if (err) return console.error(err);
-				console.log(matilda.summary());
-			}); */
-
 		}
 	});
 
 	// passport is for user auth
 	// require('./lib/passport.js')(passport);
 
-	app.listen(app.get('port'), function() {
-		console.log('Server running on localhost:' + app.get('port'));
+	app.listen(app.get('port'), () => {
+		console.log(`Server running on localhost:${app.get('port')}`);
 	});
 }
 
