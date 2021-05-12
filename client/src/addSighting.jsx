@@ -27,12 +27,15 @@ export class NewSighting extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
+        //Move input from user into single JSON
         const newSighting = {
             animal: this.state.animal,
             location: this.state.location,
             time: new Date()
         };
 
+        //Prepare info for fetch call
         const newSightingInfo = {
             method: 'post',
             headers: {
@@ -41,14 +44,13 @@ export class NewSighting extends React.Component {
             body: JSON.stringify(newSighting)
         };
 
-        //console.log(newSightingInfo);
-
+        //Add sighting to DB and return to home
         fetch('/sighting', newSightingInfo)
         .then(response => {
             response.json();
-            console.log(response);
+            console.log(`Success: ${response}`);
+            this.props.return(); //Return to homepage
         })
-        .then(this.props.return)
         .catch(err => {
             console.log("addSighting caught error")
             console.log(err);
