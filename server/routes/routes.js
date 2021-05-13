@@ -7,9 +7,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo');
-const sighting = require ('./sightingsController.js');
+// const mongoose = require('mongoose');
+// const MongoStore = require('connect-mongo');
+const sighting = require('./sightingsController.js');
 
 // router.use(session({
 // 	secret: 'nothingiswrongwithpinappleonpizza',
@@ -51,6 +51,5 @@ router.post('/sighting', function(req, res) {
 
 // router.route('/sighting/:sightingID')
 // 	.delete(sighting.deleteSighting);
-
 
 module.exports = router;
