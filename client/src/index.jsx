@@ -9,7 +9,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sightings: [sight, sight1, sight2],
+			sightings: [],
 			showing: "sight"
 		
 		};
@@ -20,6 +20,26 @@ class App extends React.Component {
 
 	}
 
+	componentDidMount() {
+		fetch('/sighting')
+		.then((response) => response.json())
+		.then((data) => {
+			//console.log(data);
+			console.log('Refresh loading sightings...');
+			const loadedSightings = [];
+			data.forEach((sighting) => {
+				//console.log(sighting);
+				loadedSightings.push(sighting)
+			});
+			this.setState({ 
+				sightings: loadedSightings
+			});
+			console.log('...Loaded');
+		})
+		.catch((err) => {
+			if (err) console.log(err);
+		});
+	};
 
 	renderSightings(){
 		const {sightings} = this.state;
@@ -41,6 +61,27 @@ class App extends React.Component {
 
 	viewHomepage() {
 		console.log("Clicked Home");
+
+		//Get any updated sightings from db
+		fetch('/sighting')
+		.then((response) => response.json())
+		.then((data) => {
+			console.log('Homepage loading sightings...');
+			const loadedSightings = [];
+			data.forEach((sighting) => {
+				//console.log(sighting);
+				loadedSightings.push(sighting)
+			});
+			this.setState({ 
+				sightings: loadedSightings
+			});
+			console.log('...Loaded');
+		})
+		.catch((err) => {
+			if (err) console.log(err);
+		});
+
+		//Show homepage
 		this.setState({
 			showing: "sight"
 		});
@@ -49,7 +90,6 @@ class App extends React.Component {
 	addSighting() {
 		console.log("Clicked Sighting");
 		this.setState(state => ({
-			//sightings: [...state.sightings, sight],
 			showing: "newSight"
 		}));
 	}
@@ -60,7 +100,6 @@ class App extends React.Component {
 			showing: "animals"
 		});
 	}
-
 
 	showAnimals() {
 		console.log("Showing animals");

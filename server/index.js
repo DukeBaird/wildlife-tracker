@@ -28,7 +28,7 @@ function start() {
 	});
 
 	app.use('/', routes);
-	// app.use('/api/v1', api.router);
+	app.use('/api/v1', api.router);
 
 	// This should end up having 2 connections, one for "prod", and one for development
 	mongoose.connect((process.env.MONGOSTRING || config.dbConnectionString), {
