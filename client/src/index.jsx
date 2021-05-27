@@ -21,7 +21,7 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch('/sighting')
+		fetch('/api/v1/sighting')
 		.then((response) => response.json())
 		.then((data) => {
 			//console.log(data);
@@ -37,7 +37,10 @@ class App extends React.Component {
 			console.log('...Loaded');
 		})
 		.catch((err) => {
-			if (err) console.log(err);
+			if (err) {
+				console.log('error in componentDidMount');
+				console.log(err);
+			};
 		});
 	};
 
@@ -63,7 +66,7 @@ class App extends React.Component {
 		console.log("Clicked Home");
 
 		//Get any updated sightings from db
-		fetch('/sighting')
+		fetch('/api/v1/sighting')
 		.then((response) => response.json())
 		.then((data) => {
 			console.log('Homepage loading sightings...');

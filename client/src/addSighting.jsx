@@ -45,7 +45,7 @@ export class NewSighting extends React.Component {
         };
 
         //Add sighting to DB and return to home
-        fetch('/api/v1', newSightingInfo)
+        fetch('/api/v1/sighting', newSightingInfo)
         .then(response => {
             response.json();
             console.log(`Success: ${response}`);

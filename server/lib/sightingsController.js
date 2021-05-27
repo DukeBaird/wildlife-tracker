@@ -2,10 +2,18 @@
 
 const Sighting = require('../models/Sighting.js');
 
+//Create test sighting
+const test = Sighting({
+	animal: 'Poof',
+	location: 'Deck',
+	time: 'Now'
+});
+
 // Get all sightings in the database
 exports.getSightings = function () {
 	console.log('Getting Sightings...');
 	return Sighting.find({});
+	//return test;
 };
 
 // Create a new sighting

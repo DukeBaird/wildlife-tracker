@@ -1,24 +1,27 @@
-import express from 'express';
-import sightingsController from '../lib/sightingsController.js';
+const express = require('express');
+const Sighting = require('../models/Sighting.js');
+const sightingsController = require('../lib/sightingsController.js');
 const router = express.Router();
 
 // TODO: Adjust API to return data or err instead of unnamed JSON
-function getSightings (req, res) {
+async function getSightings (req, res) {
 	try {
-		const result = sightingsController.getSightings();
-		res.status(200).json(sight);
+		const result = await sightingsController.getSightings();
+		console.log('got sightings!');
+		res.status(200).json(result);
 	} catch (err) {
+		console.log(err);
 		res.status(500).json(err);
 	}
 }
 
 router.get('/sighting', getSightings);
 
-function addSighting (req, res) {
+async function addSighting (req, res) {
 	const newSight = new Sighting (req.body);
 	
 	try {
-		const result = sightingsController.addSighting(newSight);
+		const result = await sightingsController.addSighting(newSight);
 		res.status(201).json({ message: 'Save Success'});
 	} catch (err) {
 		res.status(500).json(err);
