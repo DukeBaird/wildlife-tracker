@@ -9,7 +9,7 @@ const router = express.Router();
 
 // const mongoose = require('mongoose');
 // const MongoStore = require('connect-mongo');
-const sighting = require('../lib/sightingsController.js');
+// const sighting = require('../lib/sightingsController.js');
 
 // router.use(session({
 // 	secret: 'nothingiswrongwithpinappleonpizza',
@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
 	});
 });
 
-/* 
+/*
 router.route('/sighting')
 	.get(sighting.getSightings)
 	.post(sighting.addSighting); */
