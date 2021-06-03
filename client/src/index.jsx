@@ -9,7 +9,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sightings: [sight, sight1, sight2],
+			sightings: [],
 			showing: "sight"
 		
 		};
@@ -20,6 +20,29 @@ class App extends React.Component {
 
 	}
 
+	componentDidMount() {
+		fetch('/api/v1/sighting')
+		.then((response) => response.json())
+		.then((data) => {
+			//console.log(data);
+			console.log('Refresh loading sightings...');
+			const loadedSightings = [];
+			data.forEach((sighting) => {
+				//console.log(sighting);
+				loadedSightings.push(sighting)
+			});
+			this.setState({ 
+				sightings: loadedSightings
+			});
+			console.log('...Loaded');
+		})
+		.catch((err) => {
+			if (err) {
+				console.log('error in componentDidMount');
+				console.log(err);
+			};
+		});
+	};
 
 	renderSightings(){
 		const {sightings} = this.state;
@@ -41,6 +64,27 @@ class App extends React.Component {
 
 	viewHomepage() {
 		console.log("Clicked Home");
+
+		//Get any updated sightings from db
+		fetch('/api/v1/sighting')
+		.then((response) => response.json())
+		.then((data) => {
+			console.log('Homepage loading sightings...');
+			const loadedSightings = [];
+			data.forEach((sighting) => {
+				//console.log(sighting);
+				loadedSightings.push(sighting)
+			});
+			this.setState({ 
+				sightings: loadedSightings
+			});
+			console.log('...Loaded');
+		})
+		.catch((err) => {
+			if (err) console.log(err);
+		});
+
+		//Show homepage
 		this.setState({
 			showing: "sight"
 		});
@@ -49,7 +93,6 @@ class App extends React.Component {
 	addSighting() {
 		console.log("Clicked Sighting");
 		this.setState(state => ({
-			//sightings: [...state.sightings, sight],
 			showing: "newSight"
 		}));
 	}
@@ -60,7 +103,6 @@ class App extends React.Component {
 			showing: "animals"
 		});
 	}
-
 
 	showAnimals() {
 		console.log("Showing animals");
@@ -89,7 +131,7 @@ class App extends React.Component {
 	}
 
 	newSighting() {
-		return <NewSighting onSubmit={this.createNewSighting}/>
+		return <NewSighting onSubmit={this.createNewSighting} return={this.viewHomepage}/>
 	}
 
 	createNewSighting(animal, location) {
@@ -172,12 +214,22 @@ function SightingAsText(props) {
 			/>
 			<SightingInfo sighting={props.sighting} />
 			<UserInfo user={props.user} />
+			<button onClick={deleteSighting(props.sighting.id)}>Delete</button>
 		</div>		
 	);
 }
 
+function deleteSighting(name) {
+	fetch(`/api/v1/sighting/${name}`, {
+		method: 'put',
+		id: name
+	})
+	.then(response => response.json())
+	.catch(err => console.log(err))
+} 
+
 //Test Variables
-const person = {
+/* const person = {
 	name:"Matt",
 	avatarUrl:"fdsfsdf"
 };
@@ -202,7 +254,7 @@ const sight2 = {
 	time: "Yesterday",
 	img: "./cat.jpg"
 };	
-
+ */
 
 
 console.log("Running!");
