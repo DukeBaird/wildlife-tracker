@@ -221,8 +221,8 @@ function SightingAsText(props) {
 
 function deleteSighting(name) {
 	fetch(`/api/v1/sighting/${name}`, {
-		method: 'put',
-		id: name
+		method: 'PUT',
+		body: { id:name }
 	})
 	.then(response => response.json())
 	.catch(err => console.log(err))
