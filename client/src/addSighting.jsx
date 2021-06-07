@@ -25,8 +25,36 @@ export class NewSighting extends React.Component {
         this.setState({location: event.target.value});
     }
 
-    handleSubmit() {
-        this.props.createNewSighting(this.state.animal, this.state.location);
+    handleSubmit(event) {
+        event.preventDefault();
+
+        //Move input from user into single JSON
+        const newSighting = {
+            animal: this.state.animal,
+            location: this.state.location,
+            time: new Date()
+        };
+
+        //Prepare info for fetch call
+        const newSightingInfo = {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',          
+            },
+            body: JSON.stringify(newSighting)
+        };
+
+        //Add sighting to DB and return to home
+        fetch('/api/v1/sighting', newSightingInfo)
+        .then(response => {
+            response.json();
+            console.log(`Success: ${response}`);
+            this.props.return(); //Return to homepage
+        })
+        .catch(err => {
+            console.log("addSighting caught error")
+            console.log(err);
+        });
     }
 
 
