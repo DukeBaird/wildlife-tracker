@@ -31,17 +31,18 @@ async function addSighting(req, res) {
 
 router.post('/sighting', addSighting);
 
-function deleteSighting(req, res) {
+async function deleteSighting(req, res) {
 	const { id } = req.params;
+	console.log(id);
 
 	try {
-		const result = sightingsController.deleteSighting(id);
-		res.status(204).json({ message: 'Sighing successfully deleted', data: result });
+		const result = await sightingsController.deleteSighting(id);
+		res.status(204).json({ message: 'Sighting successfully deleted', data: result });
 	} catch (err) {
 		res.status(500).json(err);
 	}
 }
 
-router.put('/sighting/id', deleteSighting);
+router.put('/sighting/:id', deleteSighting);
 
 exports.router = router;

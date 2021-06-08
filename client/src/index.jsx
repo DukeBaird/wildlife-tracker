@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './addSighting.jsx';
+import{DeleteButton} from './deleteButton.jsx';
 import '../style.sass';
 
 class App extends React.Component {
@@ -214,27 +215,18 @@ function SightingAsText(props) {
 			/>
 			<SightingInfo sighting={props.sighting} />
 			<UserInfo user={props.user} />
-			<button onClick={deleteSighting(props.sighting.id)}>Delete</button>
+			<DeleteButton id={props.sighting._id} />
 		</div>		
 	);
 }
 
-function deleteSighting(name) {
-	fetch(`/api/v1/sighting/${name}`, {
-		method: 'PUT',
-		body: { id:name }
-	})
-	.then(response => response.json())
-	.catch(err => console.log(err))
-} 
-
 //Test Variables
-/* const person = {
+const person = {
 	name:"Matt",
 	avatarUrl:"fdsfsdf"
 };
 
-const sight = {
+/* const sight = {
 	animal: "Cat",
 	location: "Kitchen",
 	time: "Now",

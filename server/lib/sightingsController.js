@@ -23,6 +23,7 @@ exports.addSighting = (newSight) => {
 };
 
 // Delete a sighting
-exports.deleteSighting = (name) => Sighting.remove({
-	id: name
-});
+exports.deleteSighting = (name) => {
+	console.log(`Deleting Sighting ${name}`);
+	return Sighting.findByIdAndDelete(name)
+};
