@@ -37,7 +37,7 @@ async function deleteSighting(req, res) {
 
 	try {
 		const result = await sightingsController.deleteSighting(id);
-		res.status(204).json({ message: 'Sighting successfully deleted', data: result });
+		res.status(200).json({ message: 'Sighting successfully deleted', data: result });
 	} catch (err) {
 		res.status(500).json(err);
 	}
