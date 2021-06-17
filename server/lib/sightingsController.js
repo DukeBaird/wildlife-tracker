@@ -10,8 +10,9 @@ const Sighting = require('../models/Sighting.js');
 }); */
 
 // Get all sightings in the database
-exports.getSightings = function () {
+exports.getSightings = function (pagination = {}, filter = {}) {
 	console.log('Getting Sightings...');
+	console.log(`Using some variables so lint doesn't scream: ${pagination}, ${filter}`);
 	return Sighting.find({});
 	// return test;
 };
@@ -23,7 +24,7 @@ exports.addSighting = (newSight) => {
 };
 
 // Delete a sighting
-exports.deleteSighting = (name) => {
-	console.log(`Deleting Sighting ${name}`);
-	return Sighting.findByIdAndDelete(name)
+exports.deleteSighting = (sightingId) => {
+	console.log(`Deleting Sighting ${sightingId}`);
+	return Sighting.findByIdAndDelete(sightingId);
 };
