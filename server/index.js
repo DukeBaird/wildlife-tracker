@@ -1,13 +1,15 @@
 const express = require('express');
 // const path = require('path');
 const bodyParser = require('body-parser');
-const logger = require('morgan');
+const accessLogger = require('morgan');
 const mongoose = require('mongoose');
 // const passport = require('passport');
+const logger = require('./lib/logger.js');
 
 /* eslint-disable import/no-unresolved */
 const config = require('./config');
 /* eslint-enable import/no-unresolved */
+
 const routes = require('./routes/routes');
 const api = require('./api/api.js');
 
@@ -18,7 +20,7 @@ function start() {
 	app.use(express.static(`${__dirname}./dist`));
 	app.use(bodyParser.json());
 
-	app.use(logger('common'));
+	app.use(accessLogger('common'));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -37,9 +39,9 @@ function start() {
 		useUnifiedTopology: true
 	}, (err) => {
 		if (err) {
-			console.log('Mongo Connection Error', err);
+			logger.error(`Mongo Connection Error: ${err}`);
 		} else {
-			console.log('Mongo Connection Successful');
+			logger.info('Mongo Connection Successful');
 		}
 	});
 
@@ -47,7 +49,7 @@ function start() {
 	// require('./lib/passport.js')(passport);
 
 	app.listen(app.get('port'), () => {
-		console.log(`Server running on localhost:${app.get('port')}`);
+		logger.info(`Server running on localhost:${app.get('port')}`);
 	});
 }
 
