@@ -8,7 +8,7 @@ const sightingSchema = new mongoose.Schema({
 	spottedBy: String
 });
 
-sightingSchema.methods.summary = function () {
+sightingSchema.methods.summary = function summary() {
 	return `On ${this.time}, saw a ${this.animal} at ${this.location}`;
 };
 
