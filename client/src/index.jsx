@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './addSighting.jsx';
+import {Login} from './login.jsx';
 import '../style.sass';
 
 class App extends React.Component {
@@ -16,8 +17,8 @@ class App extends React.Component {
 		this.viewHomepage = this.viewHomepage.bind(this);
 		this.addSighting = this.addSighting.bind(this);
 		this.viewAnimals = this.viewAnimals.bind(this);
+		this.viewLogin = this.viewLogin.bind(this);
 		this.createNewSighting = this.createNewSighting.bind(this);
-
 	}
 
 
@@ -30,12 +31,6 @@ class App extends React.Component {
 				<SightingAsText user={person} sighting={element} />
 			)
 		);
-
-		/* for (let i = 0; i < sightings.length; i+=1) {
-			SATList.push(
-				<SightingAsText user={person} sighting={sightings[i]} />
-			);
-		} */
 		return SATList;
 	};
 
@@ -61,6 +56,12 @@ class App extends React.Component {
 		});
 	}
 
+	viewLogin() {
+		console.log("Clicked Login");
+		this.setState({
+			showing: "login"
+		});
+	}
 
 	showAnimals() {
 		console.log("Showing animals");
@@ -88,6 +89,10 @@ class App extends React.Component {
 		return animalList;
 	}
 
+	showLogin() {
+		return <Login />
+	}
+
 	newSighting() {
 		return <NewSighting onSubmit={this.createNewSighting}/>
 	}
@@ -110,7 +115,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} />
+				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} viewLogin={this.viewLogin} />
 				<h1>MAP GOES HERE</h1>
 
 				{/* If showing = sight, render sightings */}
@@ -121,6 +126,8 @@ class App extends React.Component {
 
 				// else if showing = newSight, show new sighting input
 				: this.state.showing === "newSight" ? this.newSighting()
+
+				: this.state.showing === "login" ? this.showLogin()
 
 				// Otherwise show null
 				: null}

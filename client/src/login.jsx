@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {NewUser} from './newUser.jsx'
 import '../style.sass';
 
 export class Login extends React.Component {
@@ -7,11 +8,14 @@ export class Login extends React.Component {
 		super(props);
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			showing: "login"
 		}
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
-		this.handlePasswordChange = this.handlePasswordChange.bind(this);		
+		this.handlePasswordChange = this.handlePasswordChange.bind(this);
+		this.returnToLogin = this.returnToLogin.bind(this);		
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 
 	}
 
@@ -27,7 +31,21 @@ export class Login extends React.Component {
 		// TODO
 	}
 
-	render() {
+	handleClick() {
+		// Open up newUser page
+		console.log("Show New User")
+		this.setState({
+			showing: "newUser"
+		})
+	}
+
+	returnToLogin() {
+		this.setState({ 
+			showing: "login"
+		})
+	}
+
+	showLoginPage() {
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<label>Username:
@@ -37,6 +55,23 @@ export class Login extends React.Component {
 				<input type="text" value={this.state.password} onChange={this.handlePasswordChange}/>
 				</label>
 				<input type="submit" value="Submit"/>
-			</form>	)
+				<div onClick={this.handleClick}>New User</div>
+			</form>
+		)
+	}
+
+	showNewUser() {
+		return <NewUser viewLogin={this.returnToLogin} />
+	}
+
+	render() {
+		return (
+			<div>
+				{this.state.showing === "login" ? this.showLoginPage()
+
+				: this.state.showing === "newUser"? this.showNewUser()
+
+				: null}
+			</div>	)
 	}
 }

@@ -8,6 +8,7 @@ export class Header extends React.Component {
 		super(props)
 		this.showNewSighting = this.showNewSighting.bind(this);
 		this.showAnimalList = this.showAnimalList.bind(this);
+		this.showLogin = this.showLogin.bind(this);
 		this.goHome = this.goHome.bind(this);
 	};
 
@@ -23,6 +24,10 @@ export class Header extends React.Component {
         this.props.viewAnimals();
     }
 
+	showLogin() {
+		this.props.viewLogin();
+	}
+
 	render() {
 		return (
 			<span>
@@ -30,6 +35,7 @@ export class Header extends React.Component {
 				<button onClick={viewUser}>User</button>
 				<button onClick={this.showAnimalList}>Animals</button>
 				<button onClick={this.showNewSighting}>Add Sighting</button>
+				<button onClick={this.showLogin}>Login</button>
 			</span>
 		);
 	};
