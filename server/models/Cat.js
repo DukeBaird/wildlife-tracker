@@ -4,7 +4,7 @@ const catSchema = new mongoose.Schema({
 	name: String
 });
 
-catSchema.methods.meow = function () {
+catSchema.methods.meow = function meow() {
 	return `meow${this.name}meow`;
 };
 
