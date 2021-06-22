@@ -1,6 +1,7 @@
 const express = require('express');
 const Sighting = require('../models/Sighting.js');
 const sightingsController = require('../lib/sightingsController.js');
+const logger = require('../lib/logger.js');
 
 const router = express.Router();
 
@@ -8,10 +9,10 @@ const router = express.Router();
 async function getSightings(req, res) {
 	try {
 		const result = await sightingsController.getSightings();
-		console.log('got sightings!');
+		logger.log('got sightings!');
 		res.status(200).json(result);
 	} catch (err) {
-		console.log(err);
+		logger.log(err);
 		res.status(500).json(err);
 	}
 }
@@ -33,7 +34,7 @@ router.post('/sighting', addSighting);
 
 async function deleteSighting(req, res) {
 	const { id } = req.params;
-	console.log(id);
+	logger.log(id);
 
 	try {
 		const result = await sightingsController.deleteSighting(id);
