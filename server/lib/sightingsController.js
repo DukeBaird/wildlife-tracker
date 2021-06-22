@@ -11,9 +11,9 @@ const logger = require('./logger.js');
 }); */
 
 // Get all sightings in the database
-exports.getSightings = function (pagination = {}, filter = {}) {
+exports.getSightings = function (searchOpts = {}) {
 	logger.info('Getting Sightings...');
-	logger.info(`Using some variables so lint doesn't scream: ${pagination}, ${filter}`);
+	logger.info(`Using some variables so lint doesn't scream: ${searchOpts}`);
 	return Sighting.find({});
 	// return test;
 };

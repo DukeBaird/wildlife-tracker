@@ -48,7 +48,7 @@ export class NewSighting extends React.Component {
         fetch('/api/v1/sighting', newSightingInfo)
         .then(response => {
             response.json();
-            console.log(`Success: ${response}`);
+            console.log("Success");
             this.props.return(); //Return to homepage
         })
         .catch(err => {

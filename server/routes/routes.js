@@ -7,10 +7,6 @@ const express = require('express');
 
 const router = express.Router();
 
-// const mongoose = require('mongoose');
-// const MongoStore = require('connect-mongo');
-// const sighting = require('../lib/sightingsController.js');
-
 // router.use(session({
 // 	secret: 'nothingiswrongwithpinappleonpizza',
 // 	resave: true,

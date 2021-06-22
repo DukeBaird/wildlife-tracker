@@ -25,17 +25,11 @@ class App extends React.Component {
 		fetch('/api/v1/sighting')
 		.then((response) => response.json())
 		.then((data) => {
-			//console.log(data);
-			console.log('Refresh loading sightings...');
-			const loadedSightings = [];
-			data.forEach((sighting) => {
-				//console.log(sighting);
-				loadedSightings.push(sighting)
+			console.log("Regresh loading sightings....");
+			this.setState({
+				sightings: data.data
 			});
-			this.setState({ 
-				sightings: loadedSightings
-			});
-			console.log('...Loaded');
+			console.log("...Loaded");
 		})
 		.catch((err) => {
 			if (err) {
@@ -71,13 +65,8 @@ class App extends React.Component {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log('Homepage loading sightings...');
-			const loadedSightings = [];
-			data.forEach((sighting) => {
-				//console.log(sighting);
-				loadedSightings.push(sighting)
-			});
 			this.setState({ 
-				sightings: loadedSightings
+				sightings: data.data
 			});
 			console.log('...Loaded');
 		})
