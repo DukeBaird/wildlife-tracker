@@ -31,6 +31,7 @@ async function addSighting(req, res) {
 			error: null
 		});
 	} catch (err) {
+		logger.error(err);
 		res.status(500).json({
 			data: null,
 			error: err
@@ -46,11 +47,12 @@ async function deleteSighting(req, res) {
 
 	try {
 		const result = await sightingsController.deleteSighting(id);
-		res.status(204).json({
+		res.status(200).json({
 			data: result,
 			error: null
 		});
 	} catch (err) {
+		logger.error(err);
 		res.status(500).json({
 			data: null,
 			error: err
@@ -58,6 +60,6 @@ async function deleteSighting(req, res) {
 	}
 }
 
-router.put('/sighting/:id', deleteSighting);
+router.delete('/sighting/:id', deleteSighting);
 
 exports.router = router;
