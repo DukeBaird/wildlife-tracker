@@ -12,20 +12,20 @@ const logger = require('./logger.js');
 
 // Get all sightings in the database
 exports.getSightings = function (pagination = {}, filter = {}) {
-	logger.log('Getting Sightings...');
-	logger.log(`Using some variables so lint doesn't scream: ${pagination}, ${filter}`);
+	logger.info('Getting Sightings...');
+	logger.info(`Using some variables so lint doesn't scream: ${pagination}, ${filter}`);
 	return Sighting.find({});
 	// return test;
 };
 
 // Create a new sighting
 exports.addSighting = (newSight) => {
-	logger.log('Saving Sighting...');
+	logger.info('Saving Sighting...');
 	return newSight.save();
 };
 
 // Delete a sighting
 exports.deleteSighting = (sightingId) => {
-	logger.log(`Deleting Sighting ${sightingId}`);
+	logger.info(`Deleting Sighting ${sightingId}`);
 	return Sighting.findByIdAndDelete(sightingId);
 };

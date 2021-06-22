@@ -9,10 +9,10 @@ const router = express.Router();
 async function getSightings(req, res) {
 	try {
 		const result = await sightingsController.getSightings();
-		logger.log('got sightings!');
+		logger.info('got sightings!');
 		res.status(200).json(result);
 	} catch (err) {
-		logger.log(err);
+		logger.error(err);
 		res.status(500).json(err);
 	}
 }
@@ -34,7 +34,7 @@ router.post('/sighting', addSighting);
 
 async function deleteSighting(req, res) {
 	const { id } = req.params;
-	logger.log(id);
+	logger.info(id);
 
 	try {
 		const result = await sightingsController.deleteSighting(id);
