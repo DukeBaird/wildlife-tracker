@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../style.sass';
+import './addSighting.sass';
 
 export class NewSighting extends React.Component {
     constructor(props) {
@@ -32,16 +32,20 @@ export class NewSighting extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Animal:
-                    <input type="text" value={this.state.animal} onChange={this.handleAnimalChange} />
-                </label>
-                <label>
-                    Location:
-                    <input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
-                </label>
-                <input type="submit" value="Submit"/>
-            </form>
+			<div className="NewSighting">
+				<form onSubmit={this.handleSubmit}>
+					<label className="inputLabel">
+						<span>Animal:</span>
+						<input type="text" value={this.state.animal} onChange={this.handleAnimalChange} />
+					</label>
+					<label className="inputLabel">
+						<span>Location:</span>
+						<input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
+					</label>
+					<div className="inputDiv">
+						<input className="submit" type="submit" value="Submit"/>
+					</div>
+				</form>
+			</div>
         )}
 };
