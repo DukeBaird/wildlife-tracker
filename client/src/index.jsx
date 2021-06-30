@@ -110,8 +110,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} />
-				<Button handleClick={foo} text={"Test"} />				
+				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} />				
 				<h1>MAP GOES HERE</h1>
 
 				{/* If showing = sight, render sightings */}
