@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import '../style.sass';
 
 export class NewSighting extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            animal: '',
-            location: '',
-            time: '',
-            image: ''
+	constructor(props) {
+		super(props);
+		this.state = {
+			animal: '',
+			location: '',
+			time: '',
+			image: ''
         }
         this.handleAnimalChange = this.handleAnimalChange.bind(this);
         this.handleLocationChange = this.handleLocationChange.bind(this);

@@ -111,6 +111,7 @@ class App extends React.Component {
 			<div>
 				<h1>Ahmic Animals</h1>
 				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} />
+				<Button handleClick={foo} text={"Test"} />				
 				<h1>MAP GOES HERE</h1>
 
 				{/* If showing = sight, render sightings */}
@@ -208,6 +209,6 @@ const sight2 = {
 console.log("Running!");
 
 ReactDOM.render(
-	<App />, 
+	<App />,
 	document.getElementById('root')
 );
