@@ -11,9 +11,9 @@ export class NewSighting extends React.Component {
 			time: '',
 			image: ''
         }
-        this.handleAnimalChange = this.handleAnimalChange.bind(this);
-        this.handleLocationChange = this.handleLocationChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleAnimalChange = this.handleAnimalChange.bind(this);
+		this.handleLocationChange = this.handleLocationChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
