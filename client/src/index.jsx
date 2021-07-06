@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './addSighting.jsx';
-import{DeleteButton} from './deleteButton.jsx';
+import {DeleteButton} from './deleteButton.jsx';
 import '../style.sass';
 
 class App extends React.Component {

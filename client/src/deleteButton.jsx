@@ -10,7 +10,7 @@ export class DeleteButton extends React.Component {
 
 	deleteSighting() {
 		fetch(`/api/v1/sighting/${this.props.id}`, {
-			method: 'PUT',
+			method: 'DELETE',
 			body: JSON.stringify({ id:this.props.id })
 		})
 		.then((response) => {
