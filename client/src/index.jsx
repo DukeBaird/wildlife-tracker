@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './addSighting.jsx';
-import {DeleteButton} from './deleteButton.jsx';
+import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import '../style.sass';
 
 class App extends React.Component {
@@ -25,11 +25,13 @@ class App extends React.Component {
 		fetch('/api/v1/sighting')
 		.then((response) => response.json())
 		.then((data) => {
-			console.log("Regresh loading sightings....");
+			console.log("Refresh loading sightings....");
+			console.log(data)
 			this.setState({
 				sightings: data.data
 			});
 			console.log("...Loaded");
+			console.log(this.state.sightings);
 		})
 		.catch((err) => {
 			if (err) {
@@ -43,17 +45,12 @@ class App extends React.Component {
 		const {sightings} = this.state;
 		if (!sightings | sightings.length < 0) return null;
 		const SATList = []; //Create list of SightingAsText elements
-		sightings.forEach(element =>
+		sightings.forEach(element => {
 			SATList.push(
 				<SightingAsText user={person} sighting={element} />
-			)
+			)}
 		);
 
-		/* for (let i = 0; i < sightings.length; i+=1) {
-			SATList.push(
-				<SightingAsText user={person} sighting={sightings[i]} />
-			);
-		} */
 		return SATList;
 	};
 
@@ -160,54 +157,6 @@ class App extends React.Component {
 		);
 	};
 }		
-
-//Display user profile picture (if loaded)
-function Avatar(props) {
-	return (
-		<img className="Avatar"
-			src={props.user.avatarUrl}
-			alt={props.user.name}
-		/>		
-	);
-}
-
-//Include user's name below their profile picture
-function UserInfo(props) {
-	return (
-		<div className="UserInfo">
-			<Avatar user={props.user} />
-			<div className="UserInfo-Name">
-				{props.user.name}
-			</div>
-		</div>		
-	);
-}
-
-//SightingInfo
-function SightingInfo(props) {
-	return (
-		<div>
-			<h2>{props.sighting.animal}</h2>
-			<h4>{props.sighting.location}</h4>
-			<h4>{props.sighting.time}</h4>	
-		</div>	
-	);
-}
-
-//List version of a sighting
-function SightingAsText(props) {
-	return (
-		<div className="SightingAsText">
-			<img className="Sighting-Image"
-				src={props.sighting.img}
-				alt={props.sighting.animal}
-			/>
-			<SightingInfo sighting={props.sighting} />
-			<UserInfo user={props.user} />
-			<DeleteButton id={props.sighting._id} />
-		</div>		
-	);
-}
 
 //Test Variables
 const person = {
