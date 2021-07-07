@@ -241,6 +241,6 @@ const sight2 = {
 console.log("Running!");
 
 ReactDOM.render(
-	<App />, 
+	<App />,
 	document.getElementById('root')
 );
