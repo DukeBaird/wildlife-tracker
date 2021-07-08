@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../style.sass';
+import './newUser.sass';
 
 export class NewUser extends React.Component {
 	constructor(props) {

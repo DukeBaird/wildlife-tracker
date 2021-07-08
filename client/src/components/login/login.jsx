@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {NewUser} from './newUser.jsx'
-import '../style.sass';
+import './login.sass';
 
 export class Login extends React.Component {
 	constructor(props) {
