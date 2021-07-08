@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
-import {NewSighting} from './components/addSighting/addSighting.jsx';
+import {NewSighting} from './addSighting.jsx';
+import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import '../style.sass';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sightings: [sight, sight1, sight2],
+			sightings: [],
 			showing: "sight"
 		
 		};
@@ -20,27 +21,57 @@ class App extends React.Component {
 
 	}
 
+	componentDidMount() {
+		fetch('/api/v1/sighting')
+		.then((response) => response.json())
+		.then((data) => {
+			console.log("Refresh loading sightings....");
+			console.log(data)
+			this.setState({
+				sightings: data.data
+			});
+			console.log("...Loaded");
+			console.log(this.state.sightings);
+		})
+		.catch((err) => {
+			if (err) {
+				console.log('error in componentDidMount');
+				console.log(err);
+			};
+		});
+	};
 
 	renderSightings(){
 		const {sightings} = this.state;
 		if (!sightings | sightings.length < 0) return null;
 		const SATList = []; //Create list of SightingAsText elements
-		sightings.forEach(element =>
+		sightings.forEach(element => {
 			SATList.push(
 				<SightingAsText user={person} sighting={element} />
-			)
+			)}
 		);
 
-		/* for (let i = 0; i < sightings.length; i+=1) {
-			SATList.push(
-				<SightingAsText user={person} sighting={sightings[i]} />
-			);
-		} */
 		return SATList;
 	};
 
 	viewHomepage() {
 		console.log("Clicked Home");
+
+		//Get any updated sightings from db
+		fetch('/api/v1/sighting')
+		.then((response) => response.json())
+		.then((data) => {
+			console.log('Homepage loading sightings...');
+			this.setState({ 
+				sightings: data.data
+			});
+			console.log('...Loaded');
+		})
+		.catch((err) => {
+			if (err) console.log(err);
+		});
+
+		//Show homepage
 		this.setState({
 			showing: "sight"
 		});
@@ -49,7 +80,6 @@ class App extends React.Component {
 	addSighting() {
 		console.log("Clicked Sighting");
 		this.setState(state => ({
-			//sightings: [...state.sightings, sight],
 			showing: "newSight"
 		}));
 	}
@@ -60,7 +90,6 @@ class App extends React.Component {
 			showing: "animals"
 		});
 	}
-
 
 	showAnimals() {
 		console.log("Showing animals");
@@ -89,7 +118,7 @@ class App extends React.Component {
 	}
 
 	newSighting() {
-		return <NewSighting onSubmit={this.createNewSighting}/>
+		return <NewSighting onSubmit={this.createNewSighting} return={this.viewHomepage}/>
 	}
 
 	createNewSighting(animal, location) {
@@ -129,60 +158,13 @@ class App extends React.Component {
 	};
 }		
 
-//Display user profile picture (if loaded)
-function Avatar(props) {
-	return (
-		<img className="Avatar"
-			src={props.user.avatarUrl}
-			alt={props.user.name}
-		/>		
-	);
-}
-
-//Include user's name below their profile picture
-function UserInfo(props) {
-	return (
-		<div className="UserInfo">
-			<Avatar user={props.user} />
-			<div className="UserInfo-Name">
-				{props.user.name}
-			</div>
-		</div>		
-	);
-}
-
-//SightingInfo
-function SightingInfo(props) {
-	return (
-		<div>
-			<h2>{props.sighting.animal}</h2>
-			<h4>{props.sighting.location}</h4>
-			<h4>{props.sighting.time}</h4>	
-		</div>	
-	);
-}
-
-//List version of a sighting
-function SightingAsText(props) {
-	return (
-		<div className="SightingAsText">
-			<img className="Sighting-Image"
-				src={props.sighting.img}
-				alt={props.sighting.animal}
-			/>
-			<SightingInfo sighting={props.sighting} />
-			<UserInfo user={props.user} />
-		</div>		
-	);
-}
-
 //Test Variables
 const person = {
 	name:"Matt",
 	avatarUrl:"fdsfsdf"
 };
 
-const sight = {
+/* const sight = {
 	animal: "Cat",
 	location: "Kitchen",
 	time: "Now",
@@ -202,7 +184,7 @@ const sight2 = {
 	time: "Yesterday",
 	img: "./cat.jpg"
 };	
-
+ */
 
 
 console.log("Running!");

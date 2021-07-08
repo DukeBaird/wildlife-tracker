@@ -12,17 +12,17 @@ export class Header extends React.Component {
 		this.goHome = this.goHome.bind(this);
 	};
 
-    goHome() {
-        this.props.viewHomepage();
-    }
+	goHome() {
+		this.props.viewHomepage();
+	}
 
 	showNewSighting() {
 		this.props.addSighting();
 	};
 
-    showAnimalList() {
-        this.props.viewAnimals();
-    }
+	showAnimalList() {
+		this.props.viewAnimals();
+	}
 
 	render() {
 		return (

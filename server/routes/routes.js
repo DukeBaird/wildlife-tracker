@@ -7,9 +7,6 @@ const express = require('express');
 
 const router = express.Router();
 
-// const mongoose = require('mongoose');
-// const MongoStore = require('connect-mongo');
-
 // router.use(session({
 // 	secret: 'nothingiswrongwithpinappleonpizza',
 // 	resave: true,
