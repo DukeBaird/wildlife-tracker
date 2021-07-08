@@ -11,6 +11,7 @@ const config = require('./config');
 /* eslint-enable import/no-unresolved */
 
 const routes = require('./routes/routes');
+const api = require('./api/api.js');
 
 const app = express();
 
@@ -29,8 +30,8 @@ function start() {
 		next();
 	});
 
+	app.use('/api/v1', api.router);
 	app.use('/', routes);
-	// app.use('/api/v1', api.router);
 
 	// This should end up having 2 connections, one for "prod", and one for development
 	mongoose.connect((process.env.MONGOSTRING || config.dbConnectionString), {

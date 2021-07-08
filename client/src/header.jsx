@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Button} from './components/button/button.jsx'
 import '../style.sass';
 
 //Nav bar at top of page
@@ -12,17 +13,17 @@ export class Header extends React.Component {
 		this.goHome = this.goHome.bind(this);
 	};
 
-    goHome() {
-        this.props.viewHomepage();
-    }
+	goHome() {
+		this.props.viewHomepage();
+	}
 
 	showNewSighting() {
 		this.props.addSighting();
 	};
 
-    showAnimalList() {
-        this.props.viewAnimals();
-    }
+	showAnimalList() {
+		this.props.viewAnimals();
+	}
 
 	showLogin() {
 		this.props.viewLogin();
@@ -31,11 +32,10 @@ export class Header extends React.Component {
 	render() {
 		return (
 			<span>
-				<button onClick={this.goHome}>Home</button>
-				<button onClick={viewUser}>User</button>
-				<button onClick={this.showAnimalList}>Animals</button>
-				<button onClick={this.showNewSighting}>Add Sighting</button>
-				<button onClick={this.showLogin}>Login</button>
+				<Button handleClick={this.goHome} text="Home" />
+				<Button handleClick={viewUser} text="User" />
+				<Button handleClick={this.showAnimalList} text="Animals" />
+				<Button handleClick={this.showNewSighting} text="Add Sighting" />
 			</span>
 		);
 	};
