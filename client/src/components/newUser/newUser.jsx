@@ -45,10 +45,36 @@ export class NewUser extends React.Component {
 		this.props.viewLogin();
 	}
 
-	handleSubmit() {
+	handleSubmit(event) {
 		// TODO
 		// Check that passwords match
-		// Check that username doesn't already exist
+
+		event.preventDefault();
+
+		const newUser = {
+			username: this.state.username,
+			password: this.state.password,
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+		};
+
+		const newUserInfo = {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(newUser)
+		};
+
+		fetch('/auth/v1/signup', newUserInfo)
+		.then(response => {
+			response.json()
+			console.log("Successfully created new user");
+		})
+		.catch(err => {
+			console.log("Error creating new user");
+			console.log(err);
+		});
 	}
 
 	render() {
