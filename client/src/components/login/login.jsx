@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {NewUser} from './newUser.jsx'
+import {NewUser} from '../newUser/newUser.jsx'
 import './login.sass';
 
 export class Login extends React.Component {

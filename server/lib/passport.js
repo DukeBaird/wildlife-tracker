@@ -15,6 +15,7 @@ module.exports = function() {
 
 			User.findOne({ 'username': username }).then(exists => {
 				if (exists) {
+					logger.error("This user exists!");
 					return done(null, False);
 				} else {
 					const newUser = new User();

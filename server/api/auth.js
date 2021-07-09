@@ -1,9 +1,12 @@
 const express = require('express');
+const passport = require('passport');
 const logger = require('../lib/logger.js');
+
+const session = require('express-session');
 
 const router = express.Router()
 
-async function signUp(req, res, next) {
+function signUp(req, res, next) {
 	try {
 		passport.authenticate('local-signup', function(err, user, info) {
 			if (!user) {

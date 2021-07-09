@@ -2,6 +2,7 @@ const express = require('express');
 // const path = require('path');
 const bodyParser = require('body-parser');
 const accessLogger = require('morgan');
+const passport = require('passport');
 const mongoose = require('mongoose');
 // const passport = require('passport');
 const logger = require('./lib/logger.js');
@@ -12,6 +13,7 @@ const config = require('./config');
 
 const routes = require('./routes/routes');
 const api = require('./api/api.js');
+const auth = require('./api/auth.js');
 
 const app = express();
 
@@ -31,7 +33,7 @@ function start() {
 	});
 
 	app.use('/api/v1', api.router);
-	app.user('/auth/v1', auth.router);
+	app.use('/auth/v1', auth.router);
 	app.use('/', routes);
 
 	// This should end up having 2 connections, one for "prod", and one for development
@@ -47,7 +49,7 @@ function start() {
 	});
 
 	// passport is for user auth
-	// require('./lib/passport.js')(passport);
+	require('./lib/passport.js')(passport);
 
 	app.listen(app.get('port'), () => {
 		logger.info(`Server running on localhost:${app.get('port')}`);
