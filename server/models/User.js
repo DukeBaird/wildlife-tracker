@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
 	username: String,
 	password: String,
 	firstName: String,
 	lastName: String,
-	time: Date,
+	time: Date
 });
 
 userSchema.methods.summary = function summary() {
@@ -14,7 +15,11 @@ userSchema.methods.summary = function summary() {
 };
 
 userSchema.methods.generateHash = function generateHash(password) {
-	return bcrypt.hashSync(password, brcypt.genSaltSync(8), null);
+	console.log("About to hash a password");
+	const salt = bcrypt.genSaltSync(8);
+	const hash = bcrypt.hashSync(password, salt);
+	console.log(hash);
+	return hash;
 };
 
 userSchema.methods.isValidPassword = function isValidPassword(password) {

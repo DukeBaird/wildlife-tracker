@@ -1,5 +1,6 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+const logger = require('../lib/logger.js');
 var crypto = require('crypto');
 
 var User = new require('../models/User.js');
@@ -9,34 +10,40 @@ module.exports = function() {
 		usernameField: 'username',
 		passwordField: 'password',
 		passReqToCallback: true
-	}, function (req, username, password, done) {
+	}, function (req, username, password, callback) {
 		process.nextTick(function() {
 			username = username.toLowerCase();
 
-			User.findOne({ 'username': username }).then(exists => {
+			User.findOne({ username: username }).then(exists => {
 				if (exists) {
 					logger.error("This user exists!");
-					return done(null, False);
+					return callback(null, False);
 				} else {
+					logger.info(`creating new user: ${username}`);
 					const newUser = new User();
 
 					newUser.username = username;
 					newUser.firstName = req.body.firstName;
 					newUser.lastName = req.body.lastName;
 					newUser.time = new Date()
-					newUser.password = newUser.generateHash(password);
+
+					const hashPass = newUser.generateHash(password);
+					newUser.password = hashPass;
 
 					newUser.save(err => {
 						if (err) {
+							logger.error("Issue saving new user");
 							throw err;
 						} else {
-							return done(null, newUser);
+							logger.info("Saved new use");
+							return callback(null, newUser);
 						};
 					});
 
 				};
 			}).catch(err => {
-				return done(err);
+				logger.error("Unable to find user");
+				return callback(err);
 			});
 		})
 	}));

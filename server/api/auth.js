@@ -4,27 +4,27 @@ const logger = require('../lib/logger.js');
 
 const session = require('express-session');
 
+
+
 const router = express.Router()
 
+router.use(passport.initialize());
+router.use(passport.session());
+
 function signUp(req, res, next) {
-	try {
-		passport.authenticate('local-signup', function(err, user, info) {
-			if (!user) {
-				res.status(409).json({
-					err: "User already exists"
-				});
-			} else {
-				req.logIn(user, function(err) {
-					res.redirect('/');
-				});
-			}
-		})(req, res, next);
-	} catch (err) {
-		logger.error(err);
-		res.status(500).json({
-			error: err
-		})
-	}
+	passport.authenticate('local-signup', function(err, user, info) {
+		if (!user) {
+			logger.error("The user already exists");
+			res.status(409).json({
+				err: "User already exists"
+			});
+		} else {
+			logger.info("Adding user");
+			req.logIn(user, function(err) {
+				res.redirect('/');
+			});
+		}
+	})(req, res, next);
 };
 
 router.post('/signup', signUp);
