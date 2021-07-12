@@ -35,7 +35,7 @@ module.exports = function() {
 							logger.error("Issue saving new user");
 							throw err;
 						} else {
-							logger.info("Saved new use");
+							logger.info("Saved new user");
 							return callback(null, newUser);
 						};
 					});

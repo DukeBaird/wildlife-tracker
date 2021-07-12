@@ -67,10 +67,7 @@ export class NewUser extends React.Component {
 		};
 
 		fetch('/auth/v1/signup', newUserInfo)
-		.then(response => {
-			response.json()
-			console.log("Successfully created new user");
-		})
+		.then(console.log("Successfully created new user"))
 		.catch(err => {
 			console.log("Error creating new user");
 			console.log(err);
