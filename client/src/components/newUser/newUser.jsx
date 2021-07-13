@@ -11,7 +11,7 @@ export class NewUser extends React.Component {
 			repPassword: '',
 			firstName: '',
 			lastName: '',
-			error: false
+			passMismatch: false
 		}
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -50,10 +50,14 @@ export class NewUser extends React.Component {
 		event.preventDefault();
 
 		if (this.state.password === this.state.repPassword) {
-			this.setState({error: false});
+			this.setState({passMismatch: false});
 			this.submitUser();
 		} else {
-			this.setState({error: true});
+			this.setState({
+				passMismatch: true,
+				password: '',
+				repPassword: ''
+			});
 		};
 	}
 
