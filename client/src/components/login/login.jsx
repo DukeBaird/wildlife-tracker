@@ -27,8 +27,29 @@ export class Login extends React.Component {
 		this.setState({password: event.target.value});
 	}
 
-	handleSubmit() {
-		// TODO
+	handleSubmit(event) {
+		event.preventDefault();
+
+		const user = {
+			username: this.state.username,
+			password: this.state.password
+		};
+
+		const userInfo = {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+		};
+
+		fetch('auth/v1/login', userInfo)
+		.then(console.log("Logged in!"))
+		.catch(err => {
+			console.log("Error logging user in");
+			console.log(err);
+		});
+
 	}
 
 	handleClick() {

@@ -1,10 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const logger = require('../lib/logger.js');
-
 const session = require('express-session');
-
-
 
 const router = express.Router()
 
@@ -29,17 +26,21 @@ function signUp(req, res, next) {
 
 router.post('/signup', signUp);
 
-router.post('/login', function(req, res, next) {
+function login(req, res, next) {
 	passport.authenticate('local-login', function(err, user, info) {
 		if (user) {
+			logger.info(`Logging in ${user}`);
 			req.logIn(user, function(err) {
 				return res.redirect('/');
 			});
 		} else {
 			// invalid user/password
-			return res.redirect('/login');
+			return res.redirect('/');
 		}
 	})(req, res, next);
-});
+};
+
+router.post('/login', login);
+
 
 exports.router = router;

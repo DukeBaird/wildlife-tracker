@@ -52,21 +52,21 @@ module.exports = function() {
 		usernameField: 'username',
 		asswordField: 'password',
 		passReqToCallback: true
-	}, function (req, username, password, done) {
+	}, function (req, username, password, callback) {
 		username = username.toLowerCase();
 		User.findOne({ 'username': username }).then(user => {
 			if (!user) {
-				return done(null, false);
+				return callback(null, false);
 			}
 
 			if (!user.isValidPassword(password)) {
-				return done(null, false)
+				return callback(null, false)
 			}
 
-			return done(null, user);
+			return callback(null, user);
 			
 		}).catch(err => {
-			return done(err);
+			return callback(err);
 		});
 
 	}));

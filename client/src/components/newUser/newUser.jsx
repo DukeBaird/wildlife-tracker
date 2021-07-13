@@ -10,7 +10,8 @@ export class NewUser extends React.Component {
 			password: '',
 			repPassword: '',
 			firstName: '',
-			lastName: ''
+			lastName: '',
+			error: false
 		}
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -46,11 +47,17 @@ export class NewUser extends React.Component {
 	}
 
 	handleSubmit(event) {
-		// TODO
-		// Check that passwords match
-
 		event.preventDefault();
 
+		if (this.state.password === this.state.repPassword) {
+			this.setState({error: false});
+			this.submitUser();
+		} else {
+			this.setState({error: true});
+		};
+	}
+
+	submitUser() {
 		const newUser = {
 			username: this.state.username,
 			password: this.state.password,
@@ -82,10 +89,10 @@ export class NewUser extends React.Component {
 					<input type="text" value={this.state.username} onChange={this.handleUsernameChange}/>
 					</label>
 					<label>Password:
-					<input type="text" value={this.state.password} onChange={this.handlePasswordChange}/>
+					<input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
 					</label>
 					<label>Retype Password:
-					<input type="text" value={this.state.rePassword} onChange={this.handleRepPasswordChange}/>
+					<input type="password" value={this.state.rePassword} onChange={this.handleRepPasswordChange}/>
 					</label>
 					<label>First Name:
 					<input type="text" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
@@ -94,6 +101,9 @@ export class NewUser extends React.Component {
 					<input type="text" value={this.state.lastNname} onChange={this.handleLastNameChange}/>
 					</label>
 					<input type="submit" value="Submit"/>
+					{ this.state.error &&
+						<h2>Passwords need to match</h2>
+					}
 				</form>
 				<div onClick={this.showLoginPage}>Login</div>
 			</div>	)
