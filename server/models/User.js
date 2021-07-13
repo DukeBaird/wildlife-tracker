@@ -15,10 +15,8 @@ userSchema.methods.summary = function summary() {
 };
 
 userSchema.methods.generateHash = function generateHash(password) {
-	console.log("About to hash a password");
 	const salt = bcrypt.genSaltSync(8);
 	const hash = bcrypt.hashSync(password, salt);
-	console.log(hash);
 	return hash;
 };
 
