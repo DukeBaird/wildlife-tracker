@@ -50,8 +50,16 @@ export class NewUser extends React.Component {
 		event.preventDefault();
 
 		if (this.state.password === this.state.repPassword) {
-			this.setState({passMismatch: false});
 			this.submitUser();
+
+			this.setState({
+				username: '',
+				password: '',
+				repPassword: '',
+				firstName: '',
+				lastName: '',
+				passmisMatch: false
+			});
 		} else {
 			this.setState({
 				passMismatch: true,

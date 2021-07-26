@@ -36,6 +36,10 @@ export class Header extends React.Component {
 				<Button handleClick={viewUser} text="User" />
 				<Button handleClick={this.showAnimalList} text="Animals" />
 				<Button handleClick={this.showNewSighting} text="Add Sighting" />
+{/* 				{ req.user && 
+					<Button handleClick={this.showLogin} text={req.user.username} />
+				}
+				 */}
 				<Button handleClick={this.showLogin} text="Login" />
 			</span>
 		);

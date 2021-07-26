@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const accessLogger = require('morgan');
 const passport = require('passport');
 const mongoose = require('mongoose');
-// const passport = require('passport');
 const logger = require('./lib/logger.js');
 
 /* eslint-disable import/no-unresolved */

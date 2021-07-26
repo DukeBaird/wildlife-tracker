@@ -6,18 +6,31 @@ var crypto = require('crypto');
 var User = new require('../models/User.js');
 
 module.exports = function() {
+
+	passport.serializeUser(function(user, done) {
+		logger.info("Serializing User");
+		done(null, user._id);
+	});
+
+	passport.deserializeUser(function(id, done) {
+		logger.info("Deserializing User");
+		User.findById(id, function(err, user) {
+			done(err, user);
+		});
+	});
+
 	passport.use('local-signup', new LocalStrategy({
 		usernameField: 'username',
 		passwordField: 'password',
 		passReqToCallback: true
-	}, function (req, username, password, callback) {
+	}, function (req, username, password, done) {
 		process.nextTick(function() {
 			username = username.toLowerCase();
 
 			User.findOne({ username: username }).then(exists => {
 				if (exists) {
 					logger.error("This user exists!");
-					return callback(null, False);
+					return done(null, False);
 				} else {
 					logger.info(`creating new user: ${username}`);
 					const newUser = new User();
@@ -36,14 +49,14 @@ module.exports = function() {
 							throw err;
 						} else {
 							logger.info("Saved new user");
-							return callback(null, newUser);
+							return done(null, newUser);
 						};
 					});
 
 				};
 			}).catch(err => {
 				logger.error("Unable to find user");
-				return callback(err);
+				return done(err);
 			});
 		})
 	}));
@@ -52,21 +65,21 @@ module.exports = function() {
 		usernameField: 'username',
 		asswordField: 'password',
 		passReqToCallback: true
-	}, function (req, username, password, callback) {
+	}, function (req, username, password, done) {
 		username = username.toLowerCase();
 		User.findOne({ 'username': username }).then(user => {
 			if (!user) {
-				return callback(null, false);
+				return done(null, false);
 			}
 
 			if (!user.isValidPassword(password)) {
-				return callback(null, false)
+				return done(null, false)
 			}
 
-			return callback(null, user);
+			return done(null, user);
 			
 		}).catch(err => {
-			return callback(err);
+			return done(err);
 		});
 
 	}));

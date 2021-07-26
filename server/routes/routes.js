@@ -1,20 +1,24 @@
 /* eslint no-tabs: 0 */
 // no tabs disabled because of all the commented code
 
+const config = require('../config.js');
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 
 const router = express.Router();
 
-// router.use(session({
-// 	secret: 'nothingiswrongwithpinappleonpizza',
-// 	resave: true,
-// 	saveUninitialized: true,
-// 	store: new MongoStore({
-// 		mongooseConnection: mongoose.connection
-// 	})
-// }));
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
+
+/* router.use(session({
+	secret: 'nothingiswrongwithpinappleonpizza',
+	resave: true,
+	saveUninitialized: true,
+	store: MongoStore.create({
+		mongoUrl: process.env.MONGOSTRING || config.dbConnectionString
+	})
+})); */
 
 // router.get('/', adminFunctions.isLoggedIn(['user', 'admin']), function(req, res, next) {
 // 	if (req.user) {
@@ -31,6 +35,14 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/', (req, res) => {
+	if (req.session) {
+		console.log("Logged In");
+		console.log(req.session)
+		console.log(req.user);
+	} else {
+		console.log("Not logged in")
+		console.log(req.user);
+	}
 	res.sendFile('index.html', {
 		root: './dist'
 	});

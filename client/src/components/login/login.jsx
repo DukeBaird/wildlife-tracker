@@ -37,6 +37,7 @@ export class Login extends React.Component {
 
 		const userInfo = {
 			method: 'post',
+			// credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json'
 			},
