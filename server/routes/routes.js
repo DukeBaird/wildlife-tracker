@@ -11,14 +11,14 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 
-/* router.use(session({
+router.use(session({
 	secret: 'nothingiswrongwithpinappleonpizza',
 	resave: true,
 	saveUninitialized: true,
 	store: MongoStore.create({
 		mongoUrl: process.env.MONGOSTRING || config.dbConnectionString
 	})
-})); */
+}));
 
 // router.get('/', adminFunctions.isLoggedIn(['user', 'admin']), function(req, res, next) {
 // 	if (req.user) {
@@ -37,11 +37,9 @@ router.use(passport.session());
 router.get('/', (req, res) => {
 	if (req.session) {
 		console.log("Logged In");
-		console.log(req.session)
 		console.log(req.user);
 	} else {
 		console.log("Not logged in")
-		console.log(req.user);
 	}
 	res.sendFile('index.html', {
 		root: './dist'

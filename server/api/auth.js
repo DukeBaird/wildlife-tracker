@@ -43,15 +43,11 @@ router.post('/signup', signUp);
 function login(req, res, next) {
 	passport.authenticate('local-login', function(err, user, info) {
 		if (user) {
-			logger.info(`Logging in ${user}`);
 			req.login(user, function(err) {
-				logger.info(req.user);
-				logger.info(req.session.user);
-				logger.info(req.session.passport);
 				if (err) {
 					logger.error(err);
 				} else {
-					return res.status(200);
+					return res.redirect('/');
 				}
 			});
 		} else {
