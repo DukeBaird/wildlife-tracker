@@ -35,15 +35,17 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/', (req, res) => {
-	if (req.session) {
+	if (req.user) {
 		console.log("Logged In");
-		console.log(req.user);
+		res.sendFile('index.html', {
+			root: './dist',
+		});
 	} else {
 		console.log("Not logged in")
+		res.sendFile('index.html', {
+			root: './dist'
+		});
 	}
-	res.sendFile('index.html', {
-		root: './dist'
-	});
 });
 
 module.exports = router;

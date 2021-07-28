@@ -16,6 +16,7 @@ export class Login extends React.Component {
 		this.returnToLogin = this.returnToLogin.bind(this);		
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.updateAppUserState = this.updateAppUserState.bind(this);
 
 	}
 
@@ -25,6 +26,11 @@ export class Login extends React.Component {
 
 	handlePasswordChange(event) {
 		this.setState({password: event.target.value});
+	}
+
+	updateAppUserState() {;
+		console.log("Telling App to update State")
+		this.props.onLogin();
 	}
 
 	handleSubmit(event) {
@@ -45,7 +51,11 @@ export class Login extends React.Component {
 		};
 
 		fetch('auth/v1/login', userInfo)
-		.then(console.log("Logged in!"))
+		.then(() => {
+			console.log("Logged in!");
+			localStorage.setItem('user', this.state.username);
+			this.updateAppUserState();
+		})
 		.catch(err => {
 			console.log("Error logging user in");
 			console.log(err);

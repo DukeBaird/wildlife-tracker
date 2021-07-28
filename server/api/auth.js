@@ -47,6 +47,7 @@ function login(req, res, next) {
 				if (err) {
 					logger.error(err);
 				} else {
+					// localStorage.setItem( 'user', req.user.username)
 					return res.redirect('/');
 				}
 			});

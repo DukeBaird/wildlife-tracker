@@ -13,13 +13,13 @@ class App extends React.Component {
 		this.state = {
 			sightings: [],
 			showing: "sight"
-		
 		};
 		this.viewHomepage = this.viewHomepage.bind(this);
 		this.addSighting = this.addSighting.bind(this);
 		this.viewAnimals = this.viewAnimals.bind(this);
 		this.viewLogin = this.viewLogin.bind(this);
 		this.createNewSighting = this.createNewSighting.bind(this);
+		this.updateUserState = this.updateUserState.bind(this);
 	}
 
 	componentDidMount() {
@@ -33,6 +33,17 @@ class App extends React.Component {
 			});
 			console.log("...Loaded");
 			console.log(this.state.sightings);
+			const user = localStorage.getItem('user');
+			console.log(user);
+			if (user) {
+				this.setState({
+					user: user
+				});
+			} else {
+				this.setState({
+					user: false
+				});
+			};
 		})
 		.catch((err) => {
 			if (err) {
@@ -125,8 +136,16 @@ class App extends React.Component {
 	}
 
 	showLogin() {
-		return <Login />
+		return <Login onLogin={this.updateUserState} />
 	}
+
+	updateUserState() {
+		console.log("App is updating user state");
+		const newUser = localStorage.getItem('user');
+		this.setState({
+			user: newUser
+		});
+	};
 
 	newSighting() {
 		return <NewSighting onSubmit={this.createNewSighting} return={this.viewHomepage}/>
@@ -150,7 +169,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} viewLogin={this.viewLogin} />
+				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} viewLogin={this.viewLogin} user={this.state.user}/>
 				<h1>MAP GOES HERE</h1>
 
 				{/* If showing = sight, render sightings */}
