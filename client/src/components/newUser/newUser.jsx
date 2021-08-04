@@ -19,47 +19,43 @@ export class NewUser extends React.Component {
 		this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
 		this.handleLastNameChange = this.handleLastNameChange.bind(this);
 		this.showLoginPage = this.showLoginPage.bind(this);			
-		this.handleSubmit = this.handleSubmit.bind(this);		
-	}
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.viewHomepage = this.viewHomepage.bind(this);
+	};
+
+	viewHomepage() {
+		this.props.return();
+	};
 
 	handleUsernameChange(event) {
 		this.setState({username: event.target.value});
-	}
+	};
 
 	handlePasswordChange(event) {
 		this.setState({password: event.target.value});
-	}
+	};
 
 	handleRepPasswordChange(event) {
 		this.setState({repPassword: event.target.value});
-	}
+	};
 
 	handleFirstNameChange(event) {
 		this.setState({firstName: event.target.value});
-	}
+	};
 	
 	handleLastNameChange(event) {
 		this.setState({lastName: event.target.value});
-	}
+	};
 
 	showLoginPage() {
 		this.props.viewLogin();
-	}
+	};
 
 	handleSubmit(event) {
 		event.preventDefault();
 
 		if (this.state.password === this.state.repPassword) {
 			this.submitUser();
-
-			this.setState({
-				username: '',
-				password: '',
-				repPassword: '',
-				firstName: '',
-				lastName: '',
-				passmisMatch: false
-			});
 		} else {
 			this.setState({
 				passMismatch: true,
@@ -67,7 +63,7 @@ export class NewUser extends React.Component {
 				repPassword: ''
 			});
 		};
-	}
+	};
 
 	submitUser() {
 		const newUser = {
@@ -86,12 +82,24 @@ export class NewUser extends React.Component {
 		};
 
 		fetch('/auth/v1/signup', newUserInfo)
-		.then(console.log("Successfully created new user"))
+		.then(() => {
+			console.log("Successfully created new user");
+			localStorage.setItem('user', this.state.username);
+			this.setState({
+				username: '',
+				password: '',
+				repPassword: '',
+				firstName: '',
+				lastName: '',
+				passmisMatch: false
+			});
+			this.viewHomepage();
+		})
 		.catch(err => {
 			console.log("Error creating new user");
 			console.log(err);
 		});
-	}
+	};
 
 	render() {
 		return (
@@ -104,13 +112,13 @@ export class NewUser extends React.Component {
 					<input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
 					</label>
 					<label>Retype Password:
-					<input type="password" value={this.state.rePassword} onChange={this.handleRepPasswordChange}/>
+					<input type="password" value={this.state.repPassword} onChange={this.handleRepPasswordChange}/>
 					</label>
 					<label>First Name:
 					<input type="text" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
 					</label>
 					<label>Last Name:
-					<input type="text" value={this.state.lastNname} onChange={this.handleLastNameChange}/>
+					<input type="text" value={this.state.lastName} onChange={this.handleLastNameChange}/>
 					</label>
 					<input type="submit" value="Submit"/>
 					{ this.state.error &&
@@ -119,6 +127,5 @@ export class NewUser extends React.Component {
 				</form>
 				<div onClick={this.showLoginPage}>Login</div>
 			</div>	)
-	}
-}
-
+	};
+};

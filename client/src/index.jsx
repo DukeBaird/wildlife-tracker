@@ -136,7 +136,7 @@ class App extends React.Component {
 	}
 
 	showLogin() {
-		return <Login onLogin={this.updateUserState} />
+		return <Login onLogin={this.updateUserState} return={this.viewHomepage} />
 	}
 
 	updateUserState() {
@@ -169,7 +169,14 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} viewLogin={this.viewLogin} user={this.state.user}/>
+				<Header 
+					addSighting={this.addSighting}
+					viewAnimals={this.viewAnimals}
+					viewHomepage={this.viewHomepage}
+					viewLogin={this.viewLogin}
+					user={this.state.user}
+					onLogout={this.updateUserState}
+				/>
 				<h1>MAP GOES HERE</h1>
 
 				{/* If showing = sight, render sightings */}
@@ -195,29 +202,6 @@ const person = {
 	name:"Matt",
 	avatarUrl:"fdsfsdf"
 };
-
-/* const sight = {
-	animal: "Cat",
-	location: "Kitchen",
-	time: "Now",
-	img: "./cat.jpg"
-};
-
-const sight1 = {
-	animal: "Dog",
-	location: "Outside",
-	time: "Now",
-	img: "./cat.jpg"
-};	
-
-const sight2 = {
-	animal: "Cat",
-	location: "Desk",
-	time: "Yesterday",
-	img: "./cat.jpg"
-};	
- */
-
 
 console.log("Running!");
 

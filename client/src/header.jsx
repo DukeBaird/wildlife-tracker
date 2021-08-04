@@ -12,13 +12,13 @@ export class Header extends React.Component {
 		this.showAnimalList = this.showAnimalList.bind(this);
 		this.showLogin = this.showLogin.bind(this);
 		this.goHome = this.goHome.bind(this);
+		this.logUserOut = this.logUserOut.bind(this);
+		this.showLogout = this.showLogout.bind(this);
 	};
-
-
 
 	goHome() {
 		this.props.viewHomepage();
-	}
+	};
 
 	showNewSighting() {
 		this.props.addSighting();
@@ -26,32 +26,53 @@ export class Header extends React.Component {
 
 	showAnimalList() {
 		this.props.viewAnimals();
-	}
+	};
 
 	showLogin() {
 		this.props.viewLogin();
-	}
+	};
+
+	showLogout() {
+		this.props.onLogout()
+	};
+
+	logUserOut() {
+		console.log("Logging user out");
+		
+		fetch('auth/v1/logout')
+		.then(() => {
+			console.log("Auth API is done logging out");
+			localStorage.removeItem('user');
+			console.log("Logged Out");
+			this.showLogout();
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	};
 
 	render() {
 		return (
 			<span>
 				<Button handleClick={this.goHome} text="Home" />
-				<Button handleClick={viewUser} text="User" />
+				{ this.props.user
+					? <Button handleClick={this.showLogin} text={this.props.user} />
+					: <Button handleClick={this.showLogin} text="User" />
+				}
 				<Button handleClick={this.showAnimalList} text="Animals" />
 				<Button handleClick={this.showNewSighting} text="Add Sighting" />
-				{ this.props.user && 
-					<Button handleClick={this.showLogin} text={this.props.user} />
-				}
-				
-				<Button handleClick={this.showLogin} text="Login" />
+				{ this.props.user
+					? <Button handleClick={this.logUserOut} text="Logout" />
+					: <Button handleClick={this.showLogin} text="Login" />
+				} 
 			</span>
 		);
 	};
-}
+};
 
 //Event handlers for Header
 function viewUser() {
 	console.log(Cookies.get('connect.sid'));
 	console.log(Cookies.get());
 	console.log("Clicked User");
-}
+};

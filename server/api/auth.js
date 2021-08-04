@@ -60,5 +60,23 @@ function login(req, res, next) {
 
 router.post('/login', login);
 
+function logout(req, res) {
+	logger.info("Auth.js is logging user out")
+	req.logout();
+	logger.info("Auth.js logout complete");
+	try {
+		res.status(200).json({
+			data: "Logged User Out",
+			error: null
+		});
+	} catch (err) {
+		res.status(500).json({
+			data: null,
+			error: err
+		});
+	};
+};
+
+router.get('/logout', logout);
 
 exports.router = router;
