@@ -15,9 +15,11 @@ export class Login extends React.Component {
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
 		this.showLogin = this.showLogin.bind(this);		
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.showNewUser = this.showNewUser.bind(this);
+		this.updateShowingState = this.updateShowingState.bind(this);
 		this.updateAppUserState = this.updateAppUserState.bind(this);
 		this.goHome = this.goHome.bind(this);
+		this.showLoginPage = this.showLoginPage.bind(this);
+		this.showNewUser = this.showNewUser.bind(this);
 	};
 
 	goHome() {
@@ -83,7 +85,7 @@ export class Login extends React.Component {
 
 	}
 
-	showNewUser() {
+	updateShowingState() {
 		// Open up newUser page
 		console.log("Show New User")
 		this.setState({
@@ -107,7 +109,7 @@ export class Login extends React.Component {
 				<input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
 				</label>
 				<input type="submit" value="Submit"/>
-				<div onClick={this.showNewUser}>New User</div>
+				<div onClick={this.updateShowingState}>New User</div>
 			</form>
 		)
 	}
