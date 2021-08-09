@@ -36,8 +36,9 @@ class App extends React.Component {
 			const user = localStorage.getItem('user');
 			console.log(user);
 			if (user) {
+				const userJSON = JSON.parse(user);
 				this.setState({
-					user: user
+					user: userJSON.username
 				});
 			} else {
 				this.setState({
@@ -142,9 +143,16 @@ class App extends React.Component {
 	updateUserState() {
 		console.log("App is updating user state");
 		const newUser = localStorage.getItem('user');
-		this.setState({
-			user: newUser
-		});
+		if (newUser) {
+			const newUserJSON = JSON.parse(newUser);
+			this.setState({
+				user: newUserJSON.username
+			});
+		} else {
+			this.setState({
+				user: ''
+			});
+		};
 	};
 
 	newSighting() {
