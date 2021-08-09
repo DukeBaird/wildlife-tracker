@@ -63,7 +63,9 @@ export class Login extends React.Component {
 			// console.log(data.data);
 			if (response.data) {
 				console.log("Logged in!");
-				localStorage.setItem('user', JSON.stringify(response.data));
+				const userData = response.data;
+				delete userData["password"];
+				localStorage.setItem('user', JSON.stringify(userData));
 				this.setState({
 					username: '',
 					password: ''
