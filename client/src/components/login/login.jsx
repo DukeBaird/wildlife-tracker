@@ -55,15 +55,26 @@ export class Login extends React.Component {
 		};
 
 		fetch('auth/v1/login', userInfo)
-		.then(() => {
-			console.log("Logged in!");
-			localStorage.setItem('user', this.state.username);
-			this.setState({
-				username: '',
-				password: ''
-			});
-			this.updateAppUserState();
-			this.goHome();
+		.then(response => response.json())
+		.then(response => {
+			// console.log(data);
+			// console.log(data.data);
+			if (response.data) {
+				console.log("Logged in!");
+				localStorage.setItem('user', this.state.username);
+				this.setState({
+					username: '',
+					password: ''
+				});
+				this.updateAppUserState();
+				this.goHome();
+			} else {
+				console.log("Oops - unable to log in");
+				localStorage.removeItem('user');
+				this.setState({
+					password: ''
+				});
+			};
 		})
 		.catch(err => {
 			console.log("Error logging user in");

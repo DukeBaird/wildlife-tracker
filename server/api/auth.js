@@ -55,20 +55,30 @@ router.post('/signup', signUp);
 function login(req, res, next) {
 	passport.authenticate('local-login', function(err, user, info) {
 		if (user) {
+			logger.info(user);
 			req.login(user, function(err) {
 				if (err) {
+					logger.error("Auth.js login function error");
 					logger.error(err);
 					return res.status(400).json({
 						data: null,
 						error: err
 					});
 				} else {
-					return res.status(200),json({
+					logger.info("Auth.js login function success");
+					return res.status(200).json({
 						data: user,
 						error: null
 					});
 				}
 			});
+
+/* 			logger.info(user);
+			return res.status(200).json({
+				data: user,
+				error: null
+			}); */
+
 		} else {
 			// invalid user/password
 			logger.error("Unable to authenticate login - auth.js");
