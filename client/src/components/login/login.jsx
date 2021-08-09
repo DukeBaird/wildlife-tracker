@@ -13,9 +13,9 @@ export class Login extends React.Component {
 		}
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
-		this.returnToLogin = this.returnToLogin.bind(this);		
+		this.showLogin = this.showLogin.bind(this);		
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleClick = this.handleClick.bind(this);
+		this.showNewUser = this.showNewUser.bind(this);
 		this.updateAppUserState = this.updateAppUserState.bind(this);
 		this.goHome = this.goHome.bind(this);
 	};
@@ -83,7 +83,7 @@ export class Login extends React.Component {
 
 	}
 
-	handleClick() {
+	showNewUser() {
 		// Open up newUser page
 		console.log("Show New User")
 		this.setState({
@@ -91,7 +91,7 @@ export class Login extends React.Component {
 		})
 	}
 
-	returnToLogin() {
+	showLogin() {
 		this.setState({ 
 			showing: "login"
 		})
@@ -107,13 +107,13 @@ export class Login extends React.Component {
 				<input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
 				</label>
 				<input type="submit" value="Submit"/>
-				<div onClick={this.handleClick}>New User</div>
+				<div onClick={this.showNewUser}>New User</div>
 			</form>
 		)
 	}
 
 	showNewUser() {
-		return <NewUser viewLogin={this.returnToLogin} return={this.goHome} />
+		return <NewUser viewLogin={this.showLogin} return={this.goHome} />
 	}
 
 	render() {

@@ -73,12 +73,6 @@ function login(req, res, next) {
 				}
 			});
 
-/* 			logger.info(user);
-			return res.status(200).json({
-				data: user,
-				error: null
-			}); */
-
 		} else {
 			// invalid user/password
 			logger.error("Unable to authenticate login - auth.js");
