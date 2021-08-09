@@ -32,11 +32,15 @@ export class NewSighting extends React.Component {
 		event.preventDefault();
 
 		//Move input from user into single JSON
+		const user = localStorage.getItem('user');
 		const newSighting = {
 			animal: this.state.animal,
 			location: this.state.location,
-			time: new Date()
+			time: new Date(),
+			spottedBy: user
 		};
+
+		console.log(newSighting);
 
 		//Prepare info for fetch call
 		const newSightingInfo = {

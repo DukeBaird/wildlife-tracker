@@ -27,12 +27,24 @@ function signUp(req, res, next) {
 			logger.info(`Using ${info} to please lint`);
 			logger.error("The user already exists");
 			res.status(409).json({
+				user: null,
 				err: "User already exists"
 			});
 		} else {
 			logger.info("Adding user");
 			req.logIn(user, function(err) {
-				res.redirect('/');
+				if (err) {
+					logger.error(err);
+					return res.status(400).json({
+						data: null,
+						error: err
+					});
+				} else {
+					return res.status(201).json({
+						user: user,
+						error: null
+					});
+				};
 			});
 		}
 	})(req, res, next);
@@ -46,14 +58,24 @@ function login(req, res, next) {
 			req.login(user, function(err) {
 				if (err) {
 					logger.error(err);
+					return res.status(400).json({
+						data: null,
+						error: err
+					});
 				} else {
-					// localStorage.setItem( 'user', req.user.username)
-					return res.redirect('/');
+					return res.status(200),json({
+						data: user,
+						error: null
+					});
 				}
 			});
 		} else {
 			// invalid user/password
-			return res.redirect('/');
+			logger.error("Unable to authenticate login - auth.js");
+			return res.status(401).json({
+				data: null,
+				error: "Invalid username/password"
+			});
 		}
 	})(req, res, next);
 };

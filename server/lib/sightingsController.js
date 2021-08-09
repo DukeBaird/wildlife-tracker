@@ -1,4 +1,4 @@
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const Sighting = require('../models/Sighting.js');
 const logger = require('./logger.js');
@@ -21,7 +21,25 @@ exports.getSightings = function (searchOpts = {}) {
 // Create a new sighting
 exports.addSighting = (newSight) => {
 	logger.info('Saving Sighting...');
-	return newSight.save();
+	logger.info(newSight);
+	logger.info("Parsing newSight");
+	for (key in newSight) {
+		logger.info(`Key: ${key}: ${newSight[key]}`)
+	};
+
+	logger.info();
+	const newSightModel = new Sighting(newSight);
+	
+	newSightModel.save()
+	.then((result) => {
+		logger.info("Success Save - sightingsController");
+		return result
+	})
+	.catch((err) => {
+		logger.error("Error in Save - sightingsController");
+		logger.error(err)
+		return err
+	});
 };
 
 // Delete a sighting
