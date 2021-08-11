@@ -1,15 +1,15 @@
 /* eslint no-tabs: 0 */
 // no tabs disabled because of all the commented code
 
-const config = require('../config.js');
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 
 const router = express.Router();
 
-const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
+const config = require('../config.js');
+const logger = require('../lib/logger.js');
 
 router.use(session({
 	secret: 'nothingiswrongwithpinappleonpizza',
@@ -36,12 +36,12 @@ router.use(passport.session());
 
 router.get('/', (req, res) => {
 	if (req.user) {
-		console.log("Logged In");
+		logger.info('Logged In - Routes.js');
 		res.sendFile('index.html', {
 			root: './dist',
 		});
 	} else {
-		console.log("Not logged in")
+		logger.info('Not logged in - Routes.js');
 		res.sendFile('index.html', {
 			root: './dist'
 		});
