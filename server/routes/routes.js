@@ -8,7 +8,11 @@ const session = require('express-session');
 const router = express.Router();
 
 const MongoStore = require('connect-mongo');
+
+/* eslint-disable import/no-unresolved */
 const config = require('../config.js');
+/* eslint-enable import/no-unresolved */
+
 const logger = require('../lib/logger.js');
 
 router.use(session({

@@ -3,7 +3,11 @@ const passport = require('passport');
 const MongoStore = require('connect-mongo');
 
 const session = require('express-session');
+
+/* eslint-disable import/no-unresolved */
 const config = require('../config.js');
+/* eslint-enable import/no-unresolved */
+
 const logger = require('../lib/logger.js');
 
 const router = express.Router();
