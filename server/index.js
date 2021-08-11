@@ -48,7 +48,9 @@ function start() {
 	});
 
 	// passport is for user auth
+	/* eslint-disable global-require */
 	require('./lib/passport.js')(passport);
+	/* eslint-enable global-require */
 
 	app.listen(app.get('port'), () => {
 		logger.info(`Server running on localhost:${app.get('port')}`);

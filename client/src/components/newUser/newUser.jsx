@@ -82,9 +82,14 @@ export class NewUser extends React.Component {
 		};
 
 		fetch('/auth/v1/signup', newUserInfo)
-		.then(() => {
+		.then((response) => response.json())
+		.then((response) => {
+			console.log(response);
+			const userData = response.data;
+			delete userData['password'];
 			console.log("Successfully created new user");
-			localStorage.setItem('user', this.state.username);
+
+			localStorage.setItem('user', JSON.stringify(userData));
 			this.setState({
 				username: '',
 				password: '',
@@ -93,6 +98,7 @@ export class NewUser extends React.Component {
 				lastName: '',
 				passmisMatch: false
 			});
+			this.props.updateState();
 			this.viewHomepage();
 		})
 		.catch(err => {

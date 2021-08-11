@@ -59,8 +59,6 @@ export class Login extends React.Component {
 		fetch('auth/v1/login', userInfo)
 		.then(response => response.json())
 		.then(response => {
-			// console.log(data);
-			// console.log(data.data);
 			if (response.data) {
 				console.log("Logged in!");
 				const userData = response.data;
@@ -117,7 +115,10 @@ export class Login extends React.Component {
 	}
 
 	showNewUser() {
-		return <NewUser viewLogin={this.showLogin} return={this.goHome} />
+		return <NewUser 
+			viewLogin={this.showLogin}
+			updateState={this.updateAppUserState}
+			return={this.goHome} />
 	}
 
 	render() {

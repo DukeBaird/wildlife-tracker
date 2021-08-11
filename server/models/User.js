@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
 	username: String,
@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.summary = function summary() {
-	return `${username} - ${firstName} ${lastName}`;
+	return `${this.username} - ${this.firstName} ${this.lastName}`;
 };
 
 userSchema.methods.generateHash = function generateHash(password) {
