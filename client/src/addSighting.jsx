@@ -31,14 +31,10 @@ export class NewSighting extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 
-		//Move input from user into single JSON
-		const user = localStorage.getItem('user');
-		const userID = user._id;
 		const newSighting = {
 			animal: this.state.animal,
 			location: this.state.location,
 			time: new Date(),
-			spottedBy: userID
 		};
 
 		console.log(newSighting);
