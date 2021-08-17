@@ -18,8 +18,8 @@ export class Login extends React.Component {
 		this.updateShowingState = this.updateShowingState.bind(this);
 		this.updateAppUserState = this.updateAppUserState.bind(this);
 		this.goHome = this.goHome.bind(this);
-		this.showLoginPage = this.showLoginPage.bind(this);
-		this.showNewUser = this.showNewUser.bind(this);
+		this.renderLoginPage = this.renderLoginPage.bind(this);
+		this.renderNewUser = this.renderNewUser.bind(this);
 	};
 
 	goHome() {
@@ -99,7 +99,7 @@ export class Login extends React.Component {
 		})
 	}
 
-	showLoginPage() {
+	renderLoginPage() {
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<label>Username:
@@ -114,7 +114,7 @@ export class Login extends React.Component {
 		)
 	}
 
-	showNewUser() {
+	renderNewUser() {
 		return <NewUser 
 			viewLogin={this.showLogin}
 			updateState={this.updateAppUserState}
@@ -124,9 +124,9 @@ export class Login extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.state.showing === "login" ? this.showLoginPage()
+				{this.state.showing === "login" ? this.renderLoginPage()
 
-				: this.state.showing === "newUser"? this.showNewUser()
+				: this.state.showing === "newUser"? this.renderNewUser()
 
 				: null}
 			</div>	)

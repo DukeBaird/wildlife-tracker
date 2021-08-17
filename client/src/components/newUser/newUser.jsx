@@ -96,7 +96,7 @@ export class NewUser extends React.Component {
 				repPassword: '',
 				firstName: '',
 				lastName: '',
-				passmisMatch: false
+				passMismatch: false
 			});
 			this.props.updateState();
 			this.viewHomepage();
@@ -127,7 +127,7 @@ export class NewUser extends React.Component {
 					<input type="text" value={this.state.lastName} onChange={this.handleLastNameChange}/>
 					</label>
 					<input type="submit" value="Submit"/>
-					{ this.state.error &&
+					{ this.state.passMismatch &&
 						<h2>Passwords need to match</h2>
 					}
 				</form>
