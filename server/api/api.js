@@ -1,10 +1,9 @@
 const express = require('express');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
-const sightingsController = require('../lib/sightingsController.js');
-const logger = require('../lib/logger.js');
-
 const session = require('express-session');
+const logger = require('../lib/logger.js');
+const sightingsController = require('../lib/sightingsController.js');
 
 /* eslint-disable import/no-unresolved */
 const config = require('../config.js');
@@ -54,7 +53,10 @@ async function addSighting(req, res) {
 		}
 
 		const sighting = req.body;
-		sighting.spottedBy = req.user.username;
+
+		/* eslint-disable no-underscore-dangle */
+		sighting.spottedBy = req.user._id;
+		/* eslint-enable no-underscore-dangle */
 
 		const result = await sightingsController.addSighting(sighting);
 		return res.status(201).json({
