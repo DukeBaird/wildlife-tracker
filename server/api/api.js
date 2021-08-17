@@ -44,6 +44,7 @@ router.get('/sighting', getSightings);
 
 async function addSighting(req, res) {
 	try {
+		// Ensure user exists
 		if (!req.user) {
 			logger.error('Attempted to add sighting while not logged in');
 			return res.status(401).json({
@@ -53,6 +54,15 @@ async function addSighting(req, res) {
 		}
 
 		const sighting = req.body;
+
+		// Ensure all input fields were filled out
+		if (!sighting.animal || !sighting.location) {
+			logger.error('Missing sighting information');
+			return res.status(500).json({
+				data: null,
+				error: 'Missing animal or location'
+			});
+		}
 
 		/* eslint-disable no-underscore-dangle */
 		sighting.spottedBy = req.user._id;
