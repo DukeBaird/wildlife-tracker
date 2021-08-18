@@ -25,13 +25,22 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 function signUp(req, res, next) {
+	logger.info(req.body);
+	if (!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName) {
+		logger.error('Missing signup information');
+		return res.status(400).json({
+			user: null,
+			error: 'Missing signup information'
+		});
+	}
+
 	passport.authenticate('local-signup', (err, user, info) => {
 		if (!user) {
 			logger.info(`Using ${info} to please lint`);
 			logger.error('The user already exists');
-			res.status(409).json({
+			return res.status(409).json({
 				user: null,
-				err: 'User already exists'
+				error: 'User already exists'
 			});
 		} else {
 			logger.info('Adding user');
