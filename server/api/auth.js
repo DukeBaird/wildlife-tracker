@@ -24,6 +24,7 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
+/* eslint-disable consistent-return */
 function signUp(req, res, next) {
 	logger.info(req.body);
 	if (!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName) {
@@ -63,6 +64,8 @@ function signUp(req, res, next) {
 }
 
 router.post('/signup', signUp);
+
+/* eslint-enable consistent-return */
 
 function login(req, res, next) {
 	passport.authenticate('local-login', (err, user, info) => {
