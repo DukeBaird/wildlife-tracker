@@ -42,23 +42,23 @@ function signUp(req, res, next) {
 				user: null,
 				error: 'User already exists'
 			});
-		} else {
-			logger.info('Adding user');
-			req.logIn(user, (loginErr) => {
-				if (loginErr) {
-					logger.error(loginErr);
-					return res.status(400).json({
-						data: null,
-						error: loginErr
-					});
-				}
-
-				return res.status(201).json({
-					data: user,
-					error: null
-				});
-			});
 		}
+
+		logger.info('Adding user');
+		return req.login(user, (loginErr) => {
+			if (loginErr) {
+				logger.error(loginErr);
+				return res.status(400).json({
+					data: null,
+					error: loginErr
+				});
+			}
+
+			return res.status(201).json({
+				data: user,
+				error: null
+			});
+		});
 	})(req, res, next);
 }
 
@@ -106,15 +106,15 @@ router.post('/login', login);
 
 function logout(req, res) {
 	logger.info('Auth.js is logging user out');
-	req.logout();
-	logger.info('Auth.js logout complete');
 	try {
-		res.status(200).json({
+		req.logout();
+		logger.info('Auth.js logout complete');
+		return res.status(200).json({
 			data: 'Logged User Out',
 			error: null
 		});
 	} catch (err) {
-		res.status(500).json({
+		return res.status(500).json({
 			data: null,
 			error: err
 		});
