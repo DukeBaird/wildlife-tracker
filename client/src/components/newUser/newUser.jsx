@@ -103,6 +103,14 @@ export class NewUser extends React.Component {
 				this.viewHomepage();
 			} else {
 				console.log("Oops - unable to sign up");
+				this.setState({
+					username: '',
+					password: '',
+					repPassword: '',
+					firstName: '',
+					lastName: '',
+					passMismatch: false
+				});
 			};
 		})
 		.catch(err => {
