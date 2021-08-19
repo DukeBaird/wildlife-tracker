@@ -12,19 +12,13 @@ export class NewUser extends React.Component {
 			firstName: '',
 			lastName: '',
 			passMismatch: false
-		}
+		};
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
 		this.handleRepPasswordChange = this.handleRepPasswordChange.bind(this);
 		this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-		this.handleLastNameChange = this.handleLastNameChange.bind(this);
-		this.showLoginPage = this.showLoginPage.bind(this);			
+		this.handleLastNameChange = this.handleLastNameChange.bind(this);			
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.viewHomepage = this.viewHomepage.bind(this);
-	};
-
-	viewHomepage() {
-		this.props.return();
 	};
 
 	handleUsernameChange(event) {
@@ -45,10 +39,6 @@ export class NewUser extends React.Component {
 	
 	handleLastNameChange(event) {
 		this.setState({lastName: event.target.value});
-	};
-
-	showLoginPage() {
-		this.props.viewLogin();
 	};
 
 	handleSubmit(event) {
@@ -84,6 +74,15 @@ export class NewUser extends React.Component {
 		fetch('/auth/v1/signup', newUserInfo)
 		.then((response) => response.json())
 		.then((response) => {
+			const clearSlate = {
+				username: '',
+				password: '',
+				repPassword: '',
+				firstName: '',
+				lastName: '',
+				passMismatch: false
+			};
+
 			if (response.data) {
 				console.log(response);
 				const userData = response.data;
@@ -91,26 +90,12 @@ export class NewUser extends React.Component {
 				console.log("Successfully created new user");
 
 				localStorage.setItem('user', JSON.stringify(userData));
-				this.setState({
-					username: '',
-					password: '',
-					repPassword: '',
-					firstName: '',
-					lastName: '',
-					passMismatch: false
-				});
+				this.setState(clearSlate);
 				this.props.updateState();
-				this.viewHomepage();
+				this.props.return();
 			} else {
 				console.log("Oops - unable to sign up");
-				this.setState({
-					username: '',
-					password: '',
-					repPassword: '',
-					firstName: '',
-					lastName: '',
-					passMismatch: false
-				});
+				this.setState(clearSlate);
 			};
 		})
 		.catch(err => {
@@ -143,7 +128,7 @@ export class NewUser extends React.Component {
 						<h2>Passwords need to match</h2>
 					}
 				</form>
-				<div onClick={this.showLoginPage}>Login</div>
+				<div onClick={this.props.viewLogin}>Login</div>
 			</div>	)
 	};
 };

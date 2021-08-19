@@ -8,32 +8,7 @@ import '../style.sass';
 export class Header extends React.Component {
 	constructor(props) {
 		super(props)
-		this.showNewSighting = this.showNewSighting.bind(this);
-		this.showAnimalList = this.showAnimalList.bind(this);
-		this.showLogin = this.showLogin.bind(this);
-		this.goHome = this.goHome.bind(this);
 		this.logUserOut = this.logUserOut.bind(this);
-		this.showLogout = this.showLogout.bind(this);
-	};
-
-	goHome() {
-		this.props.viewHomepage();
-	};
-
-	showNewSighting() {
-		this.props.addSighting();
-	};
-
-	showAnimalList() {
-		this.props.viewAnimals();
-	};
-
-	showLogin() {
-		this.props.viewLogin();
-	};
-
-	showLogout() {
-		this.props.onLogout()
 	};
 
 	logUserOut() {
@@ -44,7 +19,7 @@ export class Header extends React.Component {
 			console.log("Auth API is done logging out");
 			localStorage.removeItem('user');
 			console.log("Logged Out");
-			this.showLogout();
+			this.props.onLogout();
 		})
 		.catch(err => {
 			console.log(err);
@@ -54,25 +29,18 @@ export class Header extends React.Component {
 	render() {
 		return (
 			<span>
-				<Button handleClick={this.goHome} text="Home" />
+				<Button handleClick={this.props.viewHomepage} text="Home" />
 				{ this.props.user
-					? <Button handleClick={this.showLogin} text={this.props.user} />
-					: <Button handleClick={this.showLogin} text="User" />
+					? <Button handleClick={this.props.viewLogin} text={this.props.user} />
+					: <Button handleClick={this.props.viewLogin} text="User" />
 				}
-				<Button handleClick={this.showAnimalList} text="Animals" />
-				<Button handleClick={this.showNewSighting} text="Add Sighting" />
+				<Button handleClick={this.props.viewAnimals} text="Animals" />
+				<Button handleClick={this.props.addSighting} text="Add Sighting" />
 				{ this.props.user
 					? <Button handleClick={this.logUserOut} text="Logout" />
-					: <Button handleClick={this.showLogin} text="Login" />
+					: <Button handleClick={this.props.viewLogin} text="Login" />
 				} 
 			</span>
 		);
 	};
-};
-
-//Event handlers for Header
-function viewUser() {
-	console.log(Cookies.get('connect.sid'));
-	console.log(Cookies.get());
-	console.log("Clicked User");
 };

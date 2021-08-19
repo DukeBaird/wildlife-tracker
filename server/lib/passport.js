@@ -40,7 +40,7 @@ module.exports = function () {
 					newUser.username = lowerUsername;
 					newUser.firstName = req.body.firstName;
 					newUser.lastName = req.body.lastName;
-					newUser.time = new Date();
+					newUser.registeredAt = new Date();
 
 					const hashPass = newUser.generateHash(password);
 					newUser.password = hashPass;
