@@ -5,6 +5,7 @@ import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
+import {Profile} from './components/profile/profile.jsx';
 import '../style.sass';
 
 class App extends React.Component {
@@ -18,6 +19,7 @@ class App extends React.Component {
 		this.addSighting = this.addSighting.bind(this);
 		this.viewAnimals = this.viewAnimals.bind(this);
 		this.viewLogin = this.viewLogin.bind(this);
+		this.viewProfile = this.viewProfile.bind(this);
 		this.createNewSighting = this.createNewSighting.bind(this);
 		this.updateUserState = this.updateUserState.bind(this);
 	}
@@ -56,7 +58,7 @@ class App extends React.Component {
 
 	renderSightings(){
 		const {sightings} = this.state;
-		if (!sightings | sightings.length < 0) return null;
+		if (!sightings || sightings.length < 0) return null;
 		const SATList = []; //Create list of SightingAsText elements
 		sightings.forEach(element => {
 			SATList.push(
@@ -110,6 +112,13 @@ class App extends React.Component {
 		});
 	}
 
+	viewProfile() {
+		console.log("Clicked profile");
+		this.setState({
+			showing: 'profile'
+		});
+	}
+
 	showAnimals() {
 		console.log("Showing animals");
 		const {sightings} = this.state;
@@ -134,6 +143,19 @@ class App extends React.Component {
 		}
 
 		return animalList;
+	}
+
+	showProfile() {
+		console.log('Showing Profile');
+		const user = localStorage.getItem('user');
+		const JSONuser = JSON.parse(user);
+		if (user) {
+			return <Profile username={JSONuser.username} id={JSONuser._id} />
+		}
+
+		//Should never get here, but just in case, show the homepage
+		console.log('UH OH VIEWING HOME');
+		return this.viewHomepage()
 	}
 
 	showLogin() {
@@ -182,6 +204,7 @@ class App extends React.Component {
 					viewAnimals={this.viewAnimals}
 					viewHomepage={this.viewHomepage}
 					viewLogin={this.viewLogin}
+					viewProfile={this.viewProfile}
 					user={this.state.user}
 					onLogout={this.updateUserState}
 				/>
@@ -196,6 +219,8 @@ class App extends React.Component {
 				// else if showing = newSight, show new sighting input
 				: this.state.showing === "newSight" ? this.newSighting()
 
+				: this.state.showing === "profile" ? this.showProfile()
+
 				: this.state.showing === "login" ? this.showLogin()
 
 				// Otherwise show null
@@ -207,7 +232,7 @@ class App extends React.Component {
 
 //Test Variables
 const person = {
-	name:"Matt",
+	username:"Matt",
 	avatarUrl:"fdsfsdf"
 };
 

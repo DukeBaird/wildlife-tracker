@@ -10,8 +10,18 @@ const logger = require('./logger.js');
 
 // Get all sightings in the database
 exports.getSightings = (searchOpts = {}) => {
+	logger.info(searchOpts);
 	logger.info('Getting Sightings...');
-	logger.info(`Using some variables so lint doesn't scream: ${searchOpts}`);
+	const query = {};
+
+	logger.info(Object.keys(searchOpts));
+
+	if (searchOpts.id) { // This can be reused for various searchOpts - currently id only
+		logger.info('sightingsController calling with searchOpts');
+		query.spottedBy = {$in : searchOpts.id};
+		return Sighting.find(query);
+	}
+
 	return Sighting.find({});
 	// return test;
 };
