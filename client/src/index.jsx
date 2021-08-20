@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './addSighting.jsx';
+import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import '../style.sass';
 
@@ -12,13 +13,13 @@ class App extends React.Component {
 		this.state = {
 			sightings: [],
 			showing: "sight"
-		
 		};
 		this.viewHomepage = this.viewHomepage.bind(this);
 		this.addSighting = this.addSighting.bind(this);
 		this.viewAnimals = this.viewAnimals.bind(this);
+		this.viewLogin = this.viewLogin.bind(this);
 		this.createNewSighting = this.createNewSighting.bind(this);
-
+		this.updateUserState = this.updateUserState.bind(this);
 	}
 
 	componentDidMount() {
@@ -32,6 +33,18 @@ class App extends React.Component {
 			});
 			console.log("...Loaded");
 			console.log(this.state.sightings);
+			const user = localStorage.getItem('user');
+			console.log(user);
+			if (user) {
+				const userJSON = JSON.parse(user);
+				this.setState({
+					user: userJSON.username
+				});
+			} else {
+				this.setState({
+					user: false
+				});
+			};
 		})
 		.catch((err) => {
 			if (err) {
@@ -50,7 +63,6 @@ class App extends React.Component {
 				<SightingAsText user={person} sighting={element} />
 			)}
 		);
-
 		return SATList;
 	};
 
@@ -91,6 +103,13 @@ class App extends React.Component {
 		});
 	}
 
+	viewLogin() {
+		console.log("Clicked Login");
+		this.setState({
+			showing: "login"
+		});
+	}
+
 	showAnimals() {
 		console.log("Showing animals");
 		const {sightings} = this.state;
@@ -117,6 +136,25 @@ class App extends React.Component {
 		return animalList;
 	}
 
+	showLogin() {
+		return <Login onLogin={this.updateUserState} return={this.viewHomepage} />
+	}
+
+	updateUserState() {
+		console.log("App is updating user state");
+		const user = localStorage.getItem('user');
+		if (user) {
+			const userJSON = JSON.parse(user);
+			this.setState({
+				user: userJSON.username
+			});
+		} else {
+			this.setState({
+				user: ''
+			});
+		};
+	};
+
 	newSighting() {
 		return <NewSighting onSubmit={this.createNewSighting} return={this.viewHomepage}/>
 	}
@@ -139,7 +177,14 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
-				<Header addSighting={this.addSighting} viewAnimals={this.viewAnimals} viewHomepage={this.viewHomepage} />
+				<Header 
+					addSighting={this.addSighting}
+					viewAnimals={this.viewAnimals}
+					viewHomepage={this.viewHomepage}
+					viewLogin={this.viewLogin}
+					user={this.state.user}
+					onLogout={this.updateUserState}
+				/>
 				<h1>MAP GOES HERE</h1>
 
 				{/* If showing = sight, render sightings */}
@@ -150,6 +195,8 @@ class App extends React.Component {
 
 				// else if showing = newSight, show new sighting input
 				: this.state.showing === "newSight" ? this.newSighting()
+
+				: this.state.showing === "login" ? this.showLogin()
 
 				// Otherwise show null
 				: null}
@@ -163,29 +210,6 @@ const person = {
 	name:"Matt",
 	avatarUrl:"fdsfsdf"
 };
-
-/* const sight = {
-	animal: "Cat",
-	location: "Kitchen",
-	time: "Now",
-	img: "./cat.jpg"
-};
-
-const sight1 = {
-	animal: "Dog",
-	location: "Outside",
-	time: "Now",
-	img: "./cat.jpg"
-};	
-
-const sight2 = {
-	animal: "Cat",
-	location: "Desk",
-	time: "Yesterday",
-	img: "./cat.jpg"
-};	
- */
-
 
 console.log("Running!");
 
