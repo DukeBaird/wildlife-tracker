@@ -17,7 +17,7 @@ exports.getSightings = (searchOpts = {}) => {
 
 	if (searchOpts.id) { // This can be reused for various searchOpts - currently id only
 		logger.info('sightingsController calling with searchOpts');
-		query.spottedBy = {$in : searchOpts.id};
+		query.spottedBy = { $in: searchOpts.id };
 		return Sighting.find(query);
 	}
 
