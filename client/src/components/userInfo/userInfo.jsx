@@ -9,10 +9,10 @@ export class UserInfo extends React.Component {
 	render() {
 		return (
 			<div className="UserInfo">
-				<img className="Avatar"
+{/* 				<img className="Avatar"
 					src={this.props.user.avatarUrl}
 					alt={this.props.user.name}
-				/>	
+				/>	 */}
 				<div className="UserInfo-Name">
 					{this.props.user.name}
 				</div>

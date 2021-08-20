@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import Cookies from 'js-cookie';
 import {Button} from './components/button/button.jsx'
 import '../style.sass';
 
@@ -7,36 +8,39 @@ import '../style.sass';
 export class Header extends React.Component {
 	constructor(props) {
 		super(props)
-		this.showNewSighting = this.showNewSighting.bind(this);
-		this.showAnimalList = this.showAnimalList.bind(this);
-		this.goHome = this.goHome.bind(this);
+		this.logUserOut = this.logUserOut.bind(this);
 	};
 
-	goHome() {
-		this.props.viewHomepage();
-	}
-
-	showNewSighting() {
-		this.props.addSighting();
+	logUserOut() {
+		console.log("Logging user out");
+		
+		fetch('auth/v1/logout')
+		.then(() => {
+			console.log("Auth API is done logging out");
+			localStorage.removeItem('user');
+			console.log("Logged Out");
+			this.props.onLogout();
+		})
+		.catch(err => {
+			console.log(err);
+		});
 	};
-
-	showAnimalList() {
-		this.props.viewAnimals();
-	}
 
 	render() {
 		return (
 			<span>
-				<Button handleClick={this.goHome} text="Home" />
-				<Button handleClick={viewUser} text="User" />
-				<Button handleClick={this.showAnimalList} text="Animals" />
-				<Button handleClick={this.showNewSighting} text="Add Sighting" />
+				<Button handleClick={this.props.viewHomepage} text="Home" />
+				{ this.props.user
+					? <Button handleClick={this.props.viewLogin} text={this.props.user} />
+					: <Button handleClick={this.props.viewLogin} text="User" />
+				}
+				<Button handleClick={this.props.viewAnimals} text="Animals" />
+				<Button handleClick={this.props.addSighting} text="Add Sighting" />
+				{ this.props.user
+					? <Button handleClick={this.logUserOut} text="Logout" />
+					: <Button handleClick={this.props.viewLogin} text="Login" />
+				} 
 			</span>
 		);
 	};
-}
-
-//Event handlers for Header
-function viewUser() {
-	console.log("Clicked User");
-}
+};

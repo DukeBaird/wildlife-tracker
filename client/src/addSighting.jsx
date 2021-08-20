@@ -31,12 +31,13 @@ export class NewSighting extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 
-		//Move input from user into single JSON
 		const newSighting = {
 			animal: this.state.animal,
 			location: this.state.location,
-			time: new Date()
+			time: new Date(),
 		};
+
+		console.log(newSighting);
 
 		//Prepare info for fetch call
 		const newSightingInfo = {
