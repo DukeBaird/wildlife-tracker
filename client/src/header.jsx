@@ -31,7 +31,7 @@ export class Header extends React.Component {
 			<span>
 				<Button handleClick={this.props.viewHomepage} text="Home" />
 				{ this.props.user
-					? <Button handleClick={this.props.viewLogin} text={this.props.user} />
+					? <Button handleClick={this.props.viewProfile} text={this.props.user} />
 					: <Button handleClick={this.props.viewLogin} text="User" />
 				}
 				<Button handleClick={this.props.viewAnimals} text="Animals" />
