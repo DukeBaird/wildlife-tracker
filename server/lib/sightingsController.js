@@ -10,7 +10,6 @@ const logger = require('./logger.js');
 
 // Get all sightings in the database
 exports.getSightings = (searchOpts = {}) => {
-	logger.info(searchOpts);
 	logger.info('Getting Sightings...');
 	const query = {};
 

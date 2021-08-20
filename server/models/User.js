@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
 	password: String,
 	firstName: String,
 	lastName: String,
-	time: Date
+	registeredAt: Date
 });
 
 userSchema.methods.summary = function summary() {
