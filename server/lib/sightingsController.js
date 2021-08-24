@@ -18,9 +18,9 @@ exports.getSightings = (searchOpts = {}) => {
 		logger.info(`On page ${searchOpts.page}`);
 		skips = searchOpts.page * showLimit;
 		logger.info(`Skipping ${skips}`);
-	};
+	}
 
-	return Sighting.find({}).sort( {time: 1} ).skip(skips).limit(showLimit);
+	return Sighting.find({}).sort({ time: 1 }).skip(skips).limit(showLimit);
 	// return test;
 };
 
