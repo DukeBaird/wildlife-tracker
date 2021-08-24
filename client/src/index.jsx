@@ -213,6 +213,21 @@ class App extends React.Component {
 	}
 
 	render() {
+		let backButton;
+		if (this.state.page === 0) {
+			backButton = null;
+		} else {
+			backButton = <Button text="backwards" handleClick={this.renderPreviousPage}/>
+		}
+
+		let forwardButton;
+		if (this.state.sightings.length < 5) {
+			forwardButton = null;
+		} else {
+			forwardButton = <Button text="forwards" handleClick={this.renderNextPage}/>
+		}
+
+
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
@@ -240,8 +255,8 @@ class App extends React.Component {
 				// Otherwise show null
 				: null}
 
-				<Button text="backwards" handleClick={this.renderPreviousPage}/>
-				<Button text="forwards" handleClick={this.renderNextPage}/>
+				{backButton}
+				{forwardButton}
 			</div>
 		);
 	};
