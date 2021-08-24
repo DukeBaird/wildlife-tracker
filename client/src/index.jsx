@@ -5,6 +5,7 @@ import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
+import {Button} from './components/button/button.jsx';
 import '../style.sass';
 
 class App extends React.Component {
@@ -12,7 +13,8 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			sightings: [],
-			showing: "sight"
+			showing: "sight",
+			page: 0
 		};
 		this.viewHomepage = this.viewHomepage.bind(this);
 		this.addSighting = this.addSighting.bind(this);
@@ -20,6 +22,8 @@ class App extends React.Component {
 		this.viewLogin = this.viewLogin.bind(this);
 		this.createNewSighting = this.createNewSighting.bind(this);
 		this.updateUserState = this.updateUserState.bind(this);
+		this.renderPreviousPage = this.renderPreviousPage.bind(this);
+		this.renderNextPage = this.renderNextPage.bind(this);
 	}
 
 	componentDidMount() {
@@ -68,12 +72,26 @@ class App extends React.Component {
 
 	viewHomepage() {
 		console.log("Clicked Home");
+		console.log(`Loading page ${this.state.page}`);
+
+		const fetchInfo = {
+			method: 'get',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		};
 
 		//Get any updated sightings from db
-		fetch('/api/v1/sighting')
+		fetch(`/api/v1/sighting?page=${encodeURIComponent(this.state.page)}`, fetchInfo)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log('Homepage loading sightings...');
+
+			// Debugging
+			if (!data) {
+				console.log('No data returned from fetch');
+			};
+
+			console.log('Button push loading sightings...');
 			this.setState({ 
 				sightings: data.data
 			});
@@ -173,6 +191,27 @@ class App extends React.Component {
 		}));
 	}
 
+	renderPreviousPage() {
+		if (this.state.page > 0) {
+			this.setState({
+				page: this.state.page -= 1
+			});
+		} else {
+			console.log('Already on the first page');
+		}
+		this.viewHomepage(); // this should be renamed or a new function created if we want a button to reset state.page = 0
+	}
+
+	renderNextPage() {
+		// Quality checks for too many pages?
+		console.log('loading next page');
+		//const nextPage = this.state.page + 1;
+		this.setState({
+			page: this.state.page += 1
+		});
+		this.viewHomepage();
+	}
+
 	render() {
 		return (
 			<div>
@@ -200,6 +239,9 @@ class App extends React.Component {
 
 				// Otherwise show null
 				: null}
+
+				<Button text="backwards" handleClick={this.renderPreviousPage}/>
+				<Button text="forwards" handleClick={this.renderNextPage}/>
 			</div>
 		);
 	};

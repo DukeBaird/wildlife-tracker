@@ -11,8 +11,16 @@ const logger = require('./logger.js');
 // Get all sightings in the database
 exports.getSightings = (searchOpts = {}) => {
 	logger.info('Getting Sightings...');
-	logger.info(`Using some variables so lint doesn't scream: ${searchOpts}`);
-	return Sighting.find({});
+	const showLimit = 5;
+	let skips = 0;
+
+	if (searchOpts.page) {
+		logger.info(`On page ${searchOpts.page}`);
+		skips = searchOpts.page * showLimit;
+		logger.info(`Skipping ${skips}`);
+	};
+
+	return Sighting.find({}).sort( {time: 1} ).skip(skips).limit(showLimit);
 	// return test;
 };
 
