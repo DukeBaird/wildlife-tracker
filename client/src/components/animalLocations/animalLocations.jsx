@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../style.sass';
+import './animalLocations.sass';
 
 export class AnimalLocations extends React.Component {
 	constructor(props) {
