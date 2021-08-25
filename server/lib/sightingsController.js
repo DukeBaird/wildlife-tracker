@@ -8,6 +8,27 @@ const logger = require('./logger.js');
 	time: 'Now'
 }); */
 
+function queryBuilder(searchOpts) {
+	const query = {};
+
+	if (searchOpts.id) {
+		logger.info('Adding id to query');
+		query.spottedBy = { $in: searchOpts.id };
+	}
+
+	if (searchOpts.animal) {
+		logger.info('Adding animal to query');
+		query.animal = { $in: searchOpts.animal };
+	}
+
+	if (searchOpts.location) {
+		logger.info('Adding location to query');
+		query.spottedBy = { $in: searchOpts.location };
+	}
+
+	return query;
+}
+
 // Get all sightings in the database
 exports.getSightings = (searchOpts = {}) => {
 	logger.info('Getting Sightings...');
@@ -37,25 +58,4 @@ exports.addSighting = (newSight) => {
 exports.deleteSighting = (sightingId) => {
 	logger.info(`Deleting Sighting ${sightingId}`);
 	return Sighting.findByIdAndDelete(sightingId);
-};
-
-function queryBuilder(searchOpts) {
-	const query = {};
-
-	if (searchOpts.id) {
-		logger.info('Adding id to query');
-		query.spottedBy = { $in: searchOpts.id };
-	}
-
-	if (searchOpts.animal) {
-		logger.info('Adding animal to query');
-		query.animal = { $in: searchOpts.animal };
-	}
-
-	if (searchOpts.location) {
-		logger.info('Adding location to query');
-		query.spottedBy = { $in: searchOpts.location };
-	}
-
-	return query;
 };
