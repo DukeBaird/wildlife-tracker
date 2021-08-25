@@ -118,18 +118,34 @@ class App extends React.Component {
 		//Create "set" of animals
 		const animals = {};
 		sightings.forEach(element => {
-			if (animals[element.animal]) {
-				animals[element.animal].push(element.location);
+			const animal = element.animal;
+			const location = element.location;
+			const user = element.spottedBy;
+
+			if (animals[animal]) {
+				if (animals[animal][location]) { // Animal has been seen here
+					animals[animal][location].push(user);
+				} else {
+					animals[animal][location] = [user]; // Keep track of who's seen the animal at that location
+				}
+
 			} else {
-				animals[element.animal] = [element.location];
+				animals[animal] = {
+					[location]: [user],
+				};
 			}		
 		});
 
 		//Create elements to display from set
 		const animalList = [];		
 		for (let i in animals) {
+			const locations = [];
+			for (let k in animals[i]) {
+				locations.push(k);
+			};
+
 			animalList.push(
-			<AnimalLocations animal={i} locations={animals[i]}/>
+			<AnimalLocations animal={i} locations={locations}/>
 			);
 		}
 
