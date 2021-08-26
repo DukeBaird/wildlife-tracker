@@ -1,14 +1,7 @@
 const Sighting = require('../models/Sighting.js');
 const logger = require('./logger.js');
 
-// Create test sighting
-/* const test = Sighting({
-	animal: 'Poof',
-	location: 'Deck',
-	time: 'Now'
-}); */
-
-function queryBuilder(searchOpts) {
+exports.queryBuilder = (searchOpts) => {
 	const query = {};
 
 	if (searchOpts.id) {
@@ -23,16 +16,16 @@ function queryBuilder(searchOpts) {
 
 	if (searchOpts.location) {
 		logger.info('Adding location to query');
-		query.spottedBy = { $in: searchOpts.location };
+		query.location = { $in: searchOpts.location };
 	}
 
 	return query;
-}
+};
 
 // Get all sightings in the database
 exports.getSightings = (searchOpts = {}) => {
 	logger.info('Getting Sightings...');
-	const query = queryBuilder(searchOpts);
+	const query = exports.queryBuilder(searchOpts);
 	return Sighting.find(query);
 	// return test;
 };
