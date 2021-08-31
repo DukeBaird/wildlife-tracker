@@ -5,17 +5,14 @@ exports.queryBuilder = (searchOpts) => {
 	const query = {};
 
 	if (searchOpts.id) {
-		logger.info('Adding id to query');
 		query.spottedBy = { $in: searchOpts.id };
 	}
 
 	if (searchOpts.animal) {
-		logger.info('Adding animal to query');
 		query.animal = { $in: searchOpts.animal };
 	}
 
 	if (searchOpts.location) {
-		logger.info('Adding location to query');
 		query.location = { $in: searchOpts.location };
 	}
 

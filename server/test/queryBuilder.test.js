@@ -2,13 +2,13 @@
 const jest = require('jest');
 const { queryBuilder } = require('../lib/sightingsController.js');
 
-describe('Building queries from searchOpts', () => {
-	test('No inputs', () => {
+describe('queryBuilder', () => {
+	test('should return an empty JSON when no inputs', () => {
 		const searchOpts = {};
 		expect(queryBuilder(searchOpts)).toEqual({});
 	});
 
-	test('Only ID', () => {
+	test('Should add user id correctly as a search option', () => {
 		const searchOpts = {
 			id: 'newuser'
 		};
@@ -17,7 +17,7 @@ describe('Building queries from searchOpts', () => {
 		});
 	});
 
-	test('Only Location', () => {
+	test('Should add location correctly as a search option', () => {
 		const searchOpts = {
 			location: 'home'
 		};
@@ -26,7 +26,7 @@ describe('Building queries from searchOpts', () => {
 		});
 	});
 
-	test('Only Animal', () => {
+	test('Should add animal correctly as a search option', () => {
 		const searchOpts = {
 			animal: 'cat'
 		};
@@ -35,7 +35,7 @@ describe('Building queries from searchOpts', () => {
 		});
 	});
 
-	test('All inputs', () => {
+	test('Should correctly add all inputs as search options', () => {
 		const searchOpts = {
 			id: 'newuser',
 			animal: 'cat',
