@@ -25,7 +25,9 @@ router.use(passport.session());
 
 async function getSightings(req, res) {
 	try {
-		const result = await sightingsController.getSightings();
+		const filters = req.query;
+		const result = await sightingsController.getSightings(filters);
+
 		logger.info('got sightings!');
 		return res.status(200).json({
 			data: result,
