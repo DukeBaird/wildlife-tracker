@@ -26,7 +26,16 @@ exports.queryBuilder = (searchOpts) => {
 exports.getSightings = (searchOpts = {}) => {
 	logger.info('Getting Sightings...');
 	const query = exports.queryBuilder(searchOpts);
-	return Sighting.find(query);
+	const showLimit = 5;
+	let skips = 0;
+
+	if (searchOpts.page) {
+		logger.info(`On page ${searchOpts.page}`);
+		skips = searchOpts.page * showLimit;
+		logger.info(`Skipping ${skips}`);
+	}
+
+	return Sighting.find(query).sort({ time: 1 }).skip(skips).limit(showLimit);
 	// return test;
 };
 
