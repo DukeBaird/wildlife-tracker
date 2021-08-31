@@ -215,14 +215,14 @@ class App extends React.Component {
 	render() {
 		let backButton;
 		if (this.state.page === 0) {
-			backButton = null;
+			backButton = <Button text="backwards" handleClick={null}/>
 		} else {
 			backButton = <Button text="backwards" handleClick={this.renderPreviousPage}/>
 		}
 
 		let forwardButton;
 		if (this.state.sightings.length < 5) {
-			forwardButton = null;
+			forwardButton = <Button text="forwards" handleClick={null}/>
 		} else {
 			forwardButton = <Button text="forwards" handleClick={this.renderNextPage}/>
 		}
