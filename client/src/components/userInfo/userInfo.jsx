@@ -14,7 +14,7 @@ export class UserInfo extends React.Component {
 					alt={this.props.user.name}
 				/>	 */}
 				<div className="UserInfo-Name">
-					{this.props.user.name}
+					{this.props.user.username}
 				</div>
 			</div>		
 		);
