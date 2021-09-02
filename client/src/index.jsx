@@ -5,6 +5,8 @@ import {AnimalLocations} from './components/animalLocations/animalLocations.jsx'
 import {NewSighting} from './addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
+import {Profile} from './components/profile/profile.jsx';
+import {Button} from './components/button/button.jsx';
 import '../style.sass';
 
 class App extends React.Component {
@@ -12,14 +14,18 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			sightings: [],
-			showing: "sight"
+			showing: "sight",
+			page: 0
 		};
 		this.viewHomepage = this.viewHomepage.bind(this);
 		this.addSighting = this.addSighting.bind(this);
 		this.viewAnimals = this.viewAnimals.bind(this);
 		this.viewLogin = this.viewLogin.bind(this);
+		this.viewProfile = this.viewProfile.bind(this);
 		this.createNewSighting = this.createNewSighting.bind(this);
 		this.updateUserState = this.updateUserState.bind(this);
+		this.renderPreviousPage = this.renderPreviousPage.bind(this);
+		this.renderNextPage = this.renderNextPage.bind(this);
 	}
 
 	componentDidMount() {
@@ -56,7 +62,7 @@ class App extends React.Component {
 
 	renderSightings(){
 		const {sightings} = this.state;
-		if (!sightings | sightings.length < 0) return null;
+		if (!sightings || sightings.length < 0) return null;
 		const SATList = []; //Create list of SightingAsText elements
 		sightings.forEach(element => {
 			SATList.push(
@@ -68,12 +74,26 @@ class App extends React.Component {
 
 	viewHomepage() {
 		console.log("Clicked Home");
+		console.log(`Loading page ${this.state.page}`);
+
+		const fetchInfo = {
+			method: 'get',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		};
 
 		//Get any updated sightings from db
-		fetch('/api/v1/sighting')
+		fetch(`/api/v1/sighting?page=${encodeURIComponent(this.state.page)}`, fetchInfo)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log('Homepage loading sightings...');
+
+			// Debugging
+			if (!data) {
+				console.log('No data returned from fetch');
+			};
+
+			console.log('Button push loading sightings...');
 			this.setState({ 
 				sightings: data.data
 			});
@@ -107,6 +127,13 @@ class App extends React.Component {
 		console.log("Clicked Login");
 		this.setState({
 			showing: "login"
+		});
+	}
+
+	viewProfile() {
+		console.log("Clicked profile");
+		this.setState({
+			showing: 'profile'
 		});
 	}
 
@@ -152,6 +179,19 @@ class App extends React.Component {
 		return animalList;
 	}
 
+	showProfile() {
+		console.log('Showing Profile');
+		const user = localStorage.getItem('user');
+		const JSONuser = JSON.parse(user);
+		if (user) {
+			return <Profile username={JSONuser.username} id={JSONuser._id} />
+		}
+
+		//Should never get here, but just in case, show the homepage
+		console.log('UH OH VIEWING HOME');
+		return this.viewHomepage()
+	}
+
 	showLogin() {
 		return <Login onLogin={this.updateUserState} return={this.viewHomepage} />
 	}
@@ -189,7 +229,43 @@ class App extends React.Component {
 		}));
 	}
 
+	renderPreviousPage() {
+		if (this.state.page > 0) {
+			this.setState({
+				page: this.state.page -= 1
+			});
+		} else {
+			console.log('Already on the first page');
+		}
+		this.viewHomepage(); // this should be renamed or a new function created if we want a button to reset state.page = 0
+	}
+
+	renderNextPage() {
+		// Quality checks for too many pages?
+		console.log('loading next page');
+		//const nextPage = this.state.page + 1;
+		this.setState({
+			page: this.state.page += 1
+		});
+		this.viewHomepage();
+	}
+
 	render() {
+		let backButton;
+		if (this.state.page === 0) {
+			backButton = <Button text="backwards" handleClick={null}/>
+		} else {
+			backButton = <Button text="backwards" handleClick={this.renderPreviousPage}/>
+		}
+
+		let forwardButton;
+		if (this.state.sightings.length < 5) {
+			forwardButton = <Button text="forwards" handleClick={null}/>
+		} else {
+			forwardButton = <Button text="forwards" handleClick={this.renderNextPage}/>
+		}
+
+
 		return (
 			<div>
 				<h1>Ahmic Animals</h1>
@@ -198,6 +274,7 @@ class App extends React.Component {
 					viewAnimals={this.viewAnimals}
 					viewHomepage={this.viewHomepage}
 					viewLogin={this.viewLogin}
+					viewProfile={this.viewProfile}
 					user={this.state.user}
 					onLogout={this.updateUserState}
 				/>
@@ -212,10 +289,15 @@ class App extends React.Component {
 				// else if showing = newSight, show new sighting input
 				: this.state.showing === "newSight" ? this.newSighting()
 
+				: this.state.showing === "profile" ? this.showProfile()
+
 				: this.state.showing === "login" ? this.showLogin()
 
 				// Otherwise show null
 				: null}
+
+				{backButton}
+				{forwardButton}
 			</div>
 		);
 	};
@@ -223,7 +305,7 @@ class App extends React.Component {
 
 //Test Variables
 const person = {
-	name:"Matt",
+	username:"Matt",
 	avatarUrl:"fdsfsdf"
 };
 
