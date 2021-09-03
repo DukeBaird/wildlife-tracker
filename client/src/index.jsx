@@ -8,6 +8,7 @@ import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
 import {Button} from './components/button/button.jsx';
 import '../style.sass';
+import './images/noImage.jpg';
 
 class App extends React.Component {
 	constructor(props) {

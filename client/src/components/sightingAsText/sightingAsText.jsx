@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {SightingInfo} from '../sightingInfo/sightingInfo.jsx';
 import {UserInfo} from '../userInfo/userInfo.jsx';
 import {Button} from '../button/button.jsx';
+import noImage from './noImage.jpg';
 
 export class SightingAsText extends React.Component {
 	constructor(props) {
@@ -31,7 +32,7 @@ export class SightingAsText extends React.Component {
 		if (this.props.sighting.img) {
 			animalPicture = this.props.sighting.img;
 		} else {
-			animalPicture = '/images/noImage.jpg';
+			animalPicture = './noImage.jpg';
 		}
 
 
