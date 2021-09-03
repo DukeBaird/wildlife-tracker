@@ -38,6 +38,10 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
+const path = require('path');
+
+router.use('/images', express.static(path.join(__dirname, '../client/src/images')));
+
 router.get('/', (req, res) => {
 	if (req.user) {
 		logger.info('Logged In - Routes.js');

@@ -27,11 +27,19 @@ export class SightingAsText extends React.Component {
 	}
 
 	render() {
+		let animalPicture;
+		if (this.props.sighting.img) {
+			animalPicture = this.props.sighting.img;
+		} else {
+			animalPicture = '/images/noImage.jpg';
+		}
+
+
 		return (
 			<div className="SightingAsText">
 				<img className="Sighting-Image"
-					src={this.props.sighting.img}
-					alt={this.props.sighting.animal}
+					src={animalPicture}
+					alt="Picture of Animal"
 				/>
 				<SightingInfo sighting={this.props.sighting} />
 				<UserInfo user={this.props.user} />

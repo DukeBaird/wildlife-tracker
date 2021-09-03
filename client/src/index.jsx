@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
-import {NewSighting} from './addSighting.jsx';
+import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
