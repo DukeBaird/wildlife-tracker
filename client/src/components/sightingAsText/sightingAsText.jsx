@@ -4,6 +4,7 @@ import {SightingInfo} from '../sightingInfo/sightingInfo.jsx';
 import {UserInfo} from '../userInfo/userInfo.jsx';
 import {Button} from '../button/button.jsx';
 import noImage from './noImage.jpg';
+import './sightingAsText.sass';
 
 export class SightingAsText extends React.Component {
 	constructor(props) {
@@ -38,13 +39,17 @@ export class SightingAsText extends React.Component {
 
 		return (
 			<div className="SightingAsText">
-				<img className="Sighting-Image"
-					src={animalPicture}
-					alt="Picture of Animal"
-				/>
+				<div className="UserContainer">
+					<UserInfo user={this.props.user} />
+					<Button handleClick={this.deleteSighting} text="Delete" />
+				</div>
 				<SightingInfo sighting={this.props.sighting} />
-				<UserInfo user={this.props.user} />
-				<Button handleClick={this.deleteSighting} text="Delete" />
+				<div className="ImageContainer">
+					<img className="Sighting-Image"
+						src={animalPicture}
+						alt="Picture of Animal"
+					/>
+				</div>
 			</div>
 		)
 	}

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Header} from './header.jsx';
+import {Header} from './components/header/header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
@@ -251,37 +251,55 @@ class App extends React.Component {
 
 
 		return (
-			<div>
-				<h1>Ahmic Animals</h1>
-				<Header 
-					addSighting={this.addSighting}
-					viewAnimals={this.viewAnimals}
-					viewHomepage={this.viewHomepage}
-					viewLogin={this.viewLogin}
-					viewProfile={this.viewProfile}
-					user={this.state.user}
-					onLogout={this.updateUserState}
-				/>
-				<h1>MAP GOES HERE</h1>
+			<div id='App'>
+				<div className='UserButton'>
+					<div className='TopBar'>
+						User Profile
+					</div>
+				</div>
+				<div className='Main'>
+					<div className='TopBar'>
+						<h1 className='title'>Ahmic Animals</h1>
+						<Header
+							addSighting={this.addSighting}
+							viewAnimals={this.viewAnimals}
+							viewHomepage={this.viewHomepage}
+							viewLogin={this.viewLogin}
+							viewProfile={this.viewProfile}
+							user={this.state.user}
+							onLogout={this.updateUserState}
+						/>
+					</div>
+					<div className='MapContainer'>
+						<h1>MAP GOES HERE</h1>
+					</div>
 
-				{/* If showing = sight, render sightings */}
-				{this.state.showing === "sight" ? this.renderSightings() 
+					{/* If showing = sight, render sightings */}
+					{this.state.showing === "sight" ? this.renderSightings() 
 
-				// else if showing = animals, show animals
-				: this.state.showing === "animals" ? this.showAnimals()
+					// else if showing = animals, show animals
+					: this.state.showing === "animals" ? this.showAnimals()
 
-				// else if showing = newSight, show new sighting input
-				: this.state.showing === "newSight" ? this.newSighting()
+					// else if showing = newSight, show new sighting input
+					: this.state.showing === "newSight" ? this.newSighting()
 
-				: this.state.showing === "profile" ? this.showProfile()
+					: this.state.showing === "profile" ? this.showProfile()
 
-				: this.state.showing === "login" ? this.showLogin()
+					: this.state.showing === "login" ? this.showLogin()
 
-				// Otherwise show null
-				: null}
+					// Otherwise show null
+					: null}
 
-				{backButton}
-				{forwardButton}
+				<div className='PageButtons'>
+					{backButton}
+					{forwardButton}
+				</div>
+				</div>
+				<div className='AddButtons'>
+					<div className='TopBar'>
+						New Sighting
+					</div>
+				</div>
 			</div>
 		);
 	};
