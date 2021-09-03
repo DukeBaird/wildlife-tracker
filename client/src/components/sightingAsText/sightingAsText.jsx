@@ -32,7 +32,7 @@ export class SightingAsText extends React.Component {
 		if (this.props.sighting.img) {
 			animalPicture = this.props.sighting.img;
 		} else {
-			animalPicture = './noImage.jpg';
+			animalPicture = noImage;
 		}
 
 
