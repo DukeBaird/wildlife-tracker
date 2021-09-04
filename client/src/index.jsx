@@ -6,6 +6,7 @@ import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
+import {UserButton} from './components/userButton/userButton.jsx';
 import {Button} from './components/button/button.jsx';
 import '../style.sass';
 
@@ -254,12 +255,16 @@ class App extends React.Component {
 			<div id='App'>
 				<div className='UserButton'>
 					<div className='TopBar'>
-						User Profile
+						<UserButton 
+							user={this.state.user}
+							viewLogin={this.viewLogin}
+							viewProfile={this.viewProfile}
+						/>
 					</div>
 				</div>
 				<div className='Main'>
 					<div className='TopBar'>
-						<h1 className='title'>Ahmic Animals</h1>
+						<h1 className='title' onClick={this.viewHomepage}>Ahmic Animals</h1>
 						<Header
 							addSighting={this.addSighting}
 							viewAnimals={this.viewAnimals}
