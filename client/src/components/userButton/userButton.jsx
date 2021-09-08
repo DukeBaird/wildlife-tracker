@@ -48,6 +48,10 @@ export class UserButton extends React.Component {
 					<div id="profileButton" onClick={this.props.viewProfile}>Profile</div>
 				</div>);
 			navOptions.push(
+				<div className="buttonContainer">
+					<div id="homeButton" onClick={this.props.viewHome}>Home</div>
+				</div>);
+			navOptions.push(
 				<div className="borderContainer"></div>
 			);
 			navOptions.push(

@@ -27,6 +27,7 @@ class App extends React.Component {
 		this.updateUserState = this.updateUserState.bind(this);
 		this.renderPreviousPage = this.renderPreviousPage.bind(this);
 		this.renderNextPage = this.renderNextPage.bind(this);
+		this.buildPaginationButtons = this.buildPaginationButtons.bind(this);
 	}
 
 	componentDidMount() {
@@ -65,11 +66,19 @@ class App extends React.Component {
 		const {sightings} = this.state;
 		if (!sightings || sightings.length < 0) return null;
 		const SATList = []; //Create list of SightingAsText elements
+		SATList.push(
+			<div className='MapContainer'>
+					<h1>MAP GOES HERE</h1>
+			</div>
+		)
 		sightings.forEach(element => {
 			SATList.push(
 				<SightingAsText user={person} sighting={element} />
 			)}
 		);
+
+		SATList.push(this.buildPaginationButtons());
+
 		return SATList;
 	};
 
@@ -154,7 +163,12 @@ class App extends React.Component {
 		});
 
 		//Create elements to display from set
-		const animalList = [];		
+		const animalList = [];
+		animalList.push(
+			<div className='MapContainer'>
+					<h1>MAP GOES HERE</h1>
+			</div>
+		);	
 		for (let i in animals) {
 			animalList.push(
 			<AnimalLocations animal={i} locations={animals[i]}/>
@@ -169,7 +183,17 @@ class App extends React.Component {
 		const user = localStorage.getItem('user');
 		const JSONuser = JSON.parse(user);
 		if (user) {
-			return <Profile username={JSONuser.username} id={JSONuser._id} />
+			const profileDivs = [];
+			profileDivs.push(
+				<div className='MapContainer'>
+					<h1>MAP GOES HERE</h1>
+				</div>
+			);
+			profileDivs.push(
+				<Profile username={JSONuser.username} id={JSONuser._id} />
+			);
+
+			return profileDivs;
 		}
 
 		//Should never get here, but just in case, show the homepage
@@ -235,7 +259,7 @@ class App extends React.Component {
 		this.viewHomepage();
 	}
 
-	render() {
+	buildPaginationButtons() {
 		let backButton;
 		if (this.state.page === 0) {
 			backButton = <img src={leftButton} alt="Backwards" onClick={null}/>
@@ -250,7 +274,19 @@ class App extends React.Component {
 			forwardButton = <img src={rightButton} alt="forwards" onClick={this.renderNextPage}/>
 		}
 
+		const pageButtons = [];
+		pageButtons.push(
+			<div className="PageButtons">
+				{backButton}
+				{forwardButton}
+			</div>
+		);
 
+		return pageButtons
+
+	}
+
+	render() {
 		return (
 			<div id='App'>
 				<div className='UserButton'>
@@ -261,9 +297,6 @@ class App extends React.Component {
 				<div className='Main'>
 					<div className='TopBar'>
 						<h1 className='title' onClick={this.viewHomepage}>Ahmic Animals</h1>
-					</div>
-					<div className='MapContainer'>
-						<h1>MAP GOES HERE</h1>
 					</div>
 
 					{/* If showing = sight, render sightings */}
@@ -281,16 +314,12 @@ class App extends React.Component {
 
 					// Otherwise show null
 					: null}
-
-				<div className='PageButtons'>
-					{backButton}
-					{forwardButton}
-				</div>
 				</div>
 				<div className='AddButtons'>
 					<div className='TopBar'>
 						<UserButton 
 							user={this.state.user}
+							viewHome={this.viewHomepage}
 							viewLogin={this.viewLogin}
 							viewProfile={this.viewProfile}
 							onLogout={this.updateUserState}
