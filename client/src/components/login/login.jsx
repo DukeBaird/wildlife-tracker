@@ -101,16 +101,23 @@ export class Login extends React.Component {
 
 	renderLoginPage() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<label>Username:
-				<input type="text" value={this.state.username} onChange={this.handleUsernameChange}/>
-				</label>
-				<label>Password:
-				<input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
-				</label>
-				<input type="submit" value="Submit"/>
-				<div onClick={this.updateShowingState}>New User</div>
-			</form>
+			<div id="loginContainer">
+				<form id="loginForm" onSubmit={this.handleSubmit}>
+					<div>
+						<input className="loginInput" type="text" value={this.state.username} onChange={this.handleUsernameChange} placeholder="Username"/>
+					</div>
+					<div>
+						<input className="loginInput" type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Password"/>
+					</div>
+					<div>
+						<input id="loginSubmit" type="submit" value="Sign In"/>
+					</div>
+				</form>
+				<div id="signupContainer">
+					<div>New to the site? </div>
+					<div id="signupLink" onClick={this.updateShowingState}> Sign Up</div>
+				</div>
+			</div>
 		)
 	}
 
