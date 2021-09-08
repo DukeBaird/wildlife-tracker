@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button} from '../button/button.jsx';
 import userLogo from './userLogo.png';
 import addButton from './add.png';
 import historyButton from './history.png';
+import menuButton from './menu.png';
 import './userButton.sass';
 
 export class UserButton extends React.Component {
@@ -120,7 +120,7 @@ export class UserButton extends React.Component {
 			<div>
 				<div onClick={this.showUserSideBar} onBlur={this.hideUserSideBar} tabIndex="-1">
 					<div className="sideBarLogo">
-						<img className="userLogo" src={userLogo} alt="User Logo"/>
+						<img className="userLogo" src={menuButton} alt="User Logo"/>
 					</div>
 					<div className="userSideBar">
 						{this.state.showSideBar === true ? this.createSideBar() : null}
