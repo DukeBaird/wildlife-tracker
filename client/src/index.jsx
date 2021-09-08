@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Header} from './components/header/header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
 import {UserButton} from './components/userButton/userButton.jsx';
-import {Button} from './components/button/button.jsx';
+import leftButton from './images/left.png';
+import rightButton from './images/right.png';
 import '../style.sass';
 
 class App extends React.Component {
@@ -238,16 +238,16 @@ class App extends React.Component {
 	render() {
 		let backButton;
 		if (this.state.page === 0) {
-			backButton = <Button text="backwards" handleClick={null}/>
+			backButton = <img src={leftButton} alt="Backwards" onClick={null}/>
 		} else {
-			backButton = <Button text="backwards" handleClick={this.renderPreviousPage}/>
+			backButton = <img src={leftButton} alt="Backwards" onClick={this.renderPreviousPage}/>
 		}
 
 		let forwardButton;
 		if (this.state.sightings.length < 5) {
-			forwardButton = <Button text="forwards" handleClick={null}/>
+			forwardButton = <img src={rightButton} alt="Forwards" onClick={null}/>
 		} else {
-			forwardButton = <Button text="forwards" handleClick={this.renderNextPage}/>
+			forwardButton = <img src={rightButton} alt="forwards" onClick={this.renderNextPage}/>
 		}
 
 
@@ -255,25 +255,12 @@ class App extends React.Component {
 			<div id='App'>
 				<div className='UserButton'>
 					<div className='TopBar'>
-						<UserButton 
-							user={this.state.user}
-							viewLogin={this.viewLogin}
-							viewProfile={this.viewProfile}
-						/>
+						Logo to go here
 					</div>
 				</div>
 				<div className='Main'>
 					<div className='TopBar'>
 						<h1 className='title' onClick={this.viewHomepage}>Ahmic Animals</h1>
-						<Header
-							addSighting={this.addSighting}
-							viewAnimals={this.viewAnimals}
-							viewHomepage={this.viewHomepage}
-							viewLogin={this.viewLogin}
-							viewProfile={this.viewProfile}
-							user={this.state.user}
-							onLogout={this.updateUserState}
-						/>
 					</div>
 					<div className='MapContainer'>
 						<h1>MAP GOES HERE</h1>
@@ -302,7 +289,14 @@ class App extends React.Component {
 				</div>
 				<div className='AddButtons'>
 					<div className='TopBar'>
-						New Sighting
+						<UserButton 
+							user={this.state.user}
+							viewLogin={this.viewLogin}
+							viewProfile={this.viewProfile}
+							onLogout={this.updateUserState}
+							addSighting={this.addSighting}
+							viewAnimals={this.viewAnimals}
+						/>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,79 @@
-#userLogo
+.userLogo
 	height: 35px
+	width: 35px
+	margin: 5px
+	//margin-right: 5px
+	//margin-bottom: 5px
 
-#userLogo
+.userLogo
+	&:hover
+		cursor: pointer
+
+.userBar
+	display: flex
+	flex-direction: row
+
+.userBar div
+	display: flex
+	justify-content: center
+	flex-direction: column
+
+.sideBarLogo, .floatingButtons
+	display: flex
+	justify-content: flex-end
+
+.userSideBar
+	border: 0
+	border-radius: 0.6rem
+	background-color: #D3D3D3
+	margin-right: 5px
+	box-shadow: 0 0 8px #a9a9a9
+
+.borderContainer
+	border-bottom: 1px solid gray
+	margin: 5px 10px
+
+.buttonContainer
+	margin: 5px 10px
+	border: 0
+	border-radius: 0.6rem
+	&:hover
+		cursor: pointer
+		background-color: #a9a9a9
+
+#logoutButton, #profileButton, #animalsButton, #newSightingButton
+	width: fit-content
+	margin-left: 35px
+	//margin-bottom: 5px
+	&:hover
+		cursor: pointer
+
+//#logoutButton
+	//margin-bottom: 5px
+
+#loginButton
+	width: fit-content
+	margin-left: 5px
+	margin-bottom: 5px
+	&:hover
+		cursor: pointer
+
+#rightSideSpacer
+	height: 105px
+
+.floatingButtons
+	position: fixed
+	height: 105px
+	z-index: 99
+	width: 14.82%
+
+#floatingContainer
+	display: flex
+	flex-direction: column
+
+.floatingLogo
+	height: 35px
+	width: 35px
+	margin: 5px
 	&:hover
 		cursor: pointer
