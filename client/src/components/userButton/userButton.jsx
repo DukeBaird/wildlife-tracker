@@ -44,38 +44,38 @@ export class UserButton extends React.Component {
 				</div>
 			);
 			navOptions.push(
-				<div className="buttonContainer">
-					<div id="profileButton" onClick={this.props.viewProfile}>Profile</div>
+				<div className="buttonContainer" onClick={this.props.viewProfile}>
+					<div id="profileButton">Profile</div>
 				</div>);
 			navOptions.push(
-				<div className="buttonContainer">
-					<div id="homeButton" onClick={this.props.viewHome}>Home</div>
+				<div className="buttonContainer" onClick={this.props.viewHome}>
+					<div id="homeButton">Home</div>
 				</div>);
 			navOptions.push(
 				<div className="borderContainer"></div>
 			);
 			navOptions.push(
-				<div className="buttonContainer">
-					<div id="newSightingButton" onClick={this.props.addSighting}>Add Sighting</div>
+				<div className="buttonContainer" onClick={this.props.addSighting}>
+					<div id="newSightingButton">Add Sighting</div>
 				</div>
 			);
 			navOptions.push(
-				<div className="buttonContainer">
-					<div id="animalsButton" onClick={this.props.viewAnimals}>History</div>
+				<div className="buttonContainer" onClick={this.props.viewAnimals}>
+					<div id="animalsButton">History</div>
 				</div>
 			);
 			navOptions.push(
 				<div className="borderContainer"></div>
 			);
 			navOptions.push(
-				<div className="buttonContainer">
-					<div id="logoutButton" onClick={this.logUserOut}>Log Out</div>
+				<div className="buttonContainer" onClick={this.logUserOut}>
+					<div id="logoutButton">Log Out</div>
 				</div>
 			);
 		} else {
 			navOptions.push(
-				<div className="buttonContainer">
-					<div id="loginButton" onClick={this.props.viewLogin}>Log In</div>
+				<div className="buttonContainer" onClick={this.props.viewLogin}>
+					<div id="loginButton">Log In</div>
 				</div>
 			);
 		}
@@ -92,12 +92,16 @@ export class UserButton extends React.Component {
 	};
 
 	showFloatingButtons() {
-		const buttons = [];
+		if (this.props.user) {
+			const buttons = [];
+			
+			buttons.push(<img className="floatingLogo" src={addButton} alt="Add Sighting" onClick={this.props.addSighting}/>);
+			buttons.push(<img className="floatingLogo" src={historyButton} alt="Add Sighting" onClick={this.props.viewAnimals}/>);
 		
-		buttons.push(<img className="floatingLogo" src={addButton} alt="Add Sighting" onClick={this.props.addSighting}/>);
-		buttons.push(<img className="floatingLogo" src={historyButton} alt="Add Sighting" onClick={this.props.viewAnimals}/>);
-		
-		return buttons
+			return buttons
+		}
+
+		return null
 	}
 
 	logUserOut() {

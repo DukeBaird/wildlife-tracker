@@ -113,7 +113,7 @@ export class Login extends React.Component {
 						<input id="loginSubmit" type="submit" value="Sign In"/>
 					</div>
 				</form>
-				<div id="signupContainer">
+				<div id="signupLinkContainer">
 					<div>New to the site? </div>
 					<div id="signupLink" onClick={this.updateShowingState}> Sign Up</div>
 				</div>

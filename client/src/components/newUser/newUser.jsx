@@ -106,29 +106,34 @@ export class NewUser extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<form onSubmit={this.handleSubmit}>
-					<label>Username:
-					<input type="text" value={this.state.username} onChange={this.handleUsernameChange}/>
-					</label>
-					<label>Password:
-					<input type="password" value={this.state.password} onChange={this.handlePasswordChange}/>
-					</label>
-					<label>Retype Password:
-					<input type="password" value={this.state.repPassword} onChange={this.handleRepPasswordChange}/>
-					</label>
-					<label>First Name:
-					<input type="text" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
-					</label>
-					<label>Last Name:
-					<input type="text" value={this.state.lastName} onChange={this.handleLastNameChange}/>
-					</label>
-					<input type="submit" value="Submit"/>
+			<div id="newUserContainer">
+				<form id="newUserForm" onSubmit={this.handleSubmit}>
+					<div>
+						<input className="signupInput" type="text" value={this.state.username} onChange={this.handleUsernameChange} placeholder="Username"/>
+					</div>
+					<div>
+						<input className="signupInput" type="password" value={this.state.password} onChange={this.handlePasswordChange} placeholder="Password"/>
+					</div>
+					<div>
+						<input className="signupInput" type="password" value={this.state.repPassword} onChange={this.handleRepPasswordChange} placeholder="Retype Password"/>
+					</div>
+					<div>
+						<input className="signupInput" type="text" value={this.state.firstName} onChange={this.handleFirstNameChange} placeholder="First Name"/>
+					</div>
+					<div>
+						<input className="signupInput" type="text" value={this.state.lastName} onChange={this.handleLastNameChange} placeholder="Last Name"/>
+					</div>
+					<div>
+						<input className="signupSubmit" type="submit" value="Submit"/>
+					</div>
 					{ this.state.passMismatch &&
 						<h2>Passwords need to match</h2>
 					}
 				</form>
-				<div onClick={this.props.viewLogin}>Login</div>
+				<div id="loginLinkContainer">
+					<div>Return to</div>
+					<div id="loginLink" onClick={this.props.viewLogin}>Login</div>
+				</div>
 			</div>	)
 	};
 };
