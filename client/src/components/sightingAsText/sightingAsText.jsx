@@ -80,7 +80,7 @@ export class SightingAsText extends React.Component {
 					<div id="secondaryText">
 						<div id="cardUser">
 							<img id="cardUserLogo" src={userLogo} alt="UserLogo" />
-							<div>
+							<div id="cardUsername">
 								{userRender}
 							</div>
 						</div>
