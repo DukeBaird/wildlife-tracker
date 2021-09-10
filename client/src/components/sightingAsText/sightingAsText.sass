@@ -4,45 +4,52 @@
 	border-radius: 3px
 	margin: 3px 0
 	background-color: white
+	display: flex
+	flex-direction: row
 
-.cardTitleContainer
+.cardTextContainer
 	display: flex
 	flex-direction: column
-	margin-left: 16px //Set to 88 if there's an avatar logo
-	margin-top: 16px
-	margin-bottom: 16px
+	justify-content: space-between
+	width: 55%
+	margin: 16px 8px 16px 16px
 
 #secondaryText
 	display: flex
 	flex-direction: row
+	justify-content: space-between
 
 #mainTitle
 	font-weight: 700
+	font-size: xxx-large
+
+#cardLocation, #cardUser
+	display: flex
+	flex-direction: row
+
+#cardLocation div
 	font-size: x-large
 
-#location
-	font-weight: 400
-	font-size: 16px
+#cardUser div
+	font-size: x-large
 
 #time
-	font-weight: 200
-	font-size: 10px
-	margin-left: 16px
-	margin-bottom: 2px //To bring to same height as location
+	text-align: right
 	display: flex
 	flex-direction: column
 	justify-content: flex-end
 
 .Sighting-Image
-	height: 250px
-	margin: 4px 0
+	//height: 250px
+	max-height: 100%
+	max-width: 100%
 
 .cardImageContainer
 	display: flex
 	justify-content: center
 	background-color: #D2D2D2
+	width: 45%
 
-#cardUser
-	margin-left: 16px
-	margin-top: 16px
-	margin-bottom: 8px
+#cardUserLogo, #locPin
+	height: 30px
+	margin-right: 5px

@@ -4,13 +4,15 @@ import {SightingInfo} from '../sightingInfo/sightingInfo.jsx';
 import {UserInfo} from '../userInfo/userInfo.jsx';
 import {Button} from '../button/button.jsx';
 import noImage from '../../images/noImage.jpg';
+import userLogo from '../../images/userLogo.png';
+import pinLogo from '../../images/pin.png';
 import './sightingAsText.sass';
 
 export class SightingAsText extends React.Component {
 	constructor(props) {
 		super(props);
 		this.deleteSighting = this.deleteSighting.bind(this);
-		this.buildDateAndLocation = this.buildDateAndLocation.bind(this);
+		this.buildDate = this.buildDate.bind(this);
 	}
 
 	deleteSighting() {
@@ -29,7 +31,7 @@ export class SightingAsText extends React.Component {
 		})
 	}
 
-	buildDateAndLocation() {
+	buildDate() {
 		//Parse Date string into new Date variable
 		let sightingTime = new Date(this.props.sighting.time.split(' ')[0]);
 
@@ -42,13 +44,8 @@ export class SightingAsText extends React.Component {
 
 		const display = [];
 		display.push(
-			<div id="secondaryText">
-				<div id="location">
-					{this.props.sighting.location}
-				</div>
-				<div id="time">
-					{date}
-				</div>
+			<div id="time">
+				{date}
 			</div>
 		);
 
@@ -72,18 +69,29 @@ export class SightingAsText extends React.Component {
 
 		return (
 			<div className="SightingAsText">
-				<div className="cardTitleContainer">
-					<div id="mainTitle">{this.props.sighting.animal}</div>
-					{this.buildDateAndLocation()}
+				<div className="cardTextContainer">
+					<div>
+						<div id="mainTitle">{this.props.sighting.animal}</div>
+						<div id="cardLocation">
+							<img id="locPin" src={pinLogo} alt="locPin" />
+							<div>{this.props.sighting.location}</div>
+						</div>
+					</div>
+					<div id="secondaryText">
+						<div id="cardUser">
+							<img id="cardUserLogo" src={userLogo} alt="UserLogo" />
+							<div>
+								{userRender}
+							</div>
+						</div>
+						{this.buildDate()}
+					</div>
 				</div>
 				<div className="cardImageContainer">
 					<img className="Sighting-Image"
 						src={animalPicture}
 						alt="Picture of Animal"
 					/>
-				</div>
-				<div id="cardUser">			
-					{userRender}
 				</div>
 			</div>
 		)
