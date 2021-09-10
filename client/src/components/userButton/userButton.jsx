@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import userLogo from './userLogo.png';
-import addButton from './add.png';
-import historyButton from './history.png';
-import menuButton from './menu.png';
+import userLogo from '../../images/userLogo.png';
+import addButton from '../../images/add.png';
+import historyButton from '../../images/history.png';
+import menuButton from '../../images/menu.png';
 import './userButton.sass';
+
+//const userLogo = require('.../images/userLogo.png').default;
 
 export class UserButton extends React.Component {
 	constructor(props) {

@@ -296,7 +296,9 @@ class App extends React.Component {
 				</div>
 				<div className='Main'>
 					<div className='TopBar'>
-						<h1 className='title' onClick={this.viewHomepage}>Ahmic Animals</h1>
+						<div className='titleContainer'>
+							<h1 className='title' onClick={this.viewHomepage}>Ahmic Animals</h1>
+						</div>
 					</div>
 
 					{/* If showing = sight, render sightings */}
