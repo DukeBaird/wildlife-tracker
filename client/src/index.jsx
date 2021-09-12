@@ -7,6 +7,7 @@ import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
 import {Button} from './components/button/button.jsx';
+import {GoogleMap} from './components/googleMap/googleMap.jsx'; 
 import '../style.sass';
 
 class App extends React.Component {
@@ -262,7 +263,7 @@ class App extends React.Component {
 					user={this.state.user}
 					onLogout={this.updateUserState}
 				/>
-				<h1>MAP GOES HERE</h1>
+				<GoogleMap sightings={this.state.sightings}/>
 
 				{/* If showing = sight, render sightings */}
 				{this.state.showing === "sight" ? this.renderSightings() 
