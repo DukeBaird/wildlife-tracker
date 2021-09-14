@@ -19,7 +19,7 @@ const app = express();
 function start() {
 	app.set('port', (process.env.PORT || 8080));
 	app.use(express.static(`${__dirname}./dist`));
-	//app.use('/images', express.static(`${__dirname}../client/src/images`));
+	// app.use('/images', express.static(`${__dirname}../client/src/images`));
 	app.use(bodyParser.json());
 
 	app.use(accessLogger('common'));
