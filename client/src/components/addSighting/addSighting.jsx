@@ -23,8 +23,6 @@ export class NewSighting extends React.Component {
 	}
 
 	handleLocationChange(spottedLocation) {
-		console.log("New location is: ", spottedLocation);
-		console.log("type of location:", typeof(spottedLocation));
 		this.setState({location: spottedLocation});
 	}
 
@@ -69,6 +67,7 @@ export class NewSighting extends React.Component {
 		return (
 			<div>
 				<GoogleMap view="create" onClick={this.handleLocationChange} location={this.state.location}/>
+				{/* <GoogleMap view="create" onClick={this.handleLocationChange} /> */}
 				<form onSubmit={this.handleSubmit}>
 					<label>
 						Animal:

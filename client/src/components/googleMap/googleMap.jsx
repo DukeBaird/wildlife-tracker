@@ -16,7 +16,8 @@ export class GoogleMap extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			markers: []
+			markers: [],
+			location: null
 		};
 
 		this.mapRef = React.createRef();
@@ -24,13 +25,52 @@ export class GoogleMap extends React.Component {
 		this.createSightingMap = this.createSightingMap.bind(this);
 		this.createMarkers = this.createMarkers.bind(this);
 		this.addMarker = this.addMarker.bind(this);
+		this.showMarkers = this.showMarkers.bind(this);
+		this.hideMarkers = this.hideMarkers.bind(this);
+		this.deleteMarkers = this.deleteMarkers.bind(this);
+		this.updateLocationMarker = this.updateLocationMarker.bind(this);
+		this.addEventListener = this.addEventListener.bind(this);
 	};
 
+	//Creates a new marker on the map, updates state with the new marker
 	addMarker(location, map) {
-		new google.maps.Marker({
+		const newMarker = new google.maps.Marker({
 			position: location,
-			map: map
 		});
+
+		let marker = this.state.markers;
+		marker.push(newMarker);
+		this.setState({ markers: marker });
+		this.showMarkers(map);
+	}
+
+	//Shows all markers in state on the map
+	showMarkers(map) {
+		console.log("running show markers");
+		const markers = this.state.markers;
+		for (let i = 0; i < markers.length; i++) {
+			markers[i].setMap(map);
+		}
+	}
+
+	//Removes all markers from the map, keeps in state
+	hideMarkers() {
+		console.log("running hide markers");
+		this.showMarkers(null);
+	}
+
+	//Removes all markers from map and clears state
+	deleteMarkers() {
+		console.log("running delete markers");
+		this.hideMarkers();
+		this.setState({ markers: [] });
+	}
+
+	//Updates the marker location on the map and removes the previous markers
+	updateLocationMarker(location, map) {
+		console.log("running update location markers");
+		this.deleteMarkers();
+		this.addMarker(location, map);
 	}
 
 	createMarkers(map) {
@@ -92,7 +132,8 @@ export class GoogleMap extends React.Component {
 		loader.load()
 		.then(() => {
 			//Create map
-			const map = new google.maps.Map(this.mapRef.current, {
+			console.log("Creating sighting Map");
+			let createMap = new google.maps.Map(this.mapRef.current, {
 				center: { lat: 45.63177710291909, lng: -79.71027154237892 },
 				zoom: 15,
 			});
@@ -100,41 +141,38 @@ export class GoogleMap extends React.Component {
 			const marker = new google.maps.Marker({
 				position: this.props.location,
 			});
-			marker.setMap(map);
-
-			console.log("done creating map");
+			marker.setMap(createMap);
 
 			//Add a marker whenever you click on the map
-			google.maps.event.addListener(map, 'click', (event) => {
-				/* //Delete existing marker
-				let delMarkers = this.state.markers;
-				console.log("delMarkers set")
-				for (let i = 0; i < delMarkers.length; i++) {
-					delMarkers[i].setMap(null);
-				}
-				this.setState({ markers: [] });
-				
-				//Create new marker and push to state
-				const newMarker = new google.maps.Marker({
-					position: event.latLng,
-					map: map
-				});
 
-				this.setState({ markers: [newMarker] });
+			///
+			// Need a way to pass createMap into the event listener function
+			///
 
-				//Add marker to map
-				let createMarker = this.state.markers;
-				for (let i = 0; i < createMarker.length; i++) {
-					console.log("Adding marker with setMap");
-					createMarker[i].setMap(map);
-				}; */
+			google.maps.event.addListener(createMap, 'click', (event) => {
+/* 				this.setState({ location: event.latLng });
+
+				this.addEventListener(event, this)
+				this.updateLocationMarker(event.latLng, event.target); */
 
 				//Pass location back to previous state if requested
 				if (this.props.onClick) {
 					this.props.onClick(event.latLng)
-				};
+				}
+				console.log("Done with event Listener");
 			});
+			//google.maps.event.addListener(createMap, 'click', this.addEventListener(event, createMap));
+
 		});
+	};
+
+	addEventListener(event, map) {
+		this.updateLocationMarker(event.latLng, map);
+		if (this.props.onClick) {
+			this.props.onClick(event.latLng)
+		}
+		console.log("Done with event Listener");
+		console.log(this.state.markers);
 	};
 
 
