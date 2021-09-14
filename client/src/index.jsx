@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
-import {NewSighting} from './addSighting.jsx';
+import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
@@ -263,7 +263,7 @@ class App extends React.Component {
 					user={this.state.user}
 					onLogout={this.updateUserState}
 				/>
-				<GoogleMap sightings={this.state.sightings}/>
+				<GoogleMap sightings={this.state.sightings} view="display"/>
 
 				{/* If showing = sight, render sightings */}
 				{this.state.showing === "sight" ? this.renderSightings() 
