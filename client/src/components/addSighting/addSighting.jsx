@@ -63,16 +63,18 @@ export class NewSighting extends React.Component {
 	
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<label>
-					Animal:
-					<input type="text" value={this.state.animal} onChange={this.handleAnimalChange} />
-				</label>
-				<label>
-					Location:
-					<input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
-				</label>
-				<input type="submit" value="Submit"/>
-			</form>
+			<div id="addSightingContainer">
+				<form onSubmit={this.handleSubmit}>
+					<label>
+						Animal:
+						<input type="text" value={this.state.animal} onChange={this.handleAnimalChange} />
+					</label>
+					<label>
+						Location:
+						<input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
+					</label>
+					<input type="submit" value="Submit"/>
+				</form>
+			</div>
 		)}
 };
