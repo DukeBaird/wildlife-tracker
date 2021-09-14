@@ -39,21 +39,14 @@ export class GoogleMap extends React.Component {
 		if (!sightings || sightings.length < 0) return null;
 
 		sightings.forEach(element => {
-			const elemLocation = ('' + element.location).slice(1);
 			const defaultLocation = { lat: 45.63177710291909, lng: -79.71027154237892 };	
-
-			//Currently commented out as test DB sightings have description locations, not lat/lng
-/* 			try {
+			
+			let location;
+			try {
 				location = JSON.parse(element.location);
 			}
 			catch(err) {
 				location = defaultLocation;
-			} */
-			let location;	
-			if (elemLocation.length < 50) {
-				location = defaultLocation;
-			} else {
-				location = JSON.parse(elemLocation);
 			}
 
 			const marker = new google.maps.Marker({
@@ -113,8 +106,8 @@ export class GoogleMap extends React.Component {
 
 			//Add a marker whenever you click on the map
 			google.maps.event.addListener(map, 'click', (event) => {
-/* 				//Delete existing marker
-				const delMarkers = this.state.markers;
+				/* //Delete existing marker
+				let delMarkers = this.state.markers;
 				console.log("delMarkers set")
 				for (let i = 0; i < delMarkers.length; i++) {
 					delMarkers[i].setMap(null);
@@ -130,7 +123,7 @@ export class GoogleMap extends React.Component {
 				this.setState({ markers: [newMarker] });
 
 				//Add marker to map
-				const createMarker = this.state.markers;
+				let createMarker = this.state.markers;
 				for (let i = 0; i < createMarker.length; i++) {
 					console.log("Adding marker with setMap");
 					createMarker[i].setMap(map);
