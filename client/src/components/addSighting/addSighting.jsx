@@ -65,6 +65,15 @@ export class NewSighting extends React.Component {
 	
 	render() {
 		return (
+
+			/*
+			Currently have location passed to this state from the map whenever user clicks on the map.
+			This causes the AddSighting to re-render, re-rendering the map as well, as it gets a new prop
+
+			The AddSighting also re-renders whenever a character is typed into the animal input. This is
+			causing the map to re-render as well, even though it hasn't changed.
+			*/
+			
 			<div>
 				<GoogleMap view="create" onClick={this.handleLocationChange} location={this.state.location}/>
 				{/* <GoogleMap view="create" onClick={this.handleLocationChange} /> */}

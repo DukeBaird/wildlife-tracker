@@ -138,16 +138,16 @@ export class GoogleMap extends React.Component {
 				zoom: 15,
 			});
 
+			//Add a marker whenever you click on the map
 			const marker = new google.maps.Marker({
 				position: this.props.location,
 			});
 			marker.setMap(createMap);
 
-			//Add a marker whenever you click on the map
-
-			///
-			// Need a way to pass createMap into the event listener function
-			///
+			/*
+			Need a way to pass createMap into the event listener function
+			Right now location (2nd parameter to udateLocation Marker) is always undefined
+			*/
 
 			google.maps.event.addListener(createMap, 'click', (event) => {
 /* 				this.setState({ location: event.latLng });
