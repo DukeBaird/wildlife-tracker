@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Button} from '../button/button.jsx';
 import './animalLocations.sass';
 
 export class AnimalLocations extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			animals: []
+			animals: [],
+			showMap: false,
+			mapAnimal: ""
 		};
 		this.displayLocations = this.displayLocations.bind(this);
 		this.buildDivFromArray = this.buildDivFromArray.bind(this);
+		this.viewMap = this.viewMap.bind(this);
 	};
 
 	componentDidMount() {
@@ -25,30 +29,52 @@ export class AnimalLocations extends React.Component {
 	};
 
 	displayLocations() {
-		console.log("Displaying Locations");
 		const animals = [];
 		const animalState = this.state.animals;
 		animalState.forEach((element) => {
 			const userDiv = this.buildDivFromArray(element.users);
-			const locDiv = this.buildDivFromArray(element.locations);
+			const animal = element._id;
 
-			let returnDiv = <div className="animalLoc"> 
-				<h1>{element._id}</h1>
-				<div className="seenDiv">
-					<div className="seenDescription">Seen at:</div>
-					<div>{locDiv}</div>
+			let locCard = 
+				<div className="animalLoc">
+					<div className="image">Image Placeholder</div>
+					<h1>{animal}</h1>
+					<div className="seenDiv">
+						<div className="locUserContainer">
+							<div className="seenDescription">USER LOGO</div>
+							<div>{userDiv}</div>
+						</div>
+						<div className="mapButton" onClick={() => {
+							if (this.state.showMap === true && this.state.mapAnimal === animal) {
+								this.setState({
+									showMap: false,
+									mapAnimal: ""
+								})
+							} else {
+								this.setState({
+									showMap: true,
+									mapAnimal: animal
+								});
+							}
+						}}>
+							View Locations</div>
+					</div>
 				</div>
-				<div className="seenDiv">
-					<div className="seenDescription">Seen by:</div>
-					<div>{userDiv}</div>
-				</div>
-			</div>
 
-			animals.push(returnDiv);
+			animals.push(locCard);
+
+			if (this.state.showMap === true && this.state.mapAnimal === animal) {
+				animals.push(<div className="locMapContainer">MAP PLACEHOLDER - {this.state.mapAnimal}</div>)
+			}
 		});
 
 		return animals;
 
+	};
+
+	viewMap(element) {
+		console.log("Clicked view map - need map branch to merge");
+		console.log(element._id);
 	};
 
 	buildDivFromArray(inputList) {
