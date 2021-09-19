@@ -139,7 +139,7 @@ class App extends React.Component {
 
 	showAnimals() {
 		console.log("Showing animals");
-		const {sightings} = this.state;
+/* 		const {sightings} = this.state;
 		if (!sightings | sightings.length < 0) return null;
 
 		//Create "set" of animals
@@ -174,9 +174,9 @@ class App extends React.Component {
 			animalList.push(
 			<AnimalLocations animal={i} locations={locations}/>
 			);
-		}
+		} */
 
-		return animalList;
+		return <AnimalLocations />;
 	}
 
 	showProfile() {

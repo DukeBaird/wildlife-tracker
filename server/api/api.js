@@ -107,4 +107,25 @@ async function deleteSighting(req, res) {
 
 router.delete('/sighting/:id', deleteSighting);
 
+async function getAnimalLocations(req, res) {
+	try {
+		const filters = req.query;
+		const result = await sightingsController.getAnimalLocations(filters);
+
+		logger.info('got locations!');
+		return res.status(200).json({
+			data: result,
+			error: null
+		});
+	} catch (err) {
+		logger.error(err);
+		return res.status(500).json({
+			data: null,
+			error: err
+		});
+	}
+}
+
+router.get('/animals', getAnimalLocations);
+
 exports.router = router;
