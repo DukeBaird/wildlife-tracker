@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button} from '../button/button.jsx';
 import './animalLocations.sass';
 
 export class AnimalLocations extends React.Component {
@@ -13,7 +12,6 @@ export class AnimalLocations extends React.Component {
 		};
 		this.displayLocations = this.displayLocations.bind(this);
 		this.buildDivFromArray = this.buildDivFromArray.bind(this);
-		this.viewMap = this.viewMap.bind(this);
 	};
 
 	componentDidMount() {
@@ -70,11 +68,6 @@ export class AnimalLocations extends React.Component {
 
 		return animals;
 
-	};
-
-	viewMap(element) {
-		console.log("Clicked view map - need map branch to merge");
-		console.log(element._id);
 	};
 
 	buildDivFromArray(inputList) {
