@@ -1,3 +1,5 @@
+@use "../../../_library"
+	
 #newUserContainer
 	display: flex
 	flex-direction: column
@@ -13,18 +15,16 @@
 	justify-content: center
 
 .signupInput
+	@include library.rounded-border
 	width: 70%
 	height: 30px
 	margin: 5px 0
-	border: 1px solid gray
-	border-radius: 3px
 
 .signupSubmit
+	@include library.rounded-border
 	width: 50%
 	height: 30px
 	margin: 5px 0
-	border: 1px solid gray
-	border-radius: 3px
 
 #loginLinkContainer
 	display: flex

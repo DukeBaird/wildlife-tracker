@@ -1,3 +1,5 @@
+@use "../../../_library"
+	
 .button 
 	&:hover
 		font-weight: bold
@@ -5,7 +7,7 @@
 		cursor: pointer
 
 .button
-	border: 1px solid gray
-	border-radius: 3px
+	@include library.rounded-border
+
 
 

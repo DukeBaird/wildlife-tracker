@@ -5,7 +5,7 @@ import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
-import {UserButton} from './components/userButton/userButton.jsx';
+import {UserMenu} from './components/userMenu/userMenu.jsx';
 import leftButton from './images/left.png';
 import rightButton from './images/right.png';
 import '../style.sass';
@@ -289,7 +289,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div id='App'>
-				<div className='UserButton'>
+				<div className='logoButton'>
 					<div className='TopBar'>
 						Logo to go here
 					</div>
@@ -319,7 +319,7 @@ class App extends React.Component {
 				</div>
 				<div className='AddButtons'>
 					<div className='TopBar'>
-						<UserButton 
+						<UserMenu 
 							user={this.state.user}
 							viewHome={this.viewHomepage}
 							viewLogin={this.viewLogin}

@@ -1,3 +1,5 @@
+@use "../../../_library"
+	
 .userLogo
 	height: 35px
 	width: 35px
@@ -25,16 +27,17 @@
 .userSideBar
 	border: 0
 	border-radius: 0.6rem
-	background-color: #D3D3D3
+	background-color: library.$main-gray
 	margin-right: 5px
 	box-shadow: 0 0 8px #a9a9a9
+	padding: 1px 0
 
 .borderContainer
-	border-bottom: 1px solid gray
+	border-bottom: library.$small-border
 	margin: 5px 10px
 
 .buttonContainer
-	margin: 5px 10px
+	margin: 2px 10px
 	border: 0
 	border-radius: 0.6rem
 	&:hover
@@ -44,17 +47,14 @@
 #logoutButton, #profileButton, #animalsButton, #newSightingButton, #homeButton
 	width: fit-content
 	margin-left: 35px
-	//margin-bottom: 5px
 	&:hover
 		cursor: pointer
 
-//#logoutButton
-	//margin-bottom: 5px
-
 #loginButton
 	width: fit-content
-	margin-left: 5px
-	margin-bottom: 5px
+	margin-left: 35px
+	//margin-bottom: 5px
+	//padding: 3px 0
 	&:hover
 		cursor: pointer
 

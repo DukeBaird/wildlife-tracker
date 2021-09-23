@@ -4,11 +4,11 @@ import userLogo from '../../images/userLogo.png';
 import addButton from '../../images/add.png';
 import historyButton from '../../images/history.png';
 import menuButton from '../../images/menu.png';
-import './userButton.sass';
+import './userMenu.sass';
 
 //const userLogo = require('.../images/userLogo.png').default;
 
-export class UserButton extends React.Component {
+export class UserMenu extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -40,44 +40,43 @@ export class UserButton extends React.Component {
 		const navOptions = [];
 		if (this.props.user) {
 			navOptions.push(
-				<div className="userBar">
-					<img className="userLogo" src={userLogo} alt="User Logo"/>
-					<div>{this.props.user}</div>
-				</div>
-			);
-			navOptions.push(
-				<div className="buttonContainer" onClick={this.props.viewProfile}>
-					<div id="profileButton">Profile</div>
-				</div>);
-			navOptions.push(
-				<div className="buttonContainer" onClick={this.props.viewHome}>
-					<div id="homeButton">Home</div>
-				</div>);
-			navOptions.push(
-				<div className="borderContainer"></div>
-			);
-			navOptions.push(
-				<div className="buttonContainer" onClick={this.props.addSighting}>
-					<div id="newSightingButton">Add Sighting</div>
-				</div>
-			);
-			navOptions.push(
-				<div className="buttonContainer" onClick={this.props.viewAnimals}>
-					<div id="animalsButton">History</div>
-				</div>
-			);
-			navOptions.push(
-				<div className="borderContainer"></div>
-			);
-			navOptions.push(
-				<div className="buttonContainer" onClick={this.logUserOut}>
-					<div id="logoutButton">Log Out</div>
+				<div className="userSideBar">
+					<div className="userBar">
+						<img className="userLogo" src={userLogo} alt="User Logo"/>
+						<div>{this.props.user}</div>
+					</div>
+
+					<div className="buttonContainer" onClick={this.props.viewProfile}>
+						<div id="profileButton">Profile</div>
+					</div>
+
+					<div className="buttonContainer" onClick={this.props.viewHome}>
+						<div id="homeButton">Home</div>
+					</div>
+
+					<div className="borderContainer"></div>
+
+					<div className="buttonContainer" onClick={this.props.addSighting}>
+						<div id="newSightingButton">Add Sighting</div>
+					</div>
+
+					<div className="buttonContainer" onClick={this.props.viewAnimals}>
+						<div id="animalsButton">History</div>
+					</div>
+
+					<div className="borderContainer"></div>
+					
+					<div className="buttonContainer" onClick={this.logUserOut}>
+						<div id="logoutButton">Log Out</div>
+					</div>
 				</div>
 			);
 		} else {
 			navOptions.push(
-				<div className="buttonContainer" onClick={this.props.viewLogin}>
-					<div id="loginButton">Log In</div>
+				<div className="userSideBar">
+					<div className="buttonContainer" onClick={this.props.viewLogin}>
+						<div id="loginButton">Log In</div>
+					</div>
 				</div>
 			);
 		}
@@ -128,9 +127,7 @@ export class UserButton extends React.Component {
 					<div className="sideBarLogo">
 						<img className="userLogo" src={menuButton} alt="User Logo"/>
 					</div>
-					<div className="userSideBar">
-						{this.state.showSideBar === true ? this.createSideBar() : null}
-					</div>
+					{this.state.showSideBar === true ? this.createSideBar() : null}
 				</div>
 				<div id="rightSideSpacer"></div>
 				<div className="floatingButtons">

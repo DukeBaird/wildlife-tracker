@@ -1,7 +1,8 @@
+@use "../../../_library"
+	
 .SightingAsText
 	//width: 50%
-	border: 1px solid gray
-	border-radius: 3px
+	@include library.rounded-border
 	margin: 3px 0
 	background-color: white
 	display: flex
@@ -57,7 +58,7 @@
 .cardImageContainer
 	display: flex
 	justify-content: center
-	background-color: #D2D2D2
+	background-color: library.$main-gray
 	width: 45%
 
 #cardUserLogo, #locPin
