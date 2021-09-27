@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import userLogo from '../../images/userLogo.png';
-import addButton from '../../images/add.png';
-import historyButton from '../../images/history.png';
+
 import menuButton from '../../images/menu.png';
 import './userMenu.sass';
 
@@ -96,8 +95,8 @@ export class UserMenu extends React.Component {
 		if (this.props.user) {
 			const buttons = [];
 			
-			buttons.push(<img className="floatingLogo" src={addButton} alt="Add Sighting" onClick={this.props.addSighting}/>);
-			buttons.push(<img className="floatingLogo" src={historyButton} alt="Add Sighting" onClick={this.props.viewAnimals}/>);
+			buttons.push();
+			buttons.push();
 		
 			return buttons
 		}
@@ -129,12 +128,11 @@ export class UserMenu extends React.Component {
 					</div>
 					{this.state.showSideBar === true ? this.createSideBar() : null}
 				</div>
-				<div id="rightSideSpacer"></div>
-				<div className="floatingButtons">
-					<div id="floatingContainer">
+{/*				<div className="floatingButtons">
+					<div className="floatingContainer">
 						{this.state.showFloatingButtons === true ? this.showFloatingButtons() : null}
 					</div>
-				</div>
+				</div>*/}
 			</div>
 		)
 	};

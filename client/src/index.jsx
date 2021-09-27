@@ -8,6 +8,8 @@ import {Profile} from './components/profile/profile.jsx';
 import {UserMenu} from './components/userMenu/userMenu.jsx';
 import leftButton from './images/left.png';
 import rightButton from './images/right.png';
+import addButton from './images/add.png';
+import historyButton from './images/history.png';
 import '../style.sass';
 
 class App extends React.Component {
@@ -56,8 +58,8 @@ class App extends React.Component {
 		})
 		.catch((err) => {
 			if (err) {
-				console.log('error in componentDidMount');
-				console.log(err);
+				console.error('error in componentDidMount');
+				console.error(err);
 			};
 		});
 	};
@@ -67,7 +69,7 @@ class App extends React.Component {
 		if (!sightings || sightings.length < 0) return null;
 		const SATList = []; //Create list of SightingAsText elements
 		SATList.push(
-			<div className='MapContainer'>
+			<div className='mapContainer'>
 					<h1>MAP GOES HERE</h1>
 			</div>
 		)
@@ -276,7 +278,7 @@ class App extends React.Component {
 
 		const pageButtons = [];
 		pageButtons.push(
-			<div className="PageButtons">
+			<div className="pageButtons">
 				{backButton}
 				{forwardButton}
 			</div>
@@ -289,36 +291,14 @@ class App extends React.Component {
 	render() {
 		return (
 			<div id='App'>
-				<div className='logoButton'>
-					<div className='TopBar'>
+				<div className='topBar'>
+					<div className='logoButton'>
 						Logo to go here
 					</div>
-				</div>
-				<div className='Main'>
-					<div className='TopBar'>
-						<div className='titleContainer'>
-							<h1 className='title' onClick={this.viewHomepage}>Ahmic Animals</h1>
-						</div>
+					<div className='titleContainer'>
+						<h1 className='title' onClick={this.viewHomepage}>Ahmic Animals</h1>
 					</div>
-
-					{/* If showing = sight, render sightings */}
-					{this.state.showing === "sight" ? this.renderSightings() 
-
-					// else if showing = animals, show animals
-					: this.state.showing === "animals" ? this.showAnimals()
-
-					// else if showing = newSight, show new sighting input
-					: this.state.showing === "newSight" ? this.newSighting()
-
-					: this.state.showing === "profile" ? this.showProfile()
-
-					: this.state.showing === "login" ? this.showLogin()
-
-					// Otherwise show null
-					: null}
-				</div>
-				<div className='AddButtons'>
-					<div className='TopBar'>
+					<div className='addButtons'>
 						<UserMenu 
 							user={this.state.user}
 							viewHome={this.viewHomepage}
@@ -328,6 +308,33 @@ class App extends React.Component {
 							addSighting={this.addSighting}
 							viewAnimals={this.viewAnimals}
 						/>
+					</div>
+				</div>
+
+				<div className='mainContainer'> {/* Separate class to setup flex widths */}
+					<div className='main'>
+						{/* If showing = sight, render sightings */}
+						{this.state.showing === "sight" ? this.renderSightings() 
+
+						// else if showing = animals, show animals
+						: this.state.showing === "animals" ? this.showAnimals()
+
+						// else if showing = newSight, show new sighting input
+						: this.state.showing === "newSight" ? this.newSighting()
+
+						: this.state.showing === "profile" ? this.showProfile()
+
+						: this.state.showing === "login" ? this.showLogin()
+
+						// Otherwise show null
+						: null}
+					</div>
+				</div>
+
+				<div className="floatingButtons">
+					<div className="floatingContainer">
+						<img className="floatingLogo" src={addButton} alt="Add Sighting" onClick={this.addSighting}/>
+						<img className="floatingLogo" src={historyButton} alt="Add Sighting" onClick={this.viewAnimals}/>
 					</div>
 				</div>
 			</div>
