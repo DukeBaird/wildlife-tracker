@@ -27,7 +27,7 @@ body
 .main
 	display: flex
 	flex-direction: column
-	max-width: 1300px
+	max-width: library.$max-width
 
 
 .addButtons
@@ -71,6 +71,8 @@ body
 	height: 100px
 
 .floatingButtons
+	display: flex
+	justify-content: flex-end
 	position: fixed
 	bottom: 0
 	right: 0
@@ -89,3 +91,7 @@ body
 	box-shadow: 0 0 8px #a9a9a9
 	&:hover
 		cursor: pointer
+
+@media (screen and max-width: library.$max-width)
+	.floatingButtons
+		display: none
