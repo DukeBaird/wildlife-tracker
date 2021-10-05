@@ -11,8 +11,7 @@ export class UserMenu extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showSideBar: false, //Set to true when you need to debug sidebar
-			showFloatingButtons: true
+			showSideBar: false //Set to true when you need to debug sidebar
 		};
 		this.showUserSideBar = this.showUserSideBar.bind(this);
 		this.createSideBar = this.createSideBar.bind(this);
@@ -23,13 +22,11 @@ export class UserMenu extends React.Component {
 	showUserSideBar() {
 		if (this.state.showSideBar === false) {
 			this.setState({
-				showSideBar: true,
-				showFloatingButtons: false
+				showSideBar: true
 			});
 		} else {
 			this.setState({
-				showSideBar: false,
-				showFloatingButtons: true
+				showSideBar: false
 			});
 		}
 	};
@@ -86,23 +83,9 @@ export class UserMenu extends React.Component {
 	//Remove div with 'buttons'
 	hideUserSideBar() {
 		this.setState({
-			showSideBar: false,
-			showFloatingButtons: true
+			showSideBar: false
 		});
 	};
-
-	showFloatingButtons() {
-		if (this.props.user) {
-			const buttons = [];
-			
-			buttons.push();
-			buttons.push();
-		
-			return buttons
-		}
-
-		return null
-	}
 
 	logUserOut() {
 		console.log("Logging user out");
@@ -128,11 +111,6 @@ export class UserMenu extends React.Component {
 					</div>
 					{this.state.showSideBar === true ? this.createSideBar() : null}
 				</div>
-{/*				<div className="floatingButtons">
-					<div className="floatingContainer">
-						{this.state.showFloatingButtons === true ? this.showFloatingButtons() : null}
-					</div>
-				</div>*/}
 			</div>
 		)
 	};
