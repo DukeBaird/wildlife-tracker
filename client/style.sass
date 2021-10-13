@@ -10,28 +10,34 @@ body
 
 #App
 	display: flex
-	flex-direction: row
+	flex-direction: column
 	width: 100%
 	height: 100%
 	background-color: library.$main-colour
 
 .logoButton
-	width: 15%
+	width: 200px
 
-.Main
-	width: 70%
+.mainContainer
 	display: flex
 	flex-direction: column
-	//justify-content: center
+	justify-content: space-around
+	align-items: center
 
-.AddButtons
-	width: 15%
+.main
+	display: flex
+	flex-direction: column
+	max-width: library.$max-width
 
-.PageButtons
+
+.addButtons
+	width: 200px
+
+.pageButtons
 	display: flex
 	justify-content: space-between
 
-.PageButtons img
+.pageButtons img
 	height: 50px
 	&:hover
 		cursor: pointer
@@ -49,19 +55,43 @@ body
 	&:hover
 		cursor: pointer
 
-.MapContainer
+.mapContainer
 	@include library.rounded-border
 	display: flex
-	justify-content: center
+	width: 100%
 	height: 200px
 	background-color: gray
 	margin: 3px 0
 
-.TopBar
+.topBar
+	display: flex
+	flex-direction: row
+	justify-content: space-between
 	background-color: library.$header-colour
 	height: 100px
 
-.test
-	background-color: purple
-	height: 200px
-	width: 50px
+.floatingButtons
+	display: flex
+	justify-content: flex-end
+	position: fixed
+	bottom: 0
+	right: 0
+	z-index: 99
+	width: 200px
+
+.floatingContainer
+	display: flex
+	flex-direction: column
+
+.floatingLogo
+	height: 60px
+	width: 60px
+	margin: 0 5px 5px 0
+	border-radius: 25px
+	box-shadow: 0 0 8px #a9a9a9
+	&:hover
+		cursor: pointer
+
+@media (screen and max-width: library.$max-width)
+	.floatingButtons
+		display: none
