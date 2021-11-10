@@ -8,33 +8,28 @@ export class NewSighting extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			animal: '',
 			location: null,
 			time: '',
 			image: ''
 		}
-		this.handleAnimalChange = this.handleAnimalChange.bind(this);
 		this.handleLocationChange = this.handleLocationChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleAnimalChange(event) {
-		this.setState({animal: event.target.value});
+		this.animalInput = React.createRef();
 	}
 
 	handleLocationChange(spottedLocation) {
 		this.setState({location: spottedLocation});
 	}
 
-	handleSubmit() {
-		this.props.createNewSighting(this.state.animal, this.state.location);
-	}
+	/*handleSubmit() {
+		this.props.createNewSighting(this.animalInput.current.value, this.state.location);
+	}*/
 
 	handleSubmit(event) {
 		event.preventDefault();
 
 		const newSighting = {
-			animal: this.state.animal,
+			animal: this.animalInput.current.value,
 			location: JSON.stringify(this.state.location),
 			time: new Date(),
 		};
@@ -69,29 +64,23 @@ export class NewSighting extends React.Component {
 			/*
 			Currently have location passed to this state from the map whenever user clicks on the map.
 			This causes the AddSighting to re-render, re-rendering the map as well, as it gets a new prop
-
-			The AddSighting also re-renders whenever a character is typed into the animal input. This is
-			causing the map to re-render as well, even though it hasn't changed.
 			*/
 			
 			<div>
 				<GoogleMap view="create" onClick={this.handleLocationChange} location={this.state.location}/>
 				{/* <GoogleMap view="create" onClick={this.handleLocationChange} /> */}
 				<div id="addSightingContainer">
-					<form onSubmit={this.handleSubmit}>
-						<label>
-							Animal:
-							<input type="text" value={this.state.animal} onChange={this.handleAnimalChange} />
-						</label>
-	{/* 					<label>
-							Location:
-							<input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
-						</label> */}
-						<label>
-							Location:
-							<input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
-						</label>
-						<input type="submit" value="Submit"/>
+					<form id="addSightingForm" onSubmit={this.handleSubmit}>
+						<div>
+							<input 
+								className="addSightingInput"
+								type="text"
+								placeholder="Animal"
+								ref={this.animalInput} />
+						</div>
+						<div>
+							<input id="addSightingSubmit" type="submit" value="Submit"/>
+						</div>
 					</form>
 				</div>
 			</div>
