@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Header} from './header.jsx';
 import {AnimalLocations} from './animalLocations.jsx';
 import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
-import {Button} from './components/button/button.jsx';
 import {GoogleMap} from './components/googleMap/googleMap.jsx'; 
+import {UserMenu} from './components/userMenu/userMenu.jsx';
+import leftButton from './images/left.png';
+import rightButton from './images/right.png';
+import addButton from './images/add.png';
+import historyButton from './images/history.png';
 import '../style.sass';
 
 class App extends React.Component {
@@ -27,6 +30,7 @@ class App extends React.Component {
 		this.updateUserState = this.updateUserState.bind(this);
 		this.renderPreviousPage = this.renderPreviousPage.bind(this);
 		this.renderNextPage = this.renderNextPage.bind(this);
+		this.buildPaginationButtons = this.buildPaginationButtons.bind(this);
 	}
 
 	componentDidMount() {
@@ -55,8 +59,8 @@ class App extends React.Component {
 		})
 		.catch((err) => {
 			if (err) {
-				console.log('error in componentDidMount');
-				console.log(err);
+				console.error('error in componentDidMount');
+				console.error(err);
 			};
 		});
 	};
@@ -65,11 +69,19 @@ class App extends React.Component {
 		const {sightings} = this.state;
 		if (!sightings || sightings.length < 0) return null;
 		const SATList = []; //Create list of SightingAsText elements
+		SATList.push(
+			<div className='mapContainer'>
+					<h1>MAP GOES HERE</h1>
+			</div>
+		)
 		sightings.forEach(element => {
 			SATList.push(
 				<SightingAsText user={person} sighting={element} />
 			)}
 		);
+
+		SATList.push(this.buildPaginationButtons());
+
 		return SATList;
 	};
 
@@ -154,7 +166,12 @@ class App extends React.Component {
 		});
 
 		//Create elements to display from set
-		const animalList = [];		
+		const animalList = [];
+		animalList.push(
+			<div className='MapContainer'>
+					<h1>MAP GOES HERE</h1>
+			</div>
+		);	
 		for (let i in animals) {
 			animalList.push(
 			<AnimalLocations animal={i} locations={animals[i]}/>
@@ -169,7 +186,17 @@ class App extends React.Component {
 		const user = localStorage.getItem('user');
 		const JSONuser = JSON.parse(user);
 		if (user) {
-			return <Profile username={JSONuser.username} id={JSONuser._id} />
+			const profileDivs = [];
+			profileDivs.push(
+				<div className='MapContainer'>
+					<h1>MAP GOES HERE</h1>
+				</div>
+			);
+			profileDivs.push(
+				<Profile username={JSONuser.username} id={JSONuser._id} />
+			);
+
+			return profileDivs;
 		}
 
 		//Should never get here, but just in case, show the homepage
@@ -235,54 +262,84 @@ class App extends React.Component {
 		this.viewHomepage();
 	}
 
-	render() {
+	buildPaginationButtons() {
 		let backButton;
 		if (this.state.page === 0) {
-			backButton = <Button text="backwards" handleClick={null}/>
+			backButton = <img src={leftButton} alt="Backwards" onClick={null}/>
 		} else {
-			backButton = <Button text="backwards" handleClick={this.renderPreviousPage}/>
+			backButton = <img src={leftButton} alt="Backwards" onClick={this.renderPreviousPage}/>
 		}
 
 		let forwardButton;
 		if (this.state.sightings.length < 5) {
-			forwardButton = <Button text="forwards" handleClick={null}/>
+			forwardButton = <img src={rightButton} alt="Forwards" onClick={null}/>
 		} else {
-			forwardButton = <Button text="forwards" handleClick={this.renderNextPage}/>
+			forwardButton = <img src={rightButton} alt="forwards" onClick={this.renderNextPage}/>
 		}
 
-
-		return (
-			<div>
-				<h1>Ahmic Animals</h1>
-				<Header 
-					addSighting={this.addSighting}
-					viewAnimals={this.viewAnimals}
-					viewHomepage={this.viewHomepage}
-					viewLogin={this.viewLogin}
-					viewProfile={this.viewProfile}
-					user={this.state.user}
-					onLogout={this.updateUserState}
-				/>
-				<GoogleMap sightings={this.state.sightings} view="display"/>
-
-				{/* If showing = sight, render sightings */}
-				{this.state.showing === "sight" ? this.renderSightings() 
-
-				// else if showing = animals, show animals
-				: this.state.showing === "animals" ? this.showAnimals()
-
-				// else if showing = newSight, show new sighting input
-				: this.state.showing === "newSight" ? this.newSighting()
-
-				: this.state.showing === "profile" ? this.showProfile()
-
-				: this.state.showing === "login" ? this.showLogin()
-
-				// Otherwise show null
-				: null}
-
+		const pageButtons = [];
+		pageButtons.push(
+			<div className="pageButtons">
 				{backButton}
 				{forwardButton}
+			</div>
+		);
+
+		return pageButtons
+
+	}
+
+	render() {
+		return (
+			<div id='App'>
+				<div className='topBar'>
+					<div className='logoButton'>
+						Logo to go here
+					</div>
+					<div className='titleContainer'>
+						<h1 className='title' onClick={this.viewHomepage}>Ahmic Animals</h1>
+					</div>
+					<div className='addButtons'>
+						<UserMenu 
+							user={this.state.user}
+							viewHome={this.viewHomepage}
+							viewLogin={this.viewLogin}
+							viewProfile={this.viewProfile}
+							onLogout={this.updateUserState}
+							addSighting={this.addSighting}
+							viewAnimals={this.viewAnimals}
+						/>
+					</div>
+				</div>
+
+				<GoogleMap sightings={this.state.sightings} view="display"/>
+
+				<div className='mainContainer'> {/* Separate class to setup flex widths */}
+					<div className='main'>
+						{/* If showing = sight, render sightings */}
+						{this.state.showing === "sight" ? this.renderSightings() 
+
+						// else if showing = animals, show animals
+						: this.state.showing === "animals" ? this.showAnimals()
+
+						// else if showing = newSight, show new sighting input
+						: this.state.showing === "newSight" ? this.newSighting()
+
+						: this.state.showing === "profile" ? this.showProfile()
+
+						: this.state.showing === "login" ? this.showLogin()
+
+						// Otherwise show null
+						: null}
+					</div>
+				</div>
+
+				<div className="floatingButtons">
+					<div className="floatingContainer">
+						<img className="floatingLogo" src={addButton} alt="Add Sighting" onClick={this.addSighting}/>
+						<img className="floatingLogo" src={historyButton} alt="Add Sighting" onClick={this.viewAnimals}/>
+					</div>
+				</div>
 			</div>
 		);
 	};

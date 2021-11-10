@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {GoogleMap} from '../googleMap/googleMap.jsx';
-import './addSighting.jsx';
 import '../../../style.sass';
+import './addSighting.sass';
 
 export class NewSighting extends React.Component {
 	constructor(props) {
@@ -77,17 +77,23 @@ export class NewSighting extends React.Component {
 			<div>
 				<GoogleMap view="create" onClick={this.handleLocationChange} location={this.state.location}/>
 				{/* <GoogleMap view="create" onClick={this.handleLocationChange} /> */}
-				<form onSubmit={this.handleSubmit}>
-					<label>
-						Animal:
-						<input type="text" value={this.state.animal} onChange={this.handleAnimalChange} />
-					</label>
-{/* 					<label>
-						Location:
-						<input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
-					</label> */}
-					<input type="submit" value="Submit"/>
-				</form>
+				<div id="addSightingContainer">
+					<form onSubmit={this.handleSubmit}>
+						<label>
+							Animal:
+							<input type="text" value={this.state.animal} onChange={this.handleAnimalChange} />
+						</label>
+	{/* 					<label>
+							Location:
+							<input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
+						</label> */}
+						<label>
+							Location:
+							<input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
+						</label>
+						<input type="submit" value="Submit"/>
+					</form>
+				</div>
 			</div>
 		)}
 };

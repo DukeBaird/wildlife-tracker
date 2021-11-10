@@ -1,0 +1,66 @@
+@use "../../../_library"
+	
+.SightingAsText
+	//width: 50%
+	@include library.rounded-border
+	margin: 3px 0
+	background-color: white
+	display: flex
+	flex-direction: row
+
+.cardTextContainer
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+	width: 55%
+	margin: 16px 8px 16px 16px
+
+#secondaryText
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+
+#mainTitle
+	font-weight: 700
+	font-size: xxx-large
+
+#cardLocation, #cardUser
+	display: flex
+	flex-direction: row
+
+#cardUser
+	width: 65%
+
+#cardLocation div
+	font-size: x-large
+
+#cardUser div
+	font-size: x-large
+	overflow: hidden
+	text-overflow: ellipsis
+	white-space: nowrap
+	margin-top: 1px
+
+/** #cardUsername
+	overflow: hidden
+	text-overflow: ellipsis
+	white-space: nowrap **/
+
+#time
+	text-align: right
+	margin-top: 10px
+
+.Sighting-Image
+	//height: 250px
+	max-height: 100%
+	max-width: 100%
+
+.cardImageContainer
+	display: flex
+	justify-content: center
+	background-color: library.$main-gray
+	width: 45%
+
+#cardUserLogo, #locPin
+	height: 30px
+	margin-right: 5px
