@@ -1,0 +1,40 @@
+@use "../../../_library"
+
+#loginContainer
+	display: flex
+	justify-content: center
+	flex-direction: column
+
+#loginForm
+	display: flex
+	flex-direction: column
+
+#loginForm div
+	display: flex
+	flex-direction: row
+	justify-content: center
+
+.loginInput
+	@include library.rounded-border
+	width: 70%
+	height: 30px
+	margin: 5px 0
+
+#loginSubmit
+	@include library.rounded-border
+	width: 50%
+	height: 30px
+	margin: 5px 0
+
+#signupLinkContainer
+	display: flex
+	flex-direction: row
+	justify-content: center
+	margin-bottom: 5px
+
+#signupLink
+	color: #769e72
+	margin-left: 5px
+	&:hover
+		cursor: pointer
+		text-decoration: underline

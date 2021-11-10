@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Cookies from 'js-cookie';
-import {Button} from './components/button/button.jsx'
-import '../style.sass';
+import {Button} from '../button/button.jsx'
+import './header.sass';
 
 //Nav bar at top of page
 export class Header extends React.Component {
@@ -28,7 +28,7 @@ export class Header extends React.Component {
 
 	render() {
 		return (
-			<span>
+			<span className="Header">
 				<Button handleClick={this.props.viewHomepage} text="Home" />
 				{ this.props.user
 					? <Button handleClick={this.props.viewProfile} text={this.props.user} />
