@@ -71,7 +71,7 @@ class App extends React.Component {
 		const SATList = []; //Create list of SightingAsText elements
 		SATList.push(
 			<div className='mapContainer'>
-					<h1>MAP GOES HERE</h1>
+					<GoogleMap sightings={this.state.sightings} view="display"/>
 			</div>
 		)
 		sightings.forEach(element => {
@@ -169,7 +169,7 @@ class App extends React.Component {
 		const animalList = [];
 		animalList.push(
 			<div className='MapContainer'>
-					<h1>MAP GOES HERE</h1>
+					<GoogleMap sightings={this.state.sightings} view="display"/>
 			</div>
 		);	
 		for (let i in animals) {
@@ -189,7 +189,7 @@ class App extends React.Component {
 			const profileDivs = [];
 			profileDivs.push(
 				<div className='MapContainer'>
-					<h1>MAP GOES HERE</h1>
+					<GoogleMap sightings={this.state.sightings} view="display"/>
 				</div>
 			);
 			profileDivs.push(
@@ -312,7 +312,7 @@ class App extends React.Component {
 					</div>
 				</div>
 
-				<GoogleMap sightings={this.state.sightings} view="display"/>
+				{/* <GoogleMap sightings={this.state.sightings} view="display"/> */}
 
 				<div className='mainContainer'> {/* Separate class to setup flex widths */}
 					<div className='main'>
