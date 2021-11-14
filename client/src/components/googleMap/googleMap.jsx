@@ -4,11 +4,11 @@ import {Loader} from '@googlemaps/js-api-loader';
 import './googleMap.sass';
 
 /* eslint-disable import/no-unresolved */
-const config = require('../../../../server/config');
+const { mapsAPIKey } = require('../../../config');
 /* eslint-enable import/no-unresolved */
 
 const loader = new Loader({
-	apiKey: config.mapsAPIKey,
+	apiKey: mapsAPIKey,
 	version: "weekly"
 });
 
