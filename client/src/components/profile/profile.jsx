@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {SightingAsText} from '../sightingAsText/sightingAsText.jsx';
 import './profile.sass';
 
-/* const URLSearchParams  = require('url');
-const URL = require('url').URL; */
+//const URLSearchParams  = require('url');
+//const URL = require('url').URL;
 
 export class Profile extends React.Component {
 	constructor(props) {
