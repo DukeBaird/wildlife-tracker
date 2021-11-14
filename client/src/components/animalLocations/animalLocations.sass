@@ -1,0 +1,52 @@
+@use "../../../_library"
+	
+.seenDiv
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+
+.locUserContainer
+	display: flex
+	flex-direction: row
+
+.mapButton
+	&:hover
+		cursor: pointer
+		background-color: #d2d2d2
+
+.mapButton
+	border-radius: 3px
+	margin: 5px
+	padding: 0 5px
+
+.cardUserLogo
+	height: 30px
+	margin: 0 5px 5px 5px
+
+.usernames
+	display: flex
+	flex-direction: column
+	justify-content: center
+
+.animalName
+	margin-left: 5px
+
+.animalLoc
+	@include library.rounded-border
+	background-color: teal
+	margin: 6px 0 0 0
+	width: 100%
+
+.image
+	border: 0
+	background-color: #d2d2d2
+	border-radius: 3px
+	height: 200px
+
+.locMapContainer
+	height: 200px
+	border: 1px solid grey
+	border-bottom-left-radius: 3px
+	border-bottom-right-radius: 3px
+	width: 100%
+	background-color: #89D5D2

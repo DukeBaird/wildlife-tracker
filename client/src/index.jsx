@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {AnimalLocations} from './animalLocations.jsx';
+import {AnimalLocations} from './components/animalLocations/animalLocations.jsx';
 import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
@@ -151,33 +151,7 @@ class App extends React.Component {
 
 	showAnimals() {
 		console.log("Showing animals");
-		const {sightings} = this.state;
-		if (!sightings | sightings.length < 0) return null;
-
-		//Create "set" of animals
-		const animals = {};
-		sightings.forEach(element => {
-			if (animals[element.animal]) {
-				animals[element.animal].push(element.location);
-			} else {
-				animals[element.animal] = [element.location];
-			}		
-		});
-
-		//Create elements to display from set
-		const animalList = [];
-		animalList.push(
-			<div className='MapContainer'>
-					<h1>MAP GOES HERE</h1>
-			</div>
-		);	
-		for (let i in animals) {
-			animalList.push(
-			<AnimalLocations animal={i} locations={animals[i]}/>
-			);
-		}
-
-		return animalList;
+		return <AnimalLocations />;
 	}
 
 	showProfile() {
