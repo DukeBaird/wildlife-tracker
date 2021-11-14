@@ -38,7 +38,7 @@ export class GoogleMap extends React.Component {
 			position: location,
 		});
 
-		let marker = this.state.markers;
+		const marker = this.state.markers;
 		marker.push(newMarker);
 		this.setState({ markers: marker });
 		this.showMarkers(map);
@@ -96,12 +96,16 @@ export class GoogleMap extends React.Component {
 
 			//Some test DB entries don't have users assigned to them
 			let popUpInfo;
-			if (element.spottedBy) {
+			/*if (element.spottedBy) {
 				popUpInfo = '<div><h1>' + element.animal + '</h1><h3>' + element.spottedBy + '</h3></div>';
 			} else {
 				popUpInfo = '<div><h1>' + element.animal + '</h1><h3>Mystery User</h3></div>';
-			}
+			}*/
 			
+			element.spottedBy ? popUpInfo = `<div><h1>${element.animal}</h1><h3>${element.spottedBy}</h3></div>`
+			: popUpInfo = `<div><h1>${element.animal}</h1><h3>Mystery User</h3></div>`;
+			
+
 			const infoWindow = new google.maps.InfoWindow({
 				content: popUpInfo
 			});
