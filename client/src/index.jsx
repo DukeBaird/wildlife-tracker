@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {AnimalLocations} from './animalLocations.jsx';
+import {AnimalLocations} from './components/animalLocations/animalLocations.jsx';
 import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';

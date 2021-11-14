@@ -1,3 +1,5 @@
+@use "../../../_library"
+	
 .seenDiv
 	display: flex
 	flex-direction: row
@@ -17,16 +19,23 @@
 	margin: 5px
 	padding: 0 5px
 
+.cardUserLogo
+	height: 30px
+	margin: 0 5px 5px 5px
 
-.seenDescription
-	margin-right: 5px
+.usernames
+	display: flex
+	flex-direction: column
+	justify-content: center
+
+.animalName
+	margin-left: 5px
 
 .animalLoc
-	border: 1px solid grey
+	@include library.rounded-border
 	background-color: teal
-	border-radius: 3px
-	margin: 6px 3px 0 3px
-	width: 50%
+	margin: 6px 0 0 0
+	width: 100%
 
 .image
 	border: 0
@@ -39,6 +48,5 @@
 	border: 1px solid grey
 	border-bottom-left-radius: 3px
 	border-bottom-right-radius: 3px
-	width: 50%
-	margin: 0 3px
+	width: 100%
 	background-color: #89D5D2

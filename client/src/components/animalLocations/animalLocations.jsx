@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'
+import userLogo from '../../images/userLogo.png';;
 import './animalLocations.sass';
 
 export class AnimalLocations extends React.Component {
@@ -36,11 +37,11 @@ export class AnimalLocations extends React.Component {
 			let locCard = 
 				<div className="animalLoc">
 					<div className="image">Image Placeholder</div>
-					<h1>{animal}</h1>
+					<h1 className="animalName">{animal}</h1>
 					<div className="seenDiv">
 						<div className="locUserContainer">
-							<div className="seenDescription">USER LOGO</div>
-							<div>{userDiv}</div>
+							<img className="cardUserLogo" src={userLogo} alt="UserLogo" />
+							<div className="usernames">{userDiv}</div>
 						</div>
 						<div className="mapButton" onClick={() => {
 							if (this.state.showMap === true && this.state.mapAnimal === animal) {
