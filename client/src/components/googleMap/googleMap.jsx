@@ -94,18 +94,11 @@ export class GoogleMap extends React.Component {
 				map: map
 			});
 
-			//Some test DB entries don't have users assigned to them
-			let popUpInfo;
-			/*if (element.spottedBy) {
-				popUpInfo = '<div><h1>' + element.animal + '</h1><h3>' + element.spottedBy + '</h3></div>';
-			} else {
-				popUpInfo = '<div><h1>' + element.animal + '</h1><h3>Mystery User</h3></div>';
-			}*/
-			
+			//Some test DB entries don't have users assigned to them - call them Mystery Users
+			let popUpInfo;			
 			element.spottedBy ? popUpInfo = `<div><h1>${element.animal}</h1><h3>${element.spottedBy}</h3></div>`
 			: popUpInfo = `<div><h1>${element.animal}</h1><h3>Mystery User</h3></div>`;
 			
-
 			const infoWindow = new google.maps.InfoWindow({
 				content: popUpInfo
 			});
@@ -124,8 +117,6 @@ export class GoogleMap extends React.Component {
 				center: { lat: 45.63177710291909, lng: -79.71027154237892 },
 				zoom: 15,
 			});
-
-			//console.log("done creating map");
 
 			//Add markers for all the sightings passed to the map
 			this.createMarkers(map);

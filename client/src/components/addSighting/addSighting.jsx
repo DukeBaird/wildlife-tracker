@@ -15,6 +15,7 @@ export class NewSighting extends React.Component {
 		this.handleLocationChange = this.handleLocationChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.animalInput = React.createRef();
+		this.locationDevice = React.createRef();
 	}
 
 	handleLocationChange(spottedLocation) {
@@ -71,6 +72,10 @@ export class NewSighting extends React.Component {
 				{/* <GoogleMap view="create" onClick={this.handleLocationChange} /> */}
 				<div id="addSightingContainer">
 					<form id="addSightingForm" onSubmit={this.handleSubmit}>
+						<div id="locationDevice">
+							Click map to select location or check to use device location {/*Currently will only use map location*/}
+							<input type="checkbox" ref={this.locationDevice}/>
+						</div>
 						<div>
 							<input 
 								className="addSightingInput"
