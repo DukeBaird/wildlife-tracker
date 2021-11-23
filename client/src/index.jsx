@@ -5,7 +5,7 @@ import {NewSighting} from './components/addSighting/addSighting.jsx';
 import {Login} from './components/login/login.jsx';
 import {SightingAsText} from './components/sightingAsText/sightingAsText.jsx';
 import {Profile} from './components/profile/profile.jsx';
-import {GoogleMap} from './components/googleMap/googleMap.jsx'; 
+import {GoogleMap} from './components/googleMap/googleMap2.jsx'; 
 import {UserMenu} from './components/userMenu/userMenu.jsx';
 import leftButton from './images/left.png';
 import rightButton from './images/right.png';

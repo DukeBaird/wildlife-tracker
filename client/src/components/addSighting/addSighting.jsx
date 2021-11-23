@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {GoogleMap} from '../googleMap/googleMap.jsx';
+import {GoogleMap} from '../googleMap/googleMap2.jsx';
 import '../../../style.sass';
 import './addSighting.sass';
 
