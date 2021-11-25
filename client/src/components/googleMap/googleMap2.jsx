@@ -24,7 +24,7 @@ export class GoogleMap extends React.Component {
 
 		this.mapRef = React.createRef();
 		this.createDisplayMap = this.createDisplayMap.bind(this);
-		// this.createSightingMap = this.createSightingMap.bind(this);
+		this.createSightingMap = this.createSightingMap.bind(this);
 		this.createMarkers = this.createMarkers.bind(this);
 	};
 
@@ -104,50 +104,38 @@ export class GoogleMap extends React.Component {
 				</GoogleMapReact>;
 	};
 
+	getNewCenter = ({ center }) => {
+		console.log('onChange', center);
+		this.setState({
+			center: center
+		});
+	}
 
-/* 	createSightingMap() {
+
+	createSightingMap() {
 		//Create map
 		console.log("Creating sighting Map");
-		let createMap = new google.maps.Map(this.mapRef.current, {
-			center: { lat: 45.63177710291909, lng: -79.71027154237892 },
-			zoom: 15,
-		});
 
-		//Add a marker whenever you click on the map
-		const marker = new google.maps.Marker({
-			position: this.props.location,
-		});
-		marker.setMap(createMap); */
+		return <GoogleMapReact
+					bootstrapURLKeys = {{
+						key: mapsAPIKey,
+						language: 'en'
+					}}
+					defaultCenter = {this.props.center}
+					defaultZoom = {this.props.zoom}
+					center = {this.state.center}
+					onDrag = {this.getNewCenter}
+					//onChange = {this.getNewCenter}
+					yesIWantToUseGoogleMapApiInternals
+					onGoogleApiLoaded={({ map, maps }) => console.log(map, maps)}
+					>
 
-			/*
-			Need a way to pass createMap into the event listener function
-			Right now location (2nd parameter to udateLocation Marker) is always undefined
-			*/
+					<Marker
+						lat={this.state.center.lat}
+						lng={this.state.center.lng}
+					/>
 
-			/* google.maps.event.addListener(createMap, 'click', (event) => {
-				// this.setState({ location: event.latLng });
-
-				// this.addEventListener(event, this)
-				// this.updateLocationMarker(event.latLng, event.target);
-
-				//Pass location back to previous state if requested
-				if (this.props.onClick) {
-					this.props.onClick(event.latLng)
-				}
-				console.log("Done with event Listener");
-			});
-			//google.maps.event.addListener(createMap, 'click', this.addEventListener(event, createMap));
-
-		});
-	}; */
-
-	addEventListener(event, map) {
-		this.updateLocationMarker(event.latLng, map);
-		if (this.props.onClick) {
-			this.props.onClick(event.latLng)
-		}
-		console.log("Done with event Listener");
-		console.log(this.state.markers);
+				</GoogleMapReact>
 	};
 
 	render() {
@@ -162,16 +150,11 @@ export class GoogleMap extends React.Component {
 
 		return (
 			<div id="mapContainer" ref={this.mapRef}>
-				{this.createDisplayMap()}
-			</div>)
-
-
-			/* <div id="mapContainer" ref={this.mapRef}>
 				{this.props.view === 'display' ? this.createDisplayMap()
 				: this.props.view === 'create' ? this.createSightingMap()
 				: null}
 			</div>
-		) */
+		)
 	}
 };
 
