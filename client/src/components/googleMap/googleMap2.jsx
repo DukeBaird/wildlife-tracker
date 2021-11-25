@@ -8,11 +8,6 @@ import './googleMap.sass';
 const { mapsAPIKey } = require('../../../config');
 /* eslint-enable import/no-unresolved */
 
-/* const loader = new Loader({
-	apiKey: mapsAPIKey,
-	version: "weekly"
-});
- */
 
 export class GoogleMap extends React.Component {
 	constructor(props) {
@@ -24,7 +19,7 @@ export class GoogleMap extends React.Component {
 				lat: 45.63177710291909,
 				lng: -79.71027154237892
 			},
-			defaultZoom: 15
+			loading: true
 		};
 
 		this.mapRef = React.createRef();
@@ -32,6 +27,28 @@ export class GoogleMap extends React.Component {
 		// this.createSightingMap = this.createSightingMap.bind(this);
 		this.createMarkers = this.createMarkers.bind(this);
 	};
+
+	componentDidMount() {
+		navigator.geolocation.getCurrentPosition(
+			//Success function
+			(position) => {
+				const {latitude, longitude} = position.coords;
+
+				this.setState({
+					center: {
+						lat: latitude,
+						lng: longitude
+					},
+					loading: false
+				})
+				console.log("Updated location!");
+			},
+			//Error function
+			() => {
+				this.setState({ loading: false });
+			}
+		);
+	}
 
 	createMarkers() {
 		console.log("running createMarkers");
@@ -46,7 +63,7 @@ export class GoogleMap extends React.Component {
 				location = JSON.parse(element.location);
 			}
 			catch(err) {
-				location = this.state.center;
+				location = this.props.center;
 			}
 
 			const marker = {
@@ -71,8 +88,10 @@ export class GoogleMap extends React.Component {
 						key: mapsAPIKey,
 						language: 'en'
 					}}
-					defaultCenter = {this.state.center}
-					defaultZoom = {this.state.defaultZoom}
+					defaultCenter = {this.props.center}
+					defaultZoom = {this.props.zoom}
+					center = {this.state.center}
+					
 					>
 
 					{markers.map((marker, i) => <Marker 
@@ -85,28 +104,27 @@ export class GoogleMap extends React.Component {
 				</GoogleMapReact>;
 	};
 
-/* 	createSightingMap() {
-		loader.load()
-		.then(() => {
-			//Create map
-			console.log("Creating sighting Map");
-			let createMap = new google.maps.Map(this.mapRef.current, {
-				center: { lat: 45.63177710291909, lng: -79.71027154237892 },
-				zoom: 15,
-			});
 
-			//Add a marker whenever you click on the map
-			const marker = new google.maps.Marker({
-				position: this.props.location,
-			});
-			marker.setMap(createMap); */
+/* 	createSightingMap() {
+		//Create map
+		console.log("Creating sighting Map");
+		let createMap = new google.maps.Map(this.mapRef.current, {
+			center: { lat: 45.63177710291909, lng: -79.71027154237892 },
+			zoom: 15,
+		});
+
+		//Add a marker whenever you click on the map
+		const marker = new google.maps.Marker({
+			position: this.props.location,
+		});
+		marker.setMap(createMap); */
 
 			/*
 			Need a way to pass createMap into the event listener function
 			Right now location (2nd parameter to udateLocation Marker) is always undefined
 			*/
-/* 
-			google.maps.event.addListener(createMap, 'click', (event) => {
+
+			/* google.maps.event.addListener(createMap, 'click', (event) => {
 				// this.setState({ location: event.latLng });
 
 				// this.addEventListener(event, this)
@@ -133,6 +151,15 @@ export class GoogleMap extends React.Component {
 	};
 
 	render() {
+		const { loading } = this.state;
+
+		if (loading) {
+			console.log("Still loading!");
+			return null;
+		}
+
+		console.log("Done Loading!");
+
 		return (
 			<div id="mapContainer" ref={this.mapRef}>
 				{this.createDisplayMap()}
@@ -146,4 +173,12 @@ export class GoogleMap extends React.Component {
 			</div>
 		) */
 	}
+};
+
+GoogleMap.defaultProps = {
+	center: {
+		lat: 45.63177710291909,
+		lng: -79.71027154237892
+	},
+	zoom: 15
 };
