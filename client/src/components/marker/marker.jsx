@@ -28,11 +28,10 @@ export class Marker extends React.Component {
 	};
 
 	createInfo() {
-		console.log("DATA");
-		console.log(this.props.info);
 		const spottedBy = this.props.info.spottedBy ? this.props.info.spottedBy: 'Mystery User';
 		const time = this.props.info.time;
 		const animal = this.props.info.animal;
+		
 		return <InfoBox spottedBy={spottedBy} time={time} animal={animal}/>
 	}
 
@@ -46,8 +45,6 @@ export class Marker extends React.Component {
 		);
 	};
 }
-
-//const popUpInfo = `<div><h1>${element.animal}</h1><h3>${ element.spottedBy ? element.spottedBy : 'Mystery User'}</h3></div>`;
 
 function InfoBox(props) {
 	return <div className="infobox">
