@@ -15,7 +15,7 @@ export class NewSighting extends React.Component {
 		this.handleLocationChange = this.handleLocationChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.animalInput = React.createRef();
-		this.locationDevice = React.createRef();
+		this.sightingMap = React.createRef();
 	}
 
 	handleLocationChange(spottedLocation) {
@@ -31,7 +31,7 @@ export class NewSighting extends React.Component {
 
 		const newSighting = {
 			animal: this.animalInput.current.value,
-			location: JSON.stringify(this.state.location),
+			location: JSON.stringify(this.sightingMap.current.state.center),
 			time: new Date(),
 		};
 
@@ -68,7 +68,7 @@ export class NewSighting extends React.Component {
 			*/
 			
 			<div>
-				<GoogleMap view="create" onClick={this.handleLocationChange} location={this.state.location}/>
+				<GoogleMap view="create" onClick={this.handleLocationChange} location={this.state.location} ref={this.sightingMap}/>
 				{/* <GoogleMap view="create" onClick={this.handleLocationChange} /> */}
 				<div id="addSightingContainer">
 					<form id="addSightingForm" onSubmit={this.handleSubmit}>

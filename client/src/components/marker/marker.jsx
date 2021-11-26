@@ -6,10 +6,53 @@ import './marker.sass';
 export class Marker extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			showingInfo: false
+		}
+		this.createInfo = this.createInfo.bind(this)
+		this.updateShowingState = this.updateShowingState.bind(this)
 	};
 
+	updateShowingState() {
+		console.log("Clicked on a marker");
+		if (this.state.showingInfo === true) {
+			this.setState({
+				showingInfo: false
+			});
+		} else {
+			this.setState({
+				showingInfo: true
+			});
+		}
+		console.log(this.state.showingInfo);
+	};
+
+	createInfo() {
+		console.log("DATA");
+		console.log(this.props.info);
+		const spottedBy = this.props.info.spottedBy ? this.props.info.spottedBy: 'Mystery User';
+		const time = this.props.info.time;
+		const animal = this.props.info.animal;
+		return <InfoBox spottedBy={spottedBy} time={time} animal={animal}/>
+	}
 
 	render() {
-		return <img className="marker" src={pin} alt="Sighting Location"/>
+		const infoBox = this.state.showingInfo;
+		return (
+			<div className="markerContainer">
+				{infoBox === true ? this.createInfo() : null}
+				<img className="marker" src={pin} alt="Sighting Location" onClick={this.updateShowingState}/>
+			</div>
+		);
 	};
+}
+
+//const popUpInfo = `<div><h1>${element.animal}</h1><h3>${ element.spottedBy ? element.spottedBy : 'Mystery User'}</h3></div>`;
+
+function InfoBox(props) {
+	return <div className="infobox">
+			<h1>{props.animal}</h1>
+			<h3>{props.spottedBy}</h3>
+		</div>
+	;
 }

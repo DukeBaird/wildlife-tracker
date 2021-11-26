@@ -69,10 +69,7 @@ export class GoogleMap extends React.Component {
 			const marker = {
 				position: location,
 				data: element
-			};
-
-			//Some test DB entries don't have users assigned to them - call them Mystery Users -- PUT INTO INFOBOX COMPONENT
-			const popUpInfo = `<div><h1>${element.animal}</h1><h3>${ element.spottedBy ? element.spottedBy : 'Mystery User'}</h3></div>`;		
+			};		
 			
 			markers.push(marker);
 		});
