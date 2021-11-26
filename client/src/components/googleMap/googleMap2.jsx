@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import GoogleMapReact from 'google-map-react';
 import { Marker } from '../marker/marker.jsx';
+import pin from '../../images/pin.png';
 import './googleMap.sass';
 
 /* eslint-disable import/no-unresolved */
@@ -41,7 +42,6 @@ export class GoogleMap extends React.Component {
 					},
 					loading: false
 				})
-				console.log("Updated location!");
 			},
 			//Error function
 			() => {
@@ -116,26 +116,25 @@ export class GoogleMap extends React.Component {
 		//Create map
 		console.log("Creating sighting Map");
 
-		return <GoogleMapReact
-					bootstrapURLKeys = {{
-						key: mapsAPIKey,
-						language: 'en'
-					}}
-					defaultCenter = {this.props.center}
-					defaultZoom = {this.props.zoom}
-					center = {this.state.center}
-					onDrag = {this.getNewCenter}
-					//onChange = {this.getNewCenter}
-					yesIWantToUseGoogleMapApiInternals
-					onGoogleApiLoaded={({ map, maps }) => console.log(map, maps)}
-					>
+		return (
+				<div className="sightingMapContainer">
+					<div className="sightingMap">
+						<GoogleMapReact
+							bootstrapURLKeys = {{
+								key: mapsAPIKey,
+								language: 'en'
+							}}
+							defaultCenter = {this.props.center}
+							defaultZoom = {this.props.zoom}
+							center = {this.state.center}
+							onDrag = {this.getNewCenter}
+							>
+						</GoogleMapReact>
+					</div>
 
-					<Marker
-						lat={this.state.center.lat}
-						lng={this.state.center.lng}
-					/>
-
-				</GoogleMapReact>
+					<img className="sightingMarker" src={pin} alt="New Sighting Location"/>
+				</div>
+		);
 	};
 
 	render() {

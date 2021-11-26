@@ -72,9 +72,8 @@ export class NewSighting extends React.Component {
 				{/* <GoogleMap view="create" onClick={this.handleLocationChange} /> */}
 				<div id="addSightingContainer">
 					<form id="addSightingForm" onSubmit={this.handleSubmit}>
-						<div id="locationDevice">
-							Click map to select location or check to use device location {/*Currently will only use map location*/}
-							<input type="checkbox" ref={this.locationDevice}/>
+						<div id="locationInstruction">
+							Drag map to center pin on sighting location
 						</div>
 						<div>
 							<input 

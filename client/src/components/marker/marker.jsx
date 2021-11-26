@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import pin from '../../images/pin.png';
 import './marker.sass';
 
 export class Marker extends React.Component {
@@ -9,6 +10,6 @@ export class Marker extends React.Component {
 
 
 	render() {
-		return <div className="marker"></div>
+		return <img className="marker" src={pin} alt="Sighting Location"/>
 	};
 }
