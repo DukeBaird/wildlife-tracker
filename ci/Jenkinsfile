@@ -1,0 +1,55 @@
+def counter = 0
+
+pipeline {
+  agent any
+
+  parameters {
+    string(defaultValue: 'World', description: 'persons name', name: 'name')
+    booleanParam(defaultValue: false, description: 'should we deploy?', name: 'toDeploy')
+  }
+
+  stages {
+    stage('install') {
+      steps {
+        script {
+          sh "echo Hello ${params.name}!"
+          sh "echo ${counter}"
+        }
+      }
+    }
+    stage('test') {
+      steps {
+        script {
+          sh 'echo "this is the second stage"'
+          sh "echo ${counter}"
+        }
+      }
+    }
+    stage('build') {
+      steps {
+        script {
+          sh 'echo "this is the build stage"'
+          sh "echo ${counter}"
+          counter = 2
+        }
+      }
+    }
+    stage('deploy') {
+      when {
+        expression { return params.toDeploy }
+      }
+
+      steps {
+        script {
+          sh 'echo "this is the deploy stage"'
+          sh "echo ${counter}"
+        }
+      }
+    }
+  }
+  post {
+    cleanup {
+      cleanWs()
+    }
+  }
+}
