@@ -2,14 +2,14 @@ pipeline {
   agent any
 
   parameters {
-    string(defaultValue: '', description: 'persons name', name: 'name')
+    string(defaultValue: 'World', description: 'persons name', name: 'name')
   }
 
   stages {
     stage('test') {
       steps {
         script {
-          sh 'echo "Hello World!"'
+          sh "echo Hello ${params.name}!"
         }
       }
     }
