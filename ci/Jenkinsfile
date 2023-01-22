@@ -3,20 +3,39 @@ pipeline {
 
   parameters {
     string(defaultValue: 'World', description: 'persons name', name: 'name')
+    booleanParam(defaultValue: false, description: 'should we deploy?', name: 'toDeploy')
   }
 
   stages {
-    stage('test') {
+    stage('install') {
       steps {
         script {
           sh "echo Hello ${params.name}!"
         }
       }
     }
-    stage('stage2') {
+    stage('test') {
       steps {
         script {
           sh 'echo "this is the second stage"'
+        }
+      }
+    }
+    stage('build') {
+      steps {
+        script {
+          sh 'echo "this is the build stage"'
+        }
+      }
+    }
+    stage('deploy') {
+      when {
+        expression { return params.toDeploy }
+      }
+
+      steps {
+        script {
+          sh 'echo "this is the deploy stage"'
         }
       }
     }
