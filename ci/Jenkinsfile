@@ -1,15 +1,18 @@
 pipeline {
-  agent {
-    label 'any'
-  }
+  agent any}
 
   stages {
     stage('test') {
       steps {
         script {
-          sh 'Hello World!'
+          sh 'echo "Hello World!"'
         }
       }
+    }
+  }
+  post {
+    cleanup {
+      cleanWs()
     }
   }
 }
