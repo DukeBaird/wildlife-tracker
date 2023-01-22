@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  parameters {
+    string(defaultValue: '', description: 'persons name', name: 'name')
+  }
+
   stages {
     stage('test') {
       steps {
