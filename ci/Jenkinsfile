@@ -9,6 +9,13 @@ pipeline {
         }
       }
     }
+    stage('stage2') {
+      steps {
+        script {
+          sh 'echo "this is the second stage"'
+        }
+      }
+    }
   }
   post {
     cleanup {
