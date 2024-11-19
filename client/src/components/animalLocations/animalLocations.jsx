@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import userLogo from '../../images/userLogo.png';;
+import userLogo from '../../images/userLogo.png';
 import './animalLocations.sass';
 
 export class AnimalLocations extends React.Component {
