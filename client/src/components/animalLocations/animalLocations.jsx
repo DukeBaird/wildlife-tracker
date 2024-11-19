@@ -74,7 +74,7 @@ export class AnimalLocations extends React.Component {
 	buildDivFromArray(inputList) {
 		const returnDiv = []
 		inputList.forEach((item) => {
-			returnDiv.push(<span>{item} </span>);
+			returnDiv.push(<span key={item + index}>{item} </span>);
 		});
 		return returnDiv;
 	};
