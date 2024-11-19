@@ -58,3 +58,20 @@ exports.deleteSighting = (sightingId) => {
 	logger.info(`Deleting Sighting ${sightingId}`);
 	return Sighting.findByIdAndDelete(sightingId);
 };
+
+// Get all locations that each animal has been seen at, and all users that saw it.
+exports.getAnimalLocations = (searchOpts = {}) => {
+	logger.info('Getting locations of each animal');
+	logger.info('Using searchopts for lint', searchOpts);
+	const animalLocs = Sighting.aggregate([
+		{
+			$group: {
+				_id: '$animal',
+				locations: { $addToSet: '$location' },
+				users: { $addToSet: '$spottedBy' }
+			}
+		}
+	]);
+
+	return animalLocs;
+};
